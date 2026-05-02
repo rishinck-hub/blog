@@ -26,11 +26,11 @@ export default function Nav({ active }) {
           Mohammed<span> Rishin C K</span>
         </div>
         <div className="nav__socials">
-          <a href="https://linkedin.com" target="_blank" rel="noreferrer">li</a>
+          <a href="https://www.linkedin.com/in/mohammed-rishin-c-k-a00525240/" target="_blank" rel="noreferrer">li</a>
           <span className="nav__sep">/</span>
           <a href="https://github.com/rishinck-hub" target="_blank" rel="noreferrer">gh</a>
           <span className="nav__sep">/</span>
-          <a href="https://twitter.com" target="_blank" rel="noreferrer">tw</a>
+          {/* <a href="https://twitter.com" target="_blank" rel="noreferrer">tw</a> */}
         </div>
       </div>
 
