@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useGreeting } from '../hooks/useGreeting';
+import { resumeUrl } from '../data'
 
 const NAV_LINKS = ['Index', 'About', 'Work', 'Skills', 'Reels', 'Contact'];
 
@@ -49,6 +50,9 @@ export default function Nav({ active }) {
           ))}
         </ul>
         <a href="#contact" className="nav__cta">Let's talk!</a>
+        <a href={resumeUrl} download="Rishin_CK_Resume.pdf" className="nav__cta">
+        Download CV
+        </a>
       </div>
     </nav>
   );

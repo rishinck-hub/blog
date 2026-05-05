@@ -1,4 +1,5 @@
 import Reveal from '../components/Reveal';
+import { resumeUrl } from '../data'
 
 const LINKS = [
   { label: 'Email',    val: 'rishinkpm@gmail.com',        href: 'mailto:rishinkpm@gmail.com' },
@@ -32,6 +33,14 @@ export default function Contact() {
               </a>
             </Reveal>
           ))}
+          <a href={resumeUrl}
+          download="Rishin_CK_Resume.pdf"
+          className="resume-btn"
+          data-cursor
+        >
+          <span>Download Resume</span>
+          <span className="resume-btn__arrow">↓</span>
+        </a>
         </div>
       </div>
 

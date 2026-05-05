@@ -551,3 +551,31 @@ img  { display: block; max-width: 100%; }
   .services__item-tags { display: none; }
   .nav__links li:not(:last-child) { display: none; }
 }
+
+/* paste this at the bottom of src/styles/index.css */
+a.resume-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4rem;
+  margin-top: 2rem;
+  border: 1px solid var(--border);
+  padding: 1rem 1.5rem;
+  color: var(--white);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  min-width: 260px;
+  text-decoration: none;
+  font-family: var(--font-body);
+  transition: border-color .2s, background .2s, padding-left .2s;
+}
+a.resume-btn:hover {
+  border-color: var(--red);
+  background: rgba(232, 65, 10, 0.06);
+  padding-left: 2rem;
+}
+a.resume-btn .resume-btn__arrow {
+  color: var(--red);
+  font-size: 1rem;
+}

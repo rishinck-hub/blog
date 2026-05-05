@@ -65,3 +65,5 @@ export const marqueeItems = [
   'Problem Solver', 'React','Django', 
   'Postgresql', 'Mysql','MongoDB','Azure', 'DevOps','Video Editor',
 ];
+
+export const resumeUrl = '/Mohammed_Rishin_C_K_Software_Developer.pdf'
