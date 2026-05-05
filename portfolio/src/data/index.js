@@ -53,11 +53,11 @@ export const experience = [
 
 export const reels = [
   { id: 1, name: 'Cinematic Short',  cat: 'Cinematic',  thumb: 'https://rishinck-hub.github.io/Portfolio/images/cinematic.png', dur: '1:24' },
-  { id: 2, name: 'Brand Promo',      cat: 'Commercial', thumb: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=600&q=80', dur: '0:45' },
-  { id: 3, name: 'Travel Vlog',      cat: 'Vlog',       thumb: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600&q=80', dur: '3:10' },
-  { id: 4, name: 'Event Coverage',   cat: 'Event',      thumb: 'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=600&q=80', dur: '2:00' },
-  { id: 5, name: 'Music Edit',       cat: 'Creative',   thumb: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&q=80', dur: '3:30' },
-  { id: 6, name: 'Instagram Reel',   cat: 'Social',     thumb: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=600&q=80', dur: '0:30' },
+  { id: 2, name: 'Brand Promo',      cat: 'Commercial', thumb: 'https://rishinck-hub.github.io/Portfolio/images/promo.png', dur: '0:45' },
+  { id: 3, name: 'Travel Vlog',      cat: 'Vlog',       thumb: 'https://rishinck-hub.github.io/Portfolio/images/travel.png', dur: '3:10' },
+  { id: 4, name: 'Event Coverage',   cat: 'Event',      thumb: 'https://rishinck-hub.github.io/Portfolio/images/event.png', dur: '2:00' },
+  { id: 5, name: 'Music Edit',       cat: 'Creative',   thumb: 'https://rishinck-hub.github.io/Portfolio/images/music.png', dur: '3:30' },
+  { id: 6, name: 'Instagram Reel',   cat: 'Social',     thumb: 'https://rishinck-hub.github.io/Portfolio/images/reel.png', dur: '0:30' },
 ];
 
 export const marqueeItems = [
