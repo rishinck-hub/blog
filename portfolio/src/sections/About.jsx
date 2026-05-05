@@ -5,7 +5,7 @@ const TECHS = [
   'React', 'Next js',
   'Django','SQL',
   'MongoDB', 'DevOps',
-  'gi','github',
+  'git','github',
   'vercel','render',
   'Flutter','Firebase',
 ];
