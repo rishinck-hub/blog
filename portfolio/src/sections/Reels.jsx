@@ -31,7 +31,7 @@ export default function Reels() {
       <div className="reels__grid">
         {filtered.map((r, i) => (
           <Reveal key={r.id} delay={i * 60}>
-            <a className="reel" href="#" data-cursor>
+            <a className="reel" href="https://www.instagram.com/_rishin___ck?igsh=eXE4Y3RrOGk3bXFx&utm_source=qr" data-cursor>
               <div className="reel__thumb">
                 <img src={r.thumb} alt={r.name} />
                 <div className="reel__overlay">

@@ -54,9 +54,9 @@ export const experience = [
 export const reels = [
   { id: 1, name: 'Cinematic Short',  cat: 'Cinematic',  thumb: 'https://rishinck-hub.github.io/Portfolio/images/cinematic.png', dur: '1:24' },
   { id: 2, name: 'Brand Promo',      cat: 'Commercial', thumb: 'https://rishinck-hub.github.io/Portfolio/images/promo.png', dur: '0:45' },
-  { id: 3, name: 'Travel Vlog',      cat: 'Vlog',       thumb: 'https://rishinck-hub.github.io/Portfolio/images/travel.png', dur: '3:10' },
+  { id: 3, name: 'Travel Vlog',      cat: 'Vlog',       thumb: 'https://rishinck-hub.github.io/Portfolio/images/travel.png', dur: '1:10' },
   { id: 4, name: 'Event Coverage',   cat: 'Event',      thumb: 'https://rishinck-hub.github.io/Portfolio/images/event.png', dur: '2:00' },
-  { id: 5, name: 'Music Edit',       cat: 'Creative',   thumb: 'https://rishinck-hub.github.io/Portfolio/images/music.png', dur: '3:30' },
+  { id: 5, name: 'Music Edit',       cat: 'Creative',   thumb: 'https://rishinck-hub.github.io/Portfolio/images/music.png', dur: '1:30' },
   { id: 6, name: 'Instagram Reel',   cat: 'Social',     thumb: 'https://rishinck-hub.github.io/Portfolio/images/reel.png', dur: '0:30' },
 ];
 
