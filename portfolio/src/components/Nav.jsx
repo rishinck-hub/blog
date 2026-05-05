@@ -30,7 +30,7 @@ export default function Nav({ active }) {
           <span className="nav__sep">/</span>
           <a href="https://github.com/rishinck-hub" target="_blank" rel="noreferrer">gh</a>
           <span className="nav__sep">/</span>
-          {/* <a href="https://twitter.com" target="_blank" rel="noreferrer">tw</a> */}
+          <a href="https://www.instagram.com/_rishin___ck?igsh=eXE4Y3RrOGk3bXFx&utm_source=qr" target="_blank" rel="noreferrer">Ig</a>
         </div>
       </div>
 

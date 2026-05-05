@@ -52,7 +52,7 @@ export const experience = [
 ];
 
 export const reels = [
-  { id: 1, name: 'Cinematic Short',  cat: 'Cinematic',  thumb: 'https://images.unsplash.com/photo-1536240478700-b869ad10d1bc?w=600&q=80', dur: '1:24' },
+  { id: 1, name: 'Cinematic Short',  cat: 'Cinematic',  thumb: 'https://rishinck-hub.github.io/Portfolio/images/cinematic.png', dur: '1:24' },
   { id: 2, name: 'Brand Promo',      cat: 'Commercial', thumb: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=600&q=80', dur: '0:45' },
   { id: 3, name: 'Travel Vlog',      cat: 'Vlog',       thumb: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600&q=80', dur: '3:10' },
   { id: 4, name: 'Event Coverage',   cat: 'Event',      thumb: 'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=600&q=80', dur: '2:00' },

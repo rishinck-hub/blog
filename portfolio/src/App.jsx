@@ -42,7 +42,7 @@ export default function App() {
         <div className="footer__right">
           <a href="https://linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>
           <a href="https://github.com/rishinck-hub" target="_blank" rel="noreferrer">GitHub</a>
-          <a href="mailto:rishin@example.com">Email</a>
+          <a href="mailto:rishinkpm@gmail.com">Email</a>
         </div>
       </footer>
     </>
