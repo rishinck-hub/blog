@@ -1,10 +1,10 @@
 import Reveal from '../components/Reveal';
 
 const LINKS = [
-  { label: 'Email',    val: 'rishin@example.com',        href: 'mailto:rishinkpm@gmail.com' },
+  { label: 'Email',    val: 'rishinkpm@gmail.com',        href: 'mailto:rishinkpm@gmail.com' },
   { label: 'LinkedIn', val: 'linkedin.com/in/rishin',     href: 'https://www.linkedin.com/in/mohammed-rishin-c-k-a00525240/' },
   { label: 'GitHub',   val: 'github.com/rishinck-hub',   href: 'https://github.com/rishinck-hub' },
-  { label: 'WhatsApp', val: '+91 623 863 4185',            href: 'https://wa.me/6238634185' },
+  { label: 'WhatsApp', val: '+91 623 863 4185',            href: 'https://wa.me/+916238634185' },
 ];
 
 export default function Contact() {

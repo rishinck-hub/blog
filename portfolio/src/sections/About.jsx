@@ -1,8 +1,13 @@
 import Reveal from '../components/Reveal';
 
 const TECHS = [
-  'Python', 'Flutter', 'MongoDB', 'SQL',
-  'JavaScript', 'Java', 'Firebase', 'DevOps',
+  'Python', 'JavaScript', 
+  'React', 'Next js',
+  'Django','SQL',
+  'MongoDB', 'DevOps',
+  'gi','github',
+  'vercel','render',
+  'Flutter','Firebase',
 ];
 
 export default function About() {
