@@ -40,7 +40,7 @@ export default function App() {
       <footer className="footer">
         <span>© 2025 Mohammed Rishin C K</span>
         <div className="footer__right">
-          <a href="https://linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a href="https://www.linkedin.com/in/mohammed-rishin-c-k-a00525240/" target="_blank" rel="noreferrer">LinkedIn</a>
           <a href="https://github.com/rishinck-hub" target="_blank" rel="noreferrer">GitHub</a>
           <a href="mailto:rishinkpm@gmail.com">Email</a>
         </div>
