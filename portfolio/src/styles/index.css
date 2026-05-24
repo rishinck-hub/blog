@@ -356,7 +356,7 @@ img  { display: block; max-width: 100%; }
 }
 .intro__photo-bg {
   position: absolute; inset: 0; z-index: 0;
-  background: url('https://rishinck-hub.github.io/Portfolio/images/profile.jpeg') 35% center/cover no-repeat;
+  background: url('https://rishinck-hub.github.io/Portfolio/images/profile.png') 35% center/cover no-repeat;
   opacity: 0.06;
 }
 .intro__left {
