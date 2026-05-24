@@ -255,7 +255,7 @@ img  { display: block; max-width: 100%; }
 }
 .hero__photo {
   position: absolute; inset: 0; z-index: 1;
-  background: url('https://rishinck-hub.github.io/Portfolio/images/profile.jpeg') center/cover no-repeat;
+  background: url('https://rishinck-hub.github.io/Portfolio/images/profile.png') center/cover no-repeat;
   transform-origin: center bottom;
   will-change: transform;
 }
