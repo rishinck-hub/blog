@@ -255,7 +255,7 @@ img  { display: block; max-width: 100%; }
 }
 .hero__photo {
   position: absolute; inset: 0; z-index: 1;
-  background: url('https://rishinck-hub.github.io/Portfolio/images/profile.PNG') center/cover no-repeat;
+  background: url('https://rishinck-hub.github.io/Portfolio/images/profile.png') center/cover no-repeat;
   transform-origin: center bottom;
   will-change: transform;
 }
@@ -356,7 +356,7 @@ img  { display: block; max-width: 100%; }
 }
 .intro__photo-bg {
   position: absolute; inset: 0; z-index: 0;
-  background: url('https://rishinck-hub.github.io/Portfolio/images/profile.PNG') 35% center/cover no-repeat;
+  background: url('https://rishinck-hub.github.io/Portfolio/images/profile1.jpeg') 35% center/cover no-repeat;
   opacity: 0.06;
 }
 .intro__left {
