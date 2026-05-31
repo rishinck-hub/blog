@@ -258,16 +258,18 @@ img  { display: block; max-width: 100%; }
   background: url('https://rishinck-hub.github.io/Portfolio/images/profile.png') center/cover no-repeat;
   transform-origin: center bottom;
   will-change: transform;
+  opacity: 0.6;
+  /* mix-blend-mode: luminosity;   */
 }
 .hero__photo::after {
   content: '';
   position: absolute; inset: 0;
   background: linear-gradient(
     to right,
-    rgba(8,8,8,0.15) 0%,
-    rgba(8,8,8,0.0) 35%,
-    rgba(8,8,8,0.4) 60%,
-    rgba(8,8,8,0.88) 100%
+    rgba(8,8,8,0.75) 0%,
+    rgba(8,8,8,0.4)  30%,
+    rgba(8,8,8,0.6)  65%,
+    rgba(8,8,8,0.93) 100%
   );
 }
 .hero__photo::before {
@@ -356,8 +358,8 @@ img  { display: block; max-width: 100%; }
 }
 .intro__photo-bg {
   position: absolute; inset: 0; z-index: 0;
-  background: url('https://rishinck-hub.github.io/Portfolio/images/profile1.jpeg') 35% center/cover no-repeat;
-  opacity: 0.06;
+  background: url('https://rishinck-hub.github.io/Portfolio/images/profile3.jpeg') 35% center/cover no-repeat;
+  opacity: 0.5;
 }
 .intro__left {
   position: relative; z-index: 1;

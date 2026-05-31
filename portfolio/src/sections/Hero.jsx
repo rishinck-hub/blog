@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import HeroCanvas from '../components/HeroCanvas';
 
 export default function Hero() {
   const photoRef = useRef(null);
@@ -16,6 +17,10 @@ export default function Hero() {
 
   return (
     <section id="index" className="hero">
+
+      {/* Three.js animation — behind everything */}
+      <HeroCanvas />
+
       {/* Full-bleed photo */}
       <div ref={photoRef} className="hero__photo" />
 
@@ -69,6 +74,7 @@ export default function Hero() {
           <div className="hero__scrollbar-thumb" />
         </div>
       </div>
+
     </section>
   );
 }
