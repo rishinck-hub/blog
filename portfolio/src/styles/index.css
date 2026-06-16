@@ -258,7 +258,7 @@ img  { display: block; max-width: 100%; }
   background: url('https://rishinck-hub.github.io/Portfolio/images/profile.png') center/cover no-repeat;
   transform-origin: center bottom;
   will-change: transform;
-  opacity: 0.6;
+  /* opacity: 0.9; */
   /* mix-blend-mode: luminosity;   */
 }
 .hero__photo::after {

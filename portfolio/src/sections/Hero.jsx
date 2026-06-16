@@ -18,8 +18,8 @@ export default function Hero() {
   return (
     <section id="index" className="hero">
 
-      {/* Three.js animation — behind everything */}
-      <HeroCanvas />
+      {/* Three.js animation — behind everything
+      <HeroCanvas /> */}
 
       {/* Full-bleed photo */}
       <div ref={photoRef} className="hero__photo" />
