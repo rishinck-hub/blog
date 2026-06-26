@@ -15,14 +15,23 @@ export default function Work() {
 
       <div className="work__grid">
         {projects.map((p, i) => (
-          <Reveal key={p.name} delay={i * 60}>
-            <div className={`work__item ${p.span === 'large' ? 'work__item--large' : ''}`} data-cursor>
+          <Reveal key={p.name} delay={i * 60} className={`work__cell ${p.span === 'large' ? 'work__cell--large' : ''}`}>
+            <a
+              className={`work__item ${p.span === 'large' ? 'work__item--large' : ''}`}
+              href={p.url}
+              target={p.url ? '_blank' : undefined}
+              rel={p.url ? 'noreferrer' : undefined}
+              aria-label={p.url ? `Open ${p.name.replace('\n', ' ')} project` : undefined}
+              data-cursor
+            >
               <div className="work__item-inner">
                 <h3 className="work__item-name" style={{ whiteSpace: 'pre-line' }}>{p.name}</h3>
                 <p className="work__item-tag">{p.tag}</p>
+                {p.desc && <p className="work__item-desc">{p.desc}</p>}
+                {p.url && <span className="work__item-link">View Live ↗</span>}
                 <div className="work__item-dot" />
               </div>
-            </div>
+            </a>
           </Reveal>
         ))}
       </div>

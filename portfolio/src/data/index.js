@@ -6,6 +6,13 @@ export const services = [
 ];
 
 export const projects = [
+  {
+    name: 'Cash\nSplitter',
+    tag: 'React · Vercel · PDF Export',
+    desc: 'Trip expense splitter for friends and family with downloadable PDF summaries.',
+    url: 'https://cash-splitter-rishinck.vercel.app/',
+    span: 'large',
+  },
   { name: 'Clinic\nManagement App',   tag: 'React · Django REST · PostgreSQL · Vercel · Render'},
   { name: 'Clinic\nManagement System', tag: 'React · Django REST · MySQL · Pythonanywhere' },
   { name: 'File\nManagement System',  tag: 'Flask · Azure · Python' },
@@ -52,12 +59,12 @@ export const experience = [
 ];
 
 export const reels = [
-  { id: 1, name: 'Cinematic Short',  cat: 'Cinematic',  thumb: 'https://rishinck-hub.github.io/Portfolio/images/cinematic.png', dur: '1:24' },
-  { id: 2, name: 'Brand Promo',      cat: 'Commercial', thumb: 'https://rishinck-hub.github.io/Portfolio/images/promo.png', dur: '0:45' },
-  { id: 3, name: 'Travel Vlog',      cat: 'Vlog',       thumb: 'https://rishinck-hub.github.io/Portfolio/images/travel.png', dur: '1:10' },
-  { id: 4, name: 'Event Coverage',   cat: 'Event',      thumb: 'https://rishinck-hub.github.io/Portfolio/images/event.png', dur: '2:00' },
-  { id: 5, name: 'Music Edit',       cat: 'Creative',   thumb: 'https://rishinck-hub.github.io/Portfolio/images/music.png', dur: '1:30' },
-  { id: 6, name: 'Instagram Reel',   cat: 'Social',     thumb: 'https://rishinck-hub.github.io/Portfolio/images/reel.png', dur: '0:30' },
+  { id: 1, name: 'Cinematic Short',  cat: 'Cinematic',  thumb: 'https://rishinck-hub.github.io/Portfolio/images/cinematic.png', dur: '1:24', instagramUrl: 'https://www.instagram.com/_rishin___ck/reel/DOfvscok9qd/' },
+  { id: 2, name: 'Brand Promo',      cat: 'Commercial', thumb: 'https://rishinck-hub.github.io/Portfolio/images/promo.png', dur: '0:45', instagramUrl: 'https://www.instagram.com/_rishin___ck/reel/DLUC6WDTBgP/' },
+  { id: 3, name: 'Travel Vlog',      cat: 'Vlog',       thumb: 'https://rishinck-hub.github.io/Portfolio/images/travel.png', dur: '1:10', instagramUrl: 'https://www.instagram.com/kovilakam_boys/reel/C4u5EgePw_w/' },
+  { id: 4, name: 'Event Coverage',   cat: 'Event',      thumb: 'https://rishinck-hub.github.io/Portfolio/images/event.png', dur: '2:00', instagramUrl: 'https://www.instagram.com/mcet_.z/reel/DIivYk7T2Ry/' },
+  { id: 5, name: 'Music Edit',       cat: 'Creative',   thumb: 'https://rishinck-hub.github.io/Portfolio/images/music.png', dur: '1:30', instagramUrl: 'https://www.instagram.com/mcet_.z/reel/DIivYk7T2Ry/' },
+  { id: 6, name: 'Instagram Reel',   cat: 'Social',     thumb: 'https://rishinck-hub.github.io/Portfolio/images/reel.png', dur: '0:30', instagramUrl: 'https://www.instagram.com/mcet_.z/reel/DCcAzm4uO6t/' },
 ];
 
 export const marqueeItems = [
