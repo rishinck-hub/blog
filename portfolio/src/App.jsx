@@ -1,44 +1,43 @@
-import { useEffect, useState } from 'react';
-import Cursor     from './components/Cursor';
-import Nav        from './components/Nav';
-import Marquee    from './components/Marquee';
-import Hero       from './sections/Hero';
-import About      from './sections/About';
-import Work       from './sections/Work';
-import Skills     from './sections/Skills';
-import Experience from './sections/Experience';
-import Reels      from './sections/Reels';
-import Contact    from './sections/Contact';
+import { useEffect } from 'react';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import Cursor from './components/Cursor';
+import Nav from './components/Nav';
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import WorkPage from './pages/WorkPage';
+import ExperiencePage from './pages/ExperiencePage';
+import CreativePage from './pages/CreativePage';
+import ContactPage from './pages/ContactPage';
 
-export default function App() {
-  const [active, setActive] = useState('index');
+function ScrollToTop() {
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    const sections = document.querySelectorAll('section[id]');
-    const obs = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); }),
-      { threshold: 0.35 }
-    );
-    sections.forEach(s => obs.observe(s));
-    return () => obs.disconnect();
-  }, []);
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [pathname]);
 
+  return null;
+}
+
+export default function App() {
   return (
     <>
+      <ScrollToTop />
       <Cursor />
-      <Nav active={active} />
+      <Nav />
       <main>
-        <Hero />
-        <Marquee />
-        <About />
-        <Work />
-        <Skills />
-        <Experience />
-        <Reels />
-        <Contact />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/work" element={<WorkPage />} />
+          <Route path="/experience" element={<ExperiencePage />} />
+          <Route path="/creative" element={<CreativePage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </main>
       <footer className="footer">
-        <span>© 2025 Mohammed Rishin C K</span>
+        <span>© 2026 Mohammed Rishin C K</span>
         <div className="footer__right">
           <a href="https://www.linkedin.com/in/mohammed-rishin-c-k-a00525240/" target="_blank" rel="noreferrer">LinkedIn</a>
           <a href="https://github.com/rishinck-hub" target="_blank" rel="noreferrer">GitHub</a>

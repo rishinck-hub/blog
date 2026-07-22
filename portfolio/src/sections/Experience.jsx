@@ -1,14 +1,16 @@
 import Reveal from '../components/Reveal';
 import { experience } from '../data';
 
-export default function Experience() {
+export default function Experience({ limit }) {
+  const visibleExperience = limit ? experience.slice(0, limit) : experience;
+
   return (
     <section id="experience" className="xp">
       <Reveal>
         <h2 className="xp__title">Journey &<br />Experience</h2>
       </Reveal>
       <div className="xp__list">
-        {experience.map((e, i) => (
+        {visibleExperience.map((e, i) => (
           <Reveal key={e.role} delay={i * 80}>
             <div className="xp__item" data-cursor>
               <span className="xp__period">{e.period}</span>

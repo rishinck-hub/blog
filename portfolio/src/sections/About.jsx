@@ -11,7 +11,9 @@ const TECHS = [
   'Flutter','Firebase',
 ];
 
-export default function About() {
+export default function About({ compact = false }) {
+  const visibleTechs = compact ? TECHS.slice(0, 8) : TECHS;
+
   return (
     <section id="about" className="intro">
       <div className="intro__photo-bg" />
@@ -26,7 +28,7 @@ export default function About() {
             <p className="intro__clients-title">Stack & Tools</p>
           </Reveal>
           <div className="intro__clients-grid">
-            {TECHS.map((t, i) => (
+            {visibleTechs.map((t, i) => (
               <Reveal key={t} delay={i * 50}>
                 <div className="intro__client">
                   <span className="intro__client-dot" />
@@ -58,13 +60,13 @@ export default function About() {
           </p>
         </Reveal>
 
-        <Reveal delay={240}>
+        {!compact && <Reveal delay={240}>
           <p className="intro__text3">
             My goal is to write code that is not only functional but elegant —
             solving real problems with clean architecture. I believe great software
             is a positive force in people's lives.
           </p>
-        </Reveal>
+        </Reveal>}
 
         <Reveal delay={300}>
           <a href="#work" className="intro__cta" data-cursor>↓</a>

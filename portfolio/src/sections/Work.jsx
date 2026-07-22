@@ -1,20 +1,22 @@
 import Reveal from '../components/Reveal';
 import { projects } from '../data';
 
-export default function Work() {
+export default function Work({ limit, showHeader = true }) {
+  const visibleProjects = limit ? projects.slice(0, limit) : projects;
+
   return (
     <section id="work" className="work">
-      <div className="work__header">
+      {showHeader && <div className="work__header">
         <Reveal>
           <h2 className="work__title">Selected<br />Work</h2>
         </Reveal>
         <Reveal delay={100}>
-          <span className="work__count">{projects.length} Projects</span>
+          <span className="work__count">{visibleProjects.length} {limit ? 'Featured' : 'Projects'}</span>
         </Reveal>
-      </div>
+      </div>}
 
       <div className="work__grid">
-        {projects.map((p, i) => (
+        {visibleProjects.map((p, i) => (
           <Reveal key={p.name} delay={i * 60} className={`work__cell ${p.span === 'large' ? 'work__cell--large' : ''}`}>
             <a
               className={`work__item ${p.span === 'large' ? 'work__item--large' : ''}`}

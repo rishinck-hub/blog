@@ -1,7 +1,9 @@
 import Reveal from '../components/Reveal';
 import { services } from '../data';
 
-export default function Skills() {
+export default function Skills({ limit }) {
+  const visibleServices = limit ? services.slice(0, limit) : services;
+
   return (
     <section id="skills" className="services">
       <div className="services__header">
@@ -17,7 +19,7 @@ export default function Skills() {
       </div>
 
       <div className="services__list">
-        {services.map((s, i) => (
+        {visibleServices.map((s, i) => (
           <Reveal key={s.name} delay={i * 80}>
             <div className="services__item" data-cursor>
               <span className="services__item-n">0{i + 1}</span>

@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react';
 import Reveal from '../components/Reveal';
 import { reels } from '../data';
 
-export default function Reels() {
+export default function Reels({ limit }) {
   const [filter, setFilter] = useState('All');
   const [activeReel, setActiveReel] = useState(null);
   const cats = ['All', ...new Set(reels.map(reel => reel.cat))];
-  const filtered = filter === 'All' ? reels : reels.filter(reel => reel.cat === filter);
+  const availableReels = limit ? reels.slice(0, limit) : reels;
+  const filtered = filter === 'All' ? availableReels : availableReels.filter(reel => reel.cat === filter);
   const backgroundReel = activeReel || filtered[0] || reels[0];
 
   useEffect(() => {
@@ -57,7 +58,7 @@ export default function Reels() {
         </Reveal>
         <Reveal delay={100}>
           <div className="reels__filters">
-            {cats.map(cat => (
+            {(limit ? ['All'] : cats).map(cat => (
               <button
                 key={cat}
                 className={`reels__filter ${filter === cat ? 'reels__filter--active' : ''}`}
