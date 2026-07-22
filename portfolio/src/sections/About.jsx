@@ -1,9 +1,10 @@
 import Reveal from '../components/Reveal';
 
 const TECHS = [
-  'Python', 'JavaScript', 
+  'PHP', 'Laravel',
+  'Python', 'JavaScript',
   'React', 'Next js',
-  'Django','SQL',
+  'Django','MySQL',
   'MongoDB', 'DevOps',
   'git','github',
   'vercel','render',
@@ -52,7 +53,7 @@ export default function About() {
 
         <Reveal delay={180}>
           <p className="intro__text2">
-            By combining <strong>Python full-stack engineering</strong> and a strong foundation in databases, I've
+            By combining <strong>Laravel and React full-stack engineering</strong> with a strong foundation in MySQL and databases, I've
             built apps that are production-ready and maintainable.
           </p>
         </Reveal>

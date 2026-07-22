@@ -25,6 +25,10 @@ export default function Work() {
               data-cursor
             >
               <div className="work__item-inner">
+                <div className="work__item-meta">
+                  <span>0{i + 1}</span>
+                  <span>{p.url ? 'Live project' : 'Selected work'}</span>
+                </div>
                 <h3 className="work__item-name" style={{ whiteSpace: 'pre-line' }}>{p.name}</h3>
                 <p className="work__item-tag">{p.tag}</p>
                 {p.desc && <p className="work__item-desc">{p.desc}</p>}

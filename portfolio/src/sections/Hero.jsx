@@ -21,7 +21,8 @@ export default function Hero() {
       <HeroCanvas />
 
       <div className="hero__label">
-        <div className="hero__label-sub">Hi there! this is</div>
+        <div className="hero__status"><span /> Available for opportunities</div>
+        <div className="hero__label-sub">Hi there! This is</div>
         <div className="hero__label-name">
           Mohammed <span>Rishin C K</span>
         </div>
@@ -35,9 +36,9 @@ export default function Hero() {
 
       <div className="hero__panel">
         <div className="hero__services">
-          <a href="#skills">Full-Stack Developer</a>
+          <a href="#experience">Software Developer Intern</a>
+          <a href="#skills">Laravel & React Developer</a>
           <a href="#skills">Azure Devops and CI/CD</a>
-          <a href="#skills">Database Design</a>
         </div>
 
         <a href="#about" className="hero__help">
@@ -46,15 +47,14 @@ export default function Hero() {
         </a>
 
         <p className="hero__bio">
-          B Tech Computer Science Graduate specialised in Python
-          full-stack Developent. I build scalable, efficient applications and craft
-          visual stories through video editing.
+          Software Developer Intern at Zil Money and B.Tech Computer Science graduate.
+          I build scalable full-stack applications with Laravel, MySQL, and React.
         </p>
 
         <div className="hero__awards">
-          <span className="hero__award">B.Tech CS</span>
-          <span className="hero__award">MCET</span>
-          <span className="hero__award">2021-25</span>
+          <span className="hero__award">Zil Money</span>
+          <span className="hero__award">Laravel</span>
+          <span className="hero__award">React</span>
         </div>
       </div>
 

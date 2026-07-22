@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useGreeting } from '../hooks/useGreeting';
 import { resumeUrl } from '../data';
 
-const NAV_LINKS = ['Index', 'About', 'Work', 'Skills', 'Reels', 'Contact'];
+const NAV_LINKS = ['Index', 'About', 'Work', 'Skills', 'Experience', 'Reels', 'Contact'];
 
 export default function Nav({ active }) {
   const [scrolled, setScrolled] = useState(false);

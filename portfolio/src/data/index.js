@@ -1,11 +1,23 @@
 export const services = [
-  { name: 'Python Full-Stack',   tags: ['Django', 'REST API', 'MongoDB'] },
-  { name: 'Database Design',     tags: ['MongoDB', 'SQL', 'Firebase'] },
+  { name: 'Full-Stack Development', tags: ['Laravel', 'React', 'Django'] },
+  { name: 'Backend Development', tags: ['PHP', 'REST API', 'MySQL'] },
+  { name: 'Database Design',     tags: ['MySQL', 'MongoDB', 'SQL'] },
   { name: 'DevOps & Cloud',      tags: ['CI/CD', 'Docker', 'Learning'] },
   { name: 'Digital Marketing', tags: ['Video editing','Davinci Resolve','social Media page handling']}
 ];
 
 export const projects = [
+  {
+    name: 'Employee\nManagement System',
+    tag: 'Laravel · MySQL · React',
+    desc: 'Contributed to an employee management platform during my software developer internship at Zil Money.',
+    span: 'large',
+  },
+  {
+    name: 'OnlineCheckWriter.com\nBackend',
+    tag: 'Laravel · MySQL · REST API',
+    desc: 'Worked on backend development for OnlineCheckWriter.com as part of the Zil Money engineering team.',
+  },
   {
     name: 'Cash\nSplitter',
     tag: 'React · Vercel · PDF Export',
@@ -20,6 +32,12 @@ export const projects = [
 ];
 
 export const experience = [
+  {
+    period: 'Present',
+    role: 'Software Developer Intern',
+    org: 'Zil Money · Laravel, MySQL, React',
+    desc: 'Contributing to the Employee Management System and backend development for OnlineCheckWriter.com using Laravel, MySQL, and React.',
+  },
   {
     period: '2026',
     role: 'Clinic Management Application – Dawa Clinic',
@@ -68,9 +86,9 @@ export const reels = [
 ];
 
 export const marqueeItems = [
-  'Full-Stack Developer', 'CS Engineer', 'Python', 
+  'Software Developer Intern', 'Full-Stack Developer', 'CS Engineer', 'Laravel',
   'Problem Solver', 'React','Django', 
-  'Postgresql', 'Mysql','MongoDB','Azure', 'DevOps','Video Editor',
+  'Postgresql', 'MySQL','MongoDB','Azure', 'DevOps','Video Editor',
 ];
 
 export const resumeUrl = '/Mohammed_Rishin_C_K_Software_Developer.pdf'

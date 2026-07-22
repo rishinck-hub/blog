@@ -19,8 +19,8 @@ export default function HeroCanvas() {
     mount.appendChild(renderer.domElement);
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(34, mount.clientWidth / mount.clientHeight, 0.1, 100);
-    camera.position.set(0, 0.15, 6.9);
+    const camera = new THREE.PerspectiveCamera(33, mount.clientWidth / mount.clientHeight, 0.1, 100);
+    camera.position.set(0, 0.15, 6.25);
 
     const group = new THREE.Group();
     scene.add(group);
@@ -34,8 +34,8 @@ export default function HeroCanvas() {
     letters.forEach((letter, index) => {
       const geometry = new TextGeometry(letter, {
         font,
-        size: 1.42,
-        depth: 0.34,
+        size: 1.58,
+        depth: 0.38,
         curveSegments: 16,
         bevelEnabled: true,
         bevelThickness: 0.045,
