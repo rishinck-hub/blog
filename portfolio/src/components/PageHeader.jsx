@@ -1,15 +1,11 @@
-export default function PageHeader({ eyebrow, title, accent, description, backgroundVideoId }) {
+export default function PageHeader({ eyebrow, title, accent, description, backgroundVideo }) {
   return (
     <header className="page-hero">
-      {backgroundVideoId && (
+      {backgroundVideo && (
         <div className="page-hero__video" aria-hidden="true">
-          <iframe
-            src={`https://www.youtube-nocookie.com/embed/${backgroundVideoId}?autoplay=1&mute=1&loop=1&playlist=${backgroundVideoId}&controls=0&playsinline=1&rel=0&disablekb=1&iv_load_policy=3`}
-            title="Creative work background video"
-            allow="autoplay; encrypted-media"
-            referrerPolicy="strict-origin-when-cross-origin"
-            tabIndex="-1"
-          />
+          <video autoPlay muted loop playsInline preload="metadata">
+            <source src={backgroundVideo} type="video/mp4" />
+          </video>
         </div>
       )}
       <p className="page-hero__eyebrow">{eyebrow}</p>
