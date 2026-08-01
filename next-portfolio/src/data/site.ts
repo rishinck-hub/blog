@@ -1,4 +1,4 @@
-import type { NavigationItem, SocialLink } from "@/types/content";
+import type { NavigationItem, Service, SocialLink } from "@/types/content";
 
 const navigation = [
   { label: "Home", href: "/" },
@@ -47,3 +47,23 @@ export const siteConfig = {
   navigation,
   socials,
 } as const;
+
+export const technologies = [
+  "PHP", "Laravel", "Python", "JavaScript", "React", "Next.js", "Django",
+  "MySQL", "MongoDB", "DevOps", "Git", "GitHub", "Vercel", "Render",
+  "Flutter", "Firebase",
+] as const;
+
+export const services = [
+  { name: "Full-Stack Development", tags: ["Laravel", "React", "Django"] },
+  { name: "Backend Development", tags: ["PHP", "REST API", "MySQL"] },
+  { name: "Database Design", tags: ["MySQL", "MongoDB", "SQL"] },
+  { name: "DevOps & Cloud", tags: ["CI/CD", "Docker", "Learning"] },
+  { name: "Digital Marketing", tags: ["Video editing", "DaVinci Resolve", "Social media page handling"] },
+] as const satisfies readonly Service[];
+
+export const marqueeItems = [
+  "Software Developer Intern", "Full-Stack Developer", "CS Engineer", "Laravel",
+  "Problem Solver", "React", "Django", "PostgreSQL", "MySQL", "MongoDB",
+  "Azure", "DevOps", "Video Editor",
+] as const;

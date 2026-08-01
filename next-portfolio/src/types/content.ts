@@ -33,3 +33,8 @@ export type CreativeEntry = Readonly<{
   duration: string;
   instagramUrl: string;
 }>;
+
+export type Service = Readonly<{
+  name: string;
+  tags: readonly string[];
+}>;

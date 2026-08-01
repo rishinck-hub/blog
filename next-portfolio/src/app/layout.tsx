@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { Barlow, DM_Serif_Display } from "next/font/google";
+import { Barlow, Barlow_Condensed, DM_Serif_Display } from "next/font/google";
 
+import { Cursor } from "@/components/animation/cursor";
 import { SiteFooter } from "@/components/layout/site-footer";
-import { SiteHeader } from "@/components/layout/site-header";
+import { ScrollToTop } from "@/components/layout/scroll-to-top";
+import { SiteNavigation } from "@/components/navigation/site-navigation";
 import { siteConfig } from "@/data/site";
 
 import "./globals.css";
@@ -13,8 +15,14 @@ const bodyFont = Barlow({
   weight: ["400", "500", "700"],
 });
 
-const displayFont = DM_Serif_Display({
+const displayFont = Barlow_Condensed({
   variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["700", "900"],
+});
+
+const serifFont = DM_Serif_Display({
+  variable: "--font-serif",
   subsets: ["latin"],
   weight: "400",
 });
@@ -41,6 +49,7 @@ export const metadata: Metadata = {
     title: `${siteConfig.name} | Software Developer`,
     description: siteConfig.description,
   },
+  icons: { icon: "/favicon.svg" },
 };
 
 export default function RootLayout({
@@ -50,11 +59,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${bodyFont.variable} ${displayFont.variable}`}>
+      <body className={`${bodyFont.variable} ${displayFont.variable} ${serifFont.variable}`}>
         <a className="skip-link" href="#main-content">
           Skip to main content
         </a>
-        <SiteHeader />
+        <ScrollToTop />
+        <Cursor />
+        <SiteNavigation />
         <main id="main-content">{children}</main>
         <SiteFooter />
       </body>
