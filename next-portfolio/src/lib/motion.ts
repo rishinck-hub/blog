@@ -32,6 +32,11 @@ export const motion = {
     cursor: { follow: 0.2, state: 0.18, press: 0.1 },
     scroll: { scrub: 0.65, distance: 7, smoothDuration: 1.05 },
   },
+  pointer: {
+    visual: { x: 14, y: 10, rotation: 0.6 },
+    secondary: { x: 8, y: 5 },
+    detail: { x: 4, y: 3 },
+  },
 } as const;
 
 export const loaderCompleteEvent = "rishin:loader-complete";
