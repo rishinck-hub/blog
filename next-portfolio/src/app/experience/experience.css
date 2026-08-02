@@ -19,7 +19,7 @@ body:has(.experience-page) .editorial-header.menu-is-open{color:var(--inverse-fo
 .experience-row summary::-webkit-details-marker{display:none}
 .experience-row h3{font-family:var(--font-display);font-size:clamp(1.8rem,3vw,3.2rem);font-weight:400;line-height:1}
 .experience-row summary>p{font-size:.88rem;line-height:1.5}
-.experience-row__toggle{font-size:2rem;font-weight:300;transition:transform var(--duration-base) var(--ease-editorial)}
+.experience-row__toggle{font-size:2rem;font-weight:300;transition:transform var(--duration-normal) var(--ease-editorial)}
 .experience-row[open] .experience-row__toggle{transform:rotate(45deg)}
 .experience-row__details{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:2.5rem var(--grid-gap);padding:0 0 clamp(3rem,6vw,6rem) calc(3rem + var(--grid-gap))}
 .experience-row__details>div{display:grid;gap:1rem}

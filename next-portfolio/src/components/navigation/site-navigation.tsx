@@ -104,20 +104,20 @@ export function SiteNavigation() {
     const context = gsap.context(() => {
       gsap.fromTo(menu, { clipPath: "inset(0 0 100% 0)" }, {
         clipPath: "inset(0 0 0% 0)",
-        duration: motion.duration.slow,
-        ease: motion.ease,
+        duration: motion.timing.modal.enter,
+        ease: motion.ease.editorial,
       });
-      gsap.fromTo(".editorial-menu__item", { y: motion.reveal.distance, opacity: 0 }, {
+      gsap.fromTo(".editorial-menu__item", { y: motion.distance.medium, opacity: 0 }, {
         y: 0,
         opacity: 1,
-        duration: motion.duration.slow,
-        ease: motion.ease,
-        stagger: motion.stagger.base,
+        duration: motion.timing.text.duration,
+        ease: motion.ease.reveal,
+        stagger: motion.stagger.normal,
         delay: 0.12,
       });
       gsap.fromTo(".editorial-menu__aside", { opacity: 0 }, {
         opacity: 1,
-        duration: motion.duration.base,
+        duration: motion.duration.normal,
         delay: 0.35,
       });
     }, menu);

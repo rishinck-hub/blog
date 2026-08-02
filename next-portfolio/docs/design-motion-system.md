@@ -14,7 +14,8 @@ This document records the shared systems introduced in Phases 5–7. The migrate
 
 - GSAP and ScrollTrigger handle timelines and scroll reveals. Every component scopes animation with `gsap.context()` and reverts the context on unmount.
 - Lenis is the only smooth-scrolling layer. It is synchronized with the GSAP ticker and triggers ScrollTrigger updates from its scroll event.
-- `src/lib/motion.ts` centralizes durations, easing, stagger, reveal distance, clip presets, and page-transition timing.
+- `src/lib/motion.ts` is the canonical JavaScript motion contract. It exposes `duration.fast/normal/slow`, `ease.editorial/reveal/exit`, `stagger.tight/normal`, `distance.small/medium`, clip presets, and semantic timing groups for text, images, modals, hover, routes, dividers, cursors, and scroll-linked movement.
+- `src/styles/design-system.css` mirrors the same hierarchy for CSS with `--duration-fast`, `--duration-normal`, `--duration-slow`, semantic duration variables, and editorial/reveal/exit easing variables. Component CSS should consume these variables rather than introduce unrelated timing values.
 - The motion provider refreshes ScrollTrigger after route changes, fonts, window load, image loads, and layout resizes.
 - Advanced motion and smooth scrolling are disabled for reduced-motion users and simplified for coarse pointers, small viewports, and low-core devices.
 - Text splitting is implemented locally at word boundaries, avoiding an additional dependency.
@@ -29,5 +30,6 @@ This document records the shared systems introduced in Phases 5–7. The migrate
 
 - Prefer CSS transitions for hover and focus feedback.
 - Use the shared GSAP components only for orchestrated or scroll-driven effects.
+- Choose timing by role: fast for cursor and small state feedback, normal for controls and supporting UI, text/image presets for reveals, and the slow tier only for large visual movement. Exit motion is shorter and more direct than entrance motion.
 - Keep static page and section content as server components; isolate browser APIs and animation in client components.
 - Reuse the existing primitives where they clarify repeated editorial patterns, but keep ordinary semantic markup local.

@@ -1,26 +1,36 @@
 export const motion = {
   duration: {
     fast: 0.18,
-    base: 0.48,
+    normal: 0.48,
     slow: 0.9,
-    page: 0.8,
   },
-  ease: "power4.out",
-  cssEase: "cubic-bezier(0.16, 1, 0.3, 1)",
+  ease: {
+    editorial: "power4.out",
+    reveal: "power3.out",
+    exit: "power2.inOut",
+  },
   stagger: {
     tight: 0.035,
-    base: 0.065,
-    loose: 0.1,
+    normal: 0.065,
+  },
+  distance: {
+    small: 14,
+    medium: 32,
   },
   reveal: {
-    distance: 32,
     opacity: 0,
     imageClipFrom: "inset(0 0 100% 0)",
     imageClipTo: "inset(0 0 0% 0)",
   },
-  pageTransition: {
-    y: 12,
-    duration: 0.8,
+  timing: {
+    text: { duration: 0.72, stagger: 0.035 },
+    image: { duration: 0.9, scaleDuration: 1.14 },
+    modal: { enter: 0.72, exit: 0.42 },
+    hover: 0.18,
+    route: 0.46,
+    divider: 0.7,
+    cursor: { follow: 0.2, state: 0.18, press: 0.1 },
+    scroll: { scrub: 0.65, distance: 7, smoothDuration: 1.05 },
   },
 } as const;
 

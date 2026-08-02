@@ -14,7 +14,7 @@ body:has(.contact-page) .editorial-header.menu-is-open{color:var(--inverse-foreg
 .contact-details__list>a,.contact-details__list>div{display:grid;grid-template-columns:1fr auto;gap:.5rem 1rem;align-items:center;padding-block:1.2rem;border-bottom:1px solid var(--line)}
 .contact-details__list>a>span:first-child,.contact-details__list>div>span:first-child{grid-column:1/-1}
 .contact-details__list strong{min-width:0;font-size:.9rem;font-weight:500;overflow-wrap:anywhere}
-.contact-details__list>a>span:last-child{transition:transform var(--duration-base) var(--ease-editorial)}
+.contact-details__list>a>span:last-child{transition:transform var(--duration-normal) var(--ease-editorial)}
 .contact-details__list>a:hover>span:last-child,.contact-details__list>a:focus-visible>span:last-child{transform:translate(.25rem,-.25rem)}
 .contact-details__note{max-width:24rem}
 .contact-form-wrap{grid-column:6/-1}
@@ -23,7 +23,7 @@ body:has(.contact-page) .editorial-header.menu-is-open{color:var(--inverse-foreg
 .contact-form{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:2rem var(--grid-gap)}
 .contact-field{position:relative;display:grid;gap:.7rem}
 .contact-field label{font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
-.contact-field input,.contact-field textarea{width:100%;border:0;border-bottom:1px solid var(--foreground);border-radius:0;background:transparent;color:var(--foreground);font:inherit;outline:0;padding:.7rem 0 1rem;transition:border-color var(--duration-fast)}
+.contact-field input,.contact-field textarea{width:100%;border:0;border-bottom:1px solid var(--foreground);border-radius:0;background:transparent;color:var(--foreground);font:inherit;outline:0;padding:.7rem 0 1rem;transition:border-color var(--duration-hover)}
 .contact-field textarea{resize:vertical;line-height:1.6}
 .contact-field input:focus,.contact-field textarea:focus{border-color:var(--focus);box-shadow:0 2px 0 -1px var(--focus)}
 .contact-field input[aria-invalid=true],.contact-field textarea[aria-invalid=true]{border-color:#a32626}
@@ -32,7 +32,7 @@ body:has(.contact-page) .editorial-header.menu-is-open{color:var(--inverse-foreg
 .contact-field__help{color:var(--muted);font-size:.7rem}
 .contact-honeypot{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
 .contact-form__footer{grid-column:1/-1;display:grid;grid-template-columns:auto 1fr;gap:1.5rem;align-items:center;margin-top:1rem}
-.contact-form__footer button{min-height:3.5rem;padding:0 1.5rem;border:1px solid var(--foreground);font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;transition:background var(--duration-fast),color var(--duration-fast)}
+.contact-form__footer button{min-height:3.5rem;padding:0 1.5rem;border:1px solid var(--foreground);font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;transition:background var(--duration-hover),color var(--duration-hover)}
 .contact-form__footer button:hover:not(:disabled),.contact-form__footer button:focus-visible{background:var(--foreground);color:var(--background)}
 .contact-form__footer button:disabled{cursor:wait;opacity:.55}
 .contact-form__status{grid-column:1/-1;min-height:1.5rem;font-size:.8rem;line-height:1.5}

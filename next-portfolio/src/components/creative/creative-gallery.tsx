@@ -5,7 +5,7 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { shouldReduceAdvancedMotion } from "@/lib/motion";
+import { motion, shouldReduceAdvancedMotion } from "@/lib/motion";
 import type { CreativeEntry } from "@/types/content";
 
 function GalleryImage({ entry, sizes }: Readonly<{ entry: CreativeEntry; sizes: string }>) {
@@ -35,7 +35,7 @@ export function CreativeGallery({ entries }: Readonly<{ entries: readonly Creati
     gsap.registerPlugin(ScrollTrigger);
     const context = gsap.context(() => {
       gsap.utils.toArray<HTMLElement>(".creative-gallery__media").forEach((media, index) => {
-        gsap.to(media.querySelector("img"), { yPercent: index % 2 ? -4 : 4, ease: "none", scrollTrigger: { trigger: media, start: "top bottom", end: "bottom top", scrub: 0.7 } });
+        gsap.to(media.querySelector("img"), { yPercent: index % 2 ? -4 : 4, ease: "none", scrollTrigger: { trigger: media, start: "top bottom", end: "bottom top", scrub: motion.timing.scroll.scrub } });
       });
     }, galleryRef);
     return () => context.revert();

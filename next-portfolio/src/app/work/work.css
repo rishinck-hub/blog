@@ -21,8 +21,8 @@ body:has(.work-index) .editorial-header.menu-is-open,body:has(.case-study) .edit
 .work-entry--reverse .work-entry__copy{grid-column:9/-1;grid-row:1}
 .work-entry--reverse .work-entry__visual{grid-column:1/8;grid-row:1}
 .project-visual{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--surface);color:var(--foreground);isolation:isolate}
-.project-visual::before{position:absolute;inset:8%;border:1px solid currentColor;opacity:.18;content:"";transition:inset .7s var(--ease-editorial)}
-.project-visual::after{position:absolute;width:52%;aspect-ratio:1;right:-10%;bottom:-32%;border:1px solid currentColor;border-radius:50%;opacity:.12;content:"";transition:transform .9s var(--ease-editorial)}
+.project-visual::before{position:absolute;inset:8%;border:1px solid currentColor;opacity:.18;content:"";transition:inset var(--duration-divider) var(--ease-editorial)}
+.project-visual::after{position:absolute;width:52%;aspect-ratio:1;right:-10%;bottom:-32%;border:1px solid currentColor;border-radius:50%;opacity:.12;content:"";transition:transform var(--duration-image) var(--ease-editorial)}
 a:hover .project-visual::before,a:focus-visible .project-visual::before{inset:6%}
 a:hover .project-visual::after,a:focus-visible .project-visual::after{transform:scale(1.16)}
 .project-visual--ink{background:var(--inverse-background);color:var(--inverse-foreground)}

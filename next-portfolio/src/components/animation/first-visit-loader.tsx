@@ -3,6 +3,8 @@
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 
+import { motion } from "@/lib/motion";
+
 export function FirstVisitLoader() {
   const loaderRef = useRef<HTMLDivElement>(null);
   const counterRef = useRef<HTMLSpanElement>(null);
@@ -15,14 +17,14 @@ export function FirstVisitLoader() {
     const progress = { value: 0 };
     const context = gsap.context(() => {
       gsap.timeline({
-        defaults: { ease: "power3.out" },
+        defaults: { ease: motion.ease.reveal },
         onComplete: () => {
           document.documentElement.dataset.firstVisitLoader = "done";
           loader.style.display = "none";
         },
       })
-        .to(progress, { value: 100, duration: 0.52, ease: "power2.out", onUpdate: () => { counter.textContent = String(Math.round(progress.value)).padStart(2, "0"); } })
-        .to(loader, { clipPath: "inset(0 0 100% 0)", duration: 0.42 }, 0.4);
+        .to(progress, { value: 100, duration: motion.duration.normal, onUpdate: () => { counter.textContent = String(Math.round(progress.value)).padStart(2, "0"); } })
+        .to(loader, { clipPath: "inset(0 0 100% 0)", duration: motion.timing.modal.exit, ease: motion.ease.exit }, 0.4);
     }, loader);
 
     return () => context.revert();

@@ -27,10 +27,10 @@ export function TextReveal({ text, as: Tag = "span", className = "", delay = 0 }
         {
           yPercent: 0,
           opacity: 1,
-          duration: motion.duration.slow,
+          duration: motion.timing.text.duration,
           delay,
-          ease: motion.ease,
-          stagger: motion.stagger.tight,
+          ease: motion.ease.reveal,
+          stagger: motion.timing.text.stagger,
           scrollTrigger: { trigger: scope.current, start: "top 88%", once: true },
         },
       );

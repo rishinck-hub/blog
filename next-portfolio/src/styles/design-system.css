@@ -16,9 +16,19 @@
   --grid-gap: clamp(1rem, 2vw, 2rem);
 
   --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-exit: cubic-bezier(0.7, 0, 0.84, 0);
   --duration-fast: 180ms;
-  --duration-base: 480ms;
+  --duration-normal: 480ms;
   --duration-slow: 900ms;
+  --duration-text: 720ms;
+  --duration-image: 900ms;
+  --duration-modal-enter: 720ms;
+  --duration-modal-exit: 420ms;
+  --duration-route: 460ms;
+  --duration-divider: 700ms;
+  --duration-hover: 180ms;
+  --duration-cursor: 180ms;
 
   /* Temporary compatibility aliases for migrated page styles. */
   --black: var(--inverse-background);
@@ -244,7 +254,7 @@ body {
   content: "";
   transform: scaleX(0);
   transform-origin: right;
-  transition: transform var(--duration-base) var(--ease-editorial);
+  transition: transform var(--duration-normal) var(--ease-editorial);
 }
 
 .animated-link:hover::after,
@@ -311,7 +321,7 @@ html[data-first-visit-loader="show"] .first-visit-loader {
 @keyframes loader-safe-exit { to { opacity: 0; visibility: hidden; } }
 
 .page-transition-shell { position: relative; }
-.route-frame { animation: route-frame-enter .46s var(--ease-editorial) both; }
+.route-frame { animation: route-frame-enter var(--duration-route) var(--ease-reveal) both; }
 .page-transition-wipe {
   position: fixed;
   inset: 0;
@@ -322,7 +332,7 @@ html[data-first-visit-loader="show"] .first-visit-loader {
   color: var(--inverse-foreground);
   clip-path: inset(0 100% 0 0);
   pointer-events: none;
-  animation: route-wipe .44s var(--ease-editorial) both;
+  animation: route-wipe var(--duration-route) var(--ease-editorial) both;
 }
 .page-transition-wipe span { font-size: .65rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
 
@@ -341,7 +351,7 @@ html[data-first-visit-loader="show"] .first-visit-loader {
 .animated-link > span[aria-hidden="true"],
 .case-next__arrow,
 .contact-details__list a > span:last-child {
-  transition: transform var(--duration-base) var(--ease-editorial);
+  transition: transform var(--duration-normal) var(--ease-editorial);
 }
 .animated-link:hover > span[aria-hidden="true"],
 .animated-link:focus-visible > span[aria-hidden="true"] { transform: translateX(.25rem); }
@@ -350,7 +360,7 @@ html[data-first-visit-loader="show"] .first-visit-loader {
   .editorial-divider {
     transform: scaleX(0);
     transform-origin: left;
-    animation: divider-expand .7s var(--ease-editorial) both;
+    animation: divider-expand var(--duration-divider) var(--ease-reveal) both;
     animation-timeline: view();
     animation-range: entry 5% cover 25%;
   }
@@ -364,7 +374,7 @@ html[data-first-visit-loader="show"] .first-visit-loader {
   left: 0;
   z-index: 600;
   color: var(--inverse-foreground);
-  transition: color var(--duration-base), background var(--duration-base), border-color var(--duration-base), backdrop-filter var(--duration-base);
+  transition: color var(--duration-normal), background var(--duration-normal), border-color var(--duration-normal), backdrop-filter var(--duration-normal);
 }
 
 .editorial-header.is-scrolled,
@@ -419,7 +429,7 @@ html[data-first-visit-loader="show"] .first-visit-loader {
   content: "";
   transform: scaleX(0);
   transform-origin: right;
-  transition: transform var(--duration-base) var(--ease-editorial);
+  transition: transform var(--duration-normal) var(--ease-editorial);
 }
 
 .editorial-nav-link:hover::after,
@@ -448,7 +458,7 @@ html[data-first-visit-loader="show"] .first-visit-loader {
   width: 1rem;
   height: 1px;
   background: currentColor;
-  transition: transform var(--duration-base) var(--ease-editorial), opacity var(--duration-fast);
+  transition: transform var(--duration-normal) var(--ease-editorial), opacity var(--duration-cursor);
 }
 
 .editorial-menu-trigger__lines {

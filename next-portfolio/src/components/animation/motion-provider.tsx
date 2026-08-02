@@ -6,7 +6,7 @@ import { useEffect, useRef, type ReactNode } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { shouldReduceAdvancedMotion } from "@/lib/motion";
+import { motion, shouldReduceAdvancedMotion } from "@/lib/motion";
 
 export function MotionProvider({ children }: Readonly<{ children: ReactNode }>) {
   const pathname = usePathname();
@@ -47,7 +47,7 @@ export function MotionProvider({ children }: Readonly<{ children: ReactNode }>) 
     const lenis = new Lenis({
       autoRaf: false,
       anchors: true,
-      duration: 1.05,
+      duration: motion.timing.scroll.smoothDuration,
       smoothWheel: true,
       stopInertiaOnNavigate: true,
     });

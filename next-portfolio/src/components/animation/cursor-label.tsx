@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
-import { shouldReduceAdvancedMotion } from "@/lib/motion";
+import { motion, shouldReduceAdvancedMotion } from "@/lib/motion";
 
 export function CursorLabel() {
   const labelRef = useRef<HTMLDivElement>(null);
@@ -14,18 +14,18 @@ export function CursorLabel() {
     const capableDevice = navigator.hardwareConcurrency === undefined || navigator.hardwareConcurrency > 4;
     if (!label || !precisePointer || !capableDevice || shouldReduceAdvancedMotion()) return;
     label.style.display = "block";
-    const moveX = gsap.quickTo(label, "x", { duration: 0.2, ease: "power3.out" });
-    const moveY = gsap.quickTo(label, "y", { duration: 0.2, ease: "power3.out" });
+    const moveX = gsap.quickTo(label, "x", { duration: motion.timing.cursor.follow, ease: motion.ease.reveal });
+    const moveY = gsap.quickTo(label, "y", { duration: motion.timing.cursor.follow, ease: motion.ease.reveal });
     const onMove = (event: PointerEvent) => {
       moveX(event.clientX + 16);
       moveY(event.clientY + 16);
       const target = (event.target as Element | null)?.closest<HTMLElement>("[data-cursor-label]");
       label.textContent = target?.dataset.cursorLabel ?? "";
-      gsap.to(label, { opacity: target ? 1 : 0, scale: target ? 1 : 0.86, duration: 0.18, overwrite: true });
+      gsap.to(label, { opacity: target ? 1 : 0, scale: target ? 1 : 0.86, duration: motion.timing.cursor.state, ease: motion.ease.editorial, overwrite: true });
     };
-    const hide = () => gsap.to(label, { opacity: 0, scale: 0.86, duration: 0.15, overwrite: true });
-    const press = () => gsap.to(label, { scale: 0.92, duration: 0.1, overwrite: true });
-    const release = () => gsap.to(label, { scale: 1, duration: 0.18, overwrite: true });
+    const hide = () => gsap.to(label, { opacity: 0, scale: 0.86, duration: motion.duration.fast, ease: motion.ease.exit, overwrite: true });
+    const press = () => gsap.to(label, { scale: 0.92, duration: motion.timing.cursor.press, ease: motion.ease.exit, overwrite: true });
+    const release = () => gsap.to(label, { scale: 1, duration: motion.timing.cursor.state, ease: motion.ease.editorial, overwrite: true });
     window.addEventListener("pointermove", onMove, { passive: true });
     document.documentElement.addEventListener("pointerleave", hide);
     window.addEventListener("pointerdown", press, { passive: true });

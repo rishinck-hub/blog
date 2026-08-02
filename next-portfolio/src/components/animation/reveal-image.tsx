@@ -16,15 +16,15 @@ export function RevealImage({ children, className = "" }: Readonly<{ children: R
       const image = scope.current?.querySelector("img");
       gsap.fromTo(scope.current, { clipPath: motion.reveal.imageClipFrom }, {
         clipPath: motion.reveal.imageClipTo,
-        duration: motion.duration.slow,
-        ease: motion.ease,
+        duration: motion.timing.image.duration,
+        ease: motion.ease.reveal,
         scrollTrigger: { trigger: scope.current, start: "top 88%", once: true },
       });
       if (image) {
         gsap.fromTo(image, { scale: 1.06 }, {
           scale: 1,
-          duration: motion.duration.slow + 0.25,
-          ease: motion.ease,
+          duration: motion.timing.image.scaleDuration,
+          ease: motion.ease.reveal,
           scrollTrigger: { trigger: scope.current, start: "top 88%", once: true },
         });
       }
