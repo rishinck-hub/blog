@@ -12,10 +12,23 @@ export type SocialLink = Readonly<{
 export type Project = Readonly<{
   slug: string;
   name: string;
+  subtitle: string;
+  year: string;
+  category: "Full Stack" | "Backend" | "Frontend" | "Mobile" | "Cloud";
+  role: string;
   technologies: readonly string[];
-  description?: string;
+  description: string;
+  challenge?: string;
+  approach?: string;
+  process?: string;
+  features?: readonly string[];
+  outcome?: string;
+  coverImage?: string;
+  gallery?: readonly string[];
   liveUrl?: string;
-  confidentiality?: "public-summary-only";
+  repositoryUrl?: string;
+  isConfidential?: boolean;
+  visualTone: "paper" | "ink" | "stone";
 }>;
 
 export type ExperienceEntry = Readonly<{

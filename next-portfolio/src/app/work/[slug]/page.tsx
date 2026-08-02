@@ -2,51 +2,104 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { projects, getProject } from "@/data/projects";
+import { ProjectVisual } from "@/components/projects/project-visual";
+import { getNextProject, getProject, projects } from "@/data/projects";
 
-type ProjectPageProps = Readonly<{
-  params: Promise<{ slug: string }>;
-}>;
+import "../work.css";
+import "./case-study.css";
+
+type ProjectPageProps = Readonly<{ params: Promise<{ slug: string }> }>;
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const project = getProject(slug);
+  const project = getProject((await params).slug);
+  return project ? { title: project.name, description: project.description } : { title: "Project not found" };
+}
 
-  return project
-    ? { title: project.name, description: project.description }
-    : { title: "Project not found" };
+function StudySection({ index, title, children }: Readonly<{ index: string; title: string; children: React.ReactNode }>) {
+  return (
+    <section className="case-section">
+      <div className="case-section__label type-label"><span>{index}</span><h2>{title}</h2></div>
+      <div className="case-section__content type-body">{children}</div>
+    </section>
+  );
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
-  const { slug } = await params;
-  const project = getProject(slug);
-
+  const project = getProject((await params).slug);
   if (!project) notFound();
 
+  const index = projects.findIndex((entry) => entry.slug === project.slug);
+  const number = String(index + 1).padStart(2, "0");
+  const nextProject = getNextProject(project.slug);
+  const nextNumber = String(projects.findIndex((entry) => entry.slug === nextProject.slug) + 1).padStart(2, "0");
+
   return (
-    <article className="mx-auto max-w-6xl px-6 py-20 md:px-10 md:py-28">
-      <p className="text-xs uppercase tracking-[0.18em] text-muted-ink">Project</p>
-      <h1 className="mt-5 max-w-4xl font-serif text-5xl leading-none md:text-7xl">
-        {project.name}
-      </h1>
-      <p className="mt-6 text-sm text-muted-ink">
-        {project.technologies.join(" · ")}
-      </p>
-      {project.description ? (
-        <p className="mt-8 max-w-2xl text-lg leading-8">{project.description}</p>
-      ) : (
-        <p className="mt-8 max-w-2xl text-muted-ink">
-          Detailed public case-study content is not yet available.
-        </p>
-      )}
-      <div className="mt-10 flex gap-5 text-sm underline underline-offset-4">
-        {project.liveUrl ? <Link href={project.liveUrl}>View live project</Link> : null}
-        <Link href="/work">Back to work</Link>
+    <main className="case-study">
+      <header className="case-hero editorial-container">
+        <div className="case-hero__top type-label"><Link href="/work">← Work index</Link><span>Project {number} / {String(projects.length).padStart(2, "0")}</span></div>
+        <p className="case-hero__category type-label">{project.category}</p>
+        <h1 className="type-page-title">{project.name}</h1>
+        <p className="case-hero__subtitle type-body-large">{project.subtitle}</p>
+      </header>
+
+      <div className="case-cover editorial-container">
+        <ProjectVisual project={project} number={number} compact />
       </div>
-    </article>
+
+      <div className="case-body editorial-container">
+        <dl className="case-meta type-metadata">
+          <div><dt>Role</dt><dd>{project.role}</dd></div>
+          <div><dt>Year</dt><dd>{project.year}</dd></div>
+          <div><dt>Category</dt><dd>{project.category}</dd></div>
+          <div><dt>Technology</dt><dd>{project.technologies.join(" · ")}</dd></div>
+        </dl>
+
+        {project.isConfidential ? (
+          <aside className="case-confidential" aria-label="Confidentiality note">
+            <span className="type-label">Public summary</span>
+            <p>Some details are omitted because this work was completed in an employer context. Private screenshots, URLs, customer information, and internal implementation details are not shown.</p>
+          </aside>
+        ) : null}
+
+        <StudySection index="01" title="Overview"><p>{project.description}</p></StudySection>
+        <StudySection index="02" title="Problem"><p>{project.challenge ?? "A detailed problem statement was not included in the existing public portfolio."}</p></StudySection>
+        <StudySection index="03" title="Approach"><p>{project.approach ?? "The existing portfolio records the project and its technology stack, but does not provide a public implementation narrative."}</p></StudySection>
+        <StudySection index="04" title="Development process"><p>{project.process ?? "A detailed development process is not publicly documented for this project."}</p></StudySection>
+        <StudySection index="05" title="Features">
+          {project.features?.length ? <ul className="case-features">{project.features.map((feature) => <li key={feature}>{feature}</li>)}</ul> : <p>Feature-level details are not available in the existing public portfolio.</p>}
+        </StudySection>
+        <StudySection index="06" title="Technology decisions">
+          <p>The documented stack for this project is {project.technologies.join(", ")}. Further architectural rationale is not included in the public source material.</p>
+        </StudySection>
+        <StudySection index="07" title="Outcome"><p>{project.outcome ?? "No public outcome statement is currently available."}</p></StudySection>
+        <StudySection index="08" title="Gallery">
+          <div className="case-gallery-note">
+            <ProjectVisual project={project} number={number} />
+            <p className="type-metadata">{project.isConfidential ? "Neutral visuals replace private product screenshots." : "No genuine public gallery images are available in the current portfolio assets."}</p>
+          </div>
+        </StudySection>
+
+        <section className="case-links" aria-labelledby="case-links-title">
+          <div><span className="type-label">09</span><h2 id="case-links-title" className="type-label">External links</h2></div>
+          <div className="case-links__items">
+            {project.liveUrl ? <a className="animated-link type-label" href={project.liveUrl} target="_blank" rel="noreferrer">Visit live project <span aria-hidden="true">↗</span></a> : null}
+            {project.repositoryUrl ? <a className="animated-link type-label" href={project.repositoryUrl} target="_blank" rel="noreferrer">View repository <span aria-hidden="true">↗</span></a> : null}
+            {!project.liveUrl && !project.repositoryUrl ? <p className="type-metadata">No public project or repository URL is available.</p> : null}
+          </div>
+        </section>
+      </div>
+
+      <nav className="case-next" aria-label="Next project">
+        <Link href={`/work/${nextProject.slug}`} className="editorial-container case-next__inner">
+          <span className="type-label">Next project — {nextNumber}</span>
+          <strong>{nextProject.name}</strong>
+          <span className="case-next__arrow" aria-hidden="true">→</span>
+        </Link>
+      </nav>
+    </main>
   );
 }
