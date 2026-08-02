@@ -32,10 +32,14 @@ export type Project = Readonly<{
 }>;
 
 export type ExperienceEntry = Readonly<{
+  kind: "professional" | "education" | "development";
   period: string;
   role: string;
   organization: string;
   description: string;
+  responsibilities: readonly string[];
+  technologies: readonly string[];
+  relatedProjects?: readonly string[];
 }>;
 
 export type CreativeEntry = Readonly<{
