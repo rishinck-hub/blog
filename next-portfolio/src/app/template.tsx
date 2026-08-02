@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 
+import { PageTransition } from "@/components/animation/page-transition";
+
 export default function Template({ children }: Readonly<{ children: ReactNode }>) {
-  return <div className="route-frame">{children}</div>;
+  return <PageTransition>{children}</PageTransition>;
 }

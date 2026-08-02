@@ -94,7 +94,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       </div>
 
       <nav className="case-next" aria-label="Next project">
-        <Link href={`/work/${nextProject.slug}`} className="editorial-container case-next__inner">
+        <Link href={`/work/${nextProject.slug}`} className="editorial-container case-next__inner" data-cursor-label="Next">
           <span className="type-label">Next project — {nextNumber}</span>
           <strong>{nextProject.name}</strong>
           <span className="case-next__arrow" aria-hidden="true">→</span>

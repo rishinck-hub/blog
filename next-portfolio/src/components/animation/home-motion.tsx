@@ -14,9 +14,7 @@ export function HomeMotion() {
 
     const reduced = shouldReduceAdvancedMotion();
     const context = gsap.context(() => {
-      const loader = root.querySelector(".home-loader");
       if (reduced) {
-        gsap.set(loader, { autoAlpha: 0, display: "none" });
         return;
       }
 
@@ -24,13 +22,12 @@ export function HomeMotion() {
       const opening = gsap.timeline({ defaults: { ease: motion.ease } });
       opening
         .set(header, { autoAlpha: 0 })
-        .fromTo(loader, { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.32, display: "none" })
-        .to(header, { autoAlpha: 1, duration: 0.35 }, 0.18)
-        .from(".home-status", { y: 12, autoAlpha: 0, duration: 0.35 }, 0.22)
-        .from(".home-hero__line > span", { yPercent: 110, duration: 0.62, stagger: 0.08 }, 0.27)
-        .from(".home-hero__portrait", { clipPath: "inset(0 0 100% 0)", duration: 0.75 }, 0.32)
-        .from(".home-hero__animate:not(.home-status)", { y: 14, autoAlpha: 0, duration: 0.38, stagger: 0.06 }, 0.62)
-        .from(".home-hero__scroll, .home-hero__counter", { autoAlpha: 0, duration: 0.3 }, 0.9);
+        .to(header, { autoAlpha: 1, duration: 0.3 })
+        .from(".home-status", { y: 12, autoAlpha: 0, duration: 0.3 }, 0.08)
+        .from(".home-hero__line > span", { yPercent: 110, duration: 0.55, stagger: 0.07 }, 0.12)
+        .from(".home-hero__portrait", { clipPath: "inset(0 0 100% 0)", duration: 0.65 }, 0.16)
+        .from(".home-hero__animate:not(.home-status)", { y: 14, autoAlpha: 0, duration: 0.34, stagger: 0.05 }, 0.42)
+        .from(".home-hero__scroll, .home-hero__counter", { autoAlpha: 0, duration: 0.25 }, 0.66);
 
       gsap.utils.toArray<HTMLElement>(".home-animate").forEach((element) => {
         gsap.from(element, { y: 34, autoAlpha: 0, duration: motion.duration.slow, ease: motion.ease, scrollTrigger: { trigger: element, start: "top 88%", once: true } });
@@ -46,5 +43,5 @@ export function HomeMotion() {
     return () => context.revert();
   }, []);
 
-  return <div className="home-loader" aria-hidden="true"><span>RISHIN®</span></div>;
+  return null;
 }

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Instrument_Serif, Manrope } from "next/font/google";
+import Script from "next/script";
 
+import { CursorLabel } from "@/components/animation/cursor-label";
+import { FirstVisitLoader } from "@/components/animation/first-visit-loader";
 import { MotionProvider } from "@/components/animation/motion-provider";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteNavigation } from "@/components/navigation/site-navigation";
@@ -53,13 +56,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${bodyFont.variable} ${displayFont.variable}`}>
+        <Script id="first-visit-loader-gate" strategy="beforeInteractive">
+          {`try{var r=document.documentElement;var seen=sessionStorage.getItem("rishin-loader-seen");var reduced=matchMedia("(prefers-reduced-motion: reduce),(pointer: coarse)").matches;var slow=navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=4;r.dataset.firstVisitLoader=!seen&&!reduced&&!slow?"show":"skip";if(r.dataset.firstVisitLoader==="show")sessionStorage.setItem("rishin-loader-seen","1")}catch(e){document.documentElement.dataset.firstVisitLoader="skip"}`}
+        </Script>
+        <FirstVisitLoader />
         <MotionProvider>
           <a className="skip-link" href="#main-content">Skip to main content</a>
           <SiteNavigation />
           <main id="main-content">{children}</main>
           <SiteFooter />
+          <CursorLabel />
         </MotionProvider>
       </body>
     </html>

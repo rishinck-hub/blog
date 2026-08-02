@@ -27,7 +27,7 @@ export default function ContactPage() {
           <p className="type-label">01 — Direct</p>
           <div className="contact-details__list">
             {contactLinks.map((item) => (
-              <a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noreferrer" : undefined} key={item.label}>
+              <a href={item.href} data-cursor-label="Open" target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noreferrer" : undefined} key={item.label}>
                 <span className="type-metadata">{item.label}</span><strong>{item.value}</strong><span aria-hidden="true">↗</span>
               </a>
             ))}
