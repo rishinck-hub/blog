@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { HomeMotion } from "@/components/animation/home-motion";
+import { TextReveal } from "@/components/animation/text-reveal";
 import { AnimatedLink } from "@/components/ui/animated-link";
 import { projects } from "@/data/projects";
 import { experience } from "@/data/experience";
@@ -58,7 +59,7 @@ export default function HomePage() {
         </div>
         <div className="home-divider home-animate" />
         <div className="home-intro__grid">
-          <h2 className="type-section-heading home-animate">A developer focused on making complex digital products feel clear.</h2>
+          <TextReveal as="h2" className="type-section-heading" text="A developer focused on making complex digital products feel clear." />
           <div className="home-intro__image home-reveal-image">
             <Image src="/profile.png" alt="Mohammed Rishin C K" fill sizes="(max-width: 800px) 100vw, 34vw" />
           </div>
@@ -73,7 +74,7 @@ export default function HomePage() {
         <div className="editorial-container">
           <div className="home-section-head home-animate"><p className="type-label">02 — Selected projects</p><span className="type-metadata">Public summaries only</span></div>
           <div className="home-divider home-animate" />
-          <h2 id="selected-work-title" className="type-section-heading home-work__heading home-animate">Selected systems,<br />built with purpose.</h2>
+          <TextReveal as="h2" id="selected-work-title" className="type-section-heading home-work__heading" text="Selected systems, built with purpose." mode="line" lines={["Selected systems,", "built with purpose."]} />
         </div>
         <div className="home-projects">
           {selectedProjects.map((project) => (
@@ -103,7 +104,7 @@ export default function HomePage() {
       <section className="home-capabilities editorial-section editorial-container" aria-labelledby="capabilities-title">
         <div className="home-section-head home-animate"><p className="type-label">03 — Capabilities</p><span className="type-metadata">What I work with</span></div>
         <div className="home-divider home-animate" />
-        <h2 id="capabilities-title" className="type-section-heading home-capabilities__heading home-animate">From application logic<br />to the final interface.</h2>
+        <TextReveal as="h2" id="capabilities-title" className="type-section-heading home-capabilities__heading" text="From application logic to the final interface." mode="line" lines={["From application logic", "to the final interface."]} />
         <div className="home-capability-list">
           {capabilities.map((item) => (
             <details className="home-capability home-animate" key={item.number}>
@@ -120,7 +121,7 @@ export default function HomePage() {
       <section className="home-experience editorial-section editorial-container" aria-labelledby="experience-title">
         <div className="home-section-head home-animate"><p className="type-label">04 — Experience</p><span className="type-metadata">Selected timeline</span></div>
         <div className="home-divider home-animate" />
-        <h2 id="experience-title" className="type-section-heading home-experience__heading home-animate">Learning through building,<br />contributing, and shipping.</h2>
+        <TextReveal as="h2" id="experience-title" className="type-section-heading home-experience__heading" text="Learning through building, contributing, and shipping." mode="line" lines={["Learning through building,", "contributing, and shipping."]} />
         <div className="home-experience__list">
           {experience.slice(0, 2).map((item, index) => (
             <article className="home-experience__row home-animate" key={item.role}>
@@ -134,7 +135,7 @@ export default function HomePage() {
       <section className="home-cta" aria-labelledby="contact-cta-title">
         <div className="editorial-container home-cta__inner">
           <p className="type-label home-animate">Have an idea?</p>
-          <h2 id="contact-cta-title" className="home-cta__title home-animate"><span>Let&apos;s build</span><span>something</span><span>meaningful.</span></h2>
+          <TextReveal as="h2" id="contact-cta-title" className="home-cta__title" text="Let's build something meaningful." mode="line" lines={["Let's build", "something", "meaningful."]} />
           <AnimatedLink href="/contact" className="type-label home-animate">Start a conversation <span aria-hidden="true">→</span></AnimatedLink>
           <span className="home-cta__counter type-metadata">05 — Contact</span>
         </div>

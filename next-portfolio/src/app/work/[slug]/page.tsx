@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { TextReveal } from "@/components/animation/text-reveal";
 import { ProjectVisual } from "@/components/projects/project-visual";
 import { getNextProject, getProject, projects } from "@/data/projects";
 import { siteConfig } from "@/data/site";
@@ -58,7 +59,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <header className="case-hero editorial-container">
         <div className="case-hero__top type-label"><Link href="/work">← Work index</Link><span>Project {number} / {String(projects.length).padStart(2, "0")}</span></div>
         <p className="case-hero__category type-label">{project.category}</p>
-        <h1 className="type-page-title">{project.name}</h1>
+        <TextReveal as="h1" className="type-page-title" text={project.name} mode="line" trigger="load" />
         <p className="case-hero__subtitle type-body-large">{project.subtitle}</p>
       </header>
 

@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { TextReveal } from "@/components/animation/text-reveal";
 import { ProjectVisual } from "@/components/projects/project-visual";
 import { AnimatedLink } from "@/components/ui/animated-link";
 import { projects } from "@/data/projects";
@@ -14,7 +15,7 @@ export default function WorkPage() {
     <div className="work-index">
       <header className="work-index__hero editorial-container">
         <div className="work-index__eyebrow"><span className="type-label">Selected work</span><span className="type-metadata">{String(projects.length).padStart(2, "0")} projects</span></div>
-        <h1 className="type-page-title">A collection of digital products,<br /><em>systems and experiments.</em></h1>
+        <TextReveal as="h1" className="type-page-title" text="A collection of digital products, systems and experiments." mode="line" trigger="load" lines={["A collection of digital products,", <em key="focus">systems and experiments.</em>]} />
         <p className="type-body">Full-stack applications, backend contributions, mobile work, and cloud deployments—presented with the level of detail each project can responsibly support.</p>
       </header>
 
@@ -26,7 +27,7 @@ export default function WorkPage() {
               <div className="work-entry__copy">
                 <span className="work-entry__number">{number}</span>
                 <p className="type-label">{project.category}</p>
-                <h2 className="type-project-title">{project.name}</h2>
+                <TextReveal as="h2" className="type-project-title" text={project.name} />
                 <p className="work-entry__description type-body">{project.description}</p>
                 <dl className="work-entry__meta type-metadata">
                   <div><dt>Role</dt><dd>{project.role}</dd></div>

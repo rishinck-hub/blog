@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { TextReveal } from "@/components/animation/text-reveal";
 import { getProject } from "@/data/projects";
 import { developmentExperience, educationExperience, professionalExperience } from "@/data/experience";
 import type { ExperienceEntry } from "@/types/content";
@@ -14,7 +15,7 @@ function ExperienceGroup({ label, title, entries, startIndex }: Readonly<{ label
     <section className="experience-group editorial-container" aria-labelledby={`${label}-title`}>
       <div className="experience-group__heading">
         <p className="type-label">{label}</p>
-        <h2 id={`${label}-title`}>{title}</h2>
+        <TextReveal as="h2" id={`${label}-title`} className="experience-group__title" text={title} />
         <span className="type-metadata">{String(entries.length).padStart(2, "0")} entries</span>
       </div>
       <div className="experience-list">
@@ -66,7 +67,7 @@ export default function ExperiencePage() {
     <div className="experience-page">
       <header className="experience-hero editorial-container">
         <div className="experience-hero__top type-label"><span>Experience</span><span>Professional / education / practice</span></div>
-        <h1 className="type-page-title">Learning through real products, <em>production systems and continuous practice.</em></h1>
+        <TextReveal as="h1" className="type-page-title" text="Learning through real products, production systems and continuous practice." mode="line" trigger="load" lines={["Learning through real products,", <em key="focus">production systems and continuous practice.</em>]} />
         <p className="type-body">A record of professional contribution, application development, formal education, leadership, and technical workshops.</p>
         <span className="experience-hero__count type-metadata">{String(professionalExperience.length).padStart(2, "0")} professional entries</span>
       </header>
@@ -78,7 +79,7 @@ export default function ExperiencePage() {
       <section className="experience-close">
         <div className="editorial-container experience-close__inner">
           <p className="type-label">Continue exploring</p>
-          <h2>Experience becomes useful<br />when it shapes the next build.</h2>
+          <TextReveal as="h2" text="Experience becomes useful when it shapes the next build." mode="line" lines={["Experience becomes useful", "when it shapes the next build."]} />
           <div><Link className="animated-link type-label" href="/work">View selected work <span aria-hidden="true">→</span></Link><Link className="animated-link type-label" href="/contact">Start a conversation <span aria-hidden="true">→</span></Link></div>
         </div>
       </section>

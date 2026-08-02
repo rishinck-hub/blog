@@ -34,7 +34,7 @@ export default function AboutPage() {
     <div className="about-page">
       <header className="about-hero editorial-container">
         <div className="about-hero__top type-label"><span>About — Rishin</span><span>Software developer / India</span></div>
-        <TextReveal as="h1" className="about-hero__title type-page-title" text="I build software by understanding the problem before choosing the solution." />
+        <TextReveal as="h1" className="about-hero__title type-page-title" text="I build software by understanding the problem before choosing the solution." mode="line" trigger="load" lines={["I build software by understanding", "the problem before choosing the solution."]} />
         <p className="about-hero__intro type-body-large">Full-stack developer working across dependable backend systems, thoughtful interfaces, databases, and practical delivery workflows.</p>
         <span className="about-hero__counter type-metadata">01 / 05</span>
       </header>
@@ -107,7 +107,7 @@ export default function AboutPage() {
       <section className="about-close">
         <div className="editorial-container about-close__inner">
           <p className="type-label">05 — Let&apos;s talk</p>
-          <h2>Have a problem<br />worth understanding?</h2>
+          <TextReveal as="h2" text="Have a problem worth understanding?" mode="line" lines={["Have a problem", "worth understanding?"]} />
           <div><AnimatedLink href="/contact" className="type-label">Start a conversation <span aria-hidden="true">→</span></AnimatedLink><Link href="/work" className="type-label">View selected work →</Link></div>
         </div>
       </section>

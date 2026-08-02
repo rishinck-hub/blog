@@ -1,3 +1,4 @@
+import { TextReveal } from "@/components/animation/text-reveal";
 import { ContactForm } from "@/components/forms/contact-form";
 import { siteConfig } from "@/data/site";
 import { createPageMetadata } from "@/lib/metadata";
@@ -13,7 +14,7 @@ export default function ContactPage() {
     <div className="contact-page">
       <header className="contact-hero editorial-container">
         <div className="contact-hero__top type-label"><span>Contact</span><span>Available for opportunities</span></div>
-        <h1>Have a project,<br />role or idea<br /><em>in mind?</em></h1>
+        <TextReveal as="h1" text="Have a project, role or idea in mind?" mode="line" trigger="load" lines={["Have a project,", "role or idea", <em key="focus">in mind?</em>]} />
         <p className="type-body-large">Tell me what you are working on, where you need help, or what kind of role you have in mind.</p>
         <a className="contact-hero__email animated-link type-label" href={contactLinks[0].href}>{contactLinks[0].value} <span aria-hidden="true">↗</span></a>
       </header>
@@ -34,7 +35,7 @@ export default function ContactPage() {
 
         <div className="contact-form-wrap">
           <div className="contact-form-wrap__head"><p className="type-label">02 — Write a message</p><span className="type-metadata">All fields are required</span></div>
-          <h2 id="contact-form-title">Start with the essentials.</h2>
+          <TextReveal as="h2" id="contact-form-title" className="contact-form-title" text="Start with the essentials." />
           <ContactForm recipient={contactLinks[0].value} endpoint={process.env.NEXT_PUBLIC_CONTACT_FORM_ENDPOINT} />
         </div>
       </section>

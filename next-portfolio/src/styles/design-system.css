@@ -214,10 +214,20 @@ body {
 }
 
 .text-reveal {
-  overflow: hidden;
+  display: block;
 }
 
-.text-reveal__word {
+.text-reveal__clip {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.text-reveal__line { display: block; }
+.text-reveal__line .text-reveal__unit { max-width: 100%; white-space: normal; }
+.text-reveal__space { white-space: pre; }
+
+.text-reveal__unit {
   display: inline-block;
   will-change: transform, opacity;
 }

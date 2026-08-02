@@ -18,7 +18,7 @@ This document records the shared systems introduced in Phases 5–7. The migrate
 - `src/styles/design-system.css` mirrors the same hierarchy for CSS with `--duration-fast`, `--duration-normal`, `--duration-slow`, semantic duration variables, and editorial/reveal/exit easing variables. Component CSS should consume these variables rather than introduce unrelated timing values.
 - The motion provider refreshes ScrollTrigger after route changes, fonts, window load, image loads, and layout resizes.
 - Advanced motion and smooth scrolling are disabled for reduced-motion users and simplified for coarse pointers, small viewports, and low-core devices.
-- Text splitting is implemented locally at word boundaries, avoiding an additional dependency.
+- `TextReveal` provides semantic line, word, and deliberately opt-in character modes without another splitting dependency. It supports page-load or one-time scroll reveals, optional reversibility, responsive/font refresh, and full cleanup; its server-rendered units remain visible when JavaScript or motion is unavailable.
 - The first-session loader advances from critical font and Home hero-image readiness, has a 1.6-second readiness fallback, and dispatches a shared completion event before the Home opening timeline starts. Reduced-motion, coarse-pointer, low-core, repeat-session, and internal-navigation visits skip the full sequence.
 - The Home hero uses a roughly 1.7-second staged entrance after that handoff. On capable desktop pointers, normalized coordinates drive bounded portrait, heading, shade, and counter transforms through GSAP `quickTo`; the layers return to rest on pointer exit without React state updates.
 
