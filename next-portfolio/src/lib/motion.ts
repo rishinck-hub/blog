@@ -29,7 +29,7 @@ export function shouldReduceAdvancedMotion() {
   return (
     window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
     window.matchMedia("(pointer: coarse)").matches ||
-    window.matchMedia("(max-width: 767px)").matches ||
+    window.matchMedia("(max-width: 900px)").matches ||
     (navigator.hardwareConcurrency !== undefined && navigator.hardwareConcurrency <= 4)
   );
 }

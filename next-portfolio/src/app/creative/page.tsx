@@ -1,15 +1,12 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 
 import { CreativeGallery } from "@/components/creative/creative-gallery";
 import { creativeEntries } from "@/data/creative";
+import { createPageMetadata } from "@/lib/metadata";
 
 import "./creative.css";
 
-export const metadata: Metadata = {
-  title: "Creative",
-  description: "An editorial gallery of video editing, motion, event, travel, and social work by Mohammed Rishin C K.",
-};
+export const metadata = createPageMetadata({ title: "Creative", description: "An editorial gallery of video editing, motion, event, travel, and social work by Mohammed Rishin C K.", path: "/creative" });
 
 export default function CreativePage() {
   return (

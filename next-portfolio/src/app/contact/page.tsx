@@ -1,14 +1,10 @@
-import type { Metadata } from "next";
-
 import { ContactForm } from "@/components/forms/contact-form";
 import { siteConfig } from "@/data/site";
+import { createPageMetadata } from "@/lib/metadata";
 
 import "./contact.css";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description: "Contact Mohammed Rishin C K about software development roles, projects, and collaborations.",
-};
+export const metadata = createPageMetadata({ title: "Contact", description: "Contact Mohammed Rishin C K about software development roles, projects, and collaborations.", path: "/contact" });
 
 const contactLinks = [siteConfig.socials[0], siteConfig.socials[1], siteConfig.socials[2]];
 

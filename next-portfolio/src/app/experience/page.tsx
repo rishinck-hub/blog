@@ -1,16 +1,13 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 
 import { getProject } from "@/data/projects";
 import { developmentExperience, educationExperience, professionalExperience } from "@/data/experience";
 import type { ExperienceEntry } from "@/types/content";
+import { createPageMetadata } from "@/lib/metadata";
 
 import "./experience.css";
 
-export const metadata: Metadata = {
-  title: "Experience",
-  description: "Professional experience, education, training, leadership, and workshops from Mohammed Rishin C K.",
-};
+export const metadata = createPageMetadata({ title: "Experience", description: "Professional experience, education, training, leadership, and workshops from Mohammed Rishin C K.", path: "/experience" });
 
 function ExperienceGroup({ label, title, entries, startIndex }: Readonly<{ label: string; title: string; entries: readonly ExperienceEntry[]; startIndex: number }>) {
   return (

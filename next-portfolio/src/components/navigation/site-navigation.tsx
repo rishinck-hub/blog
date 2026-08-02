@@ -46,10 +46,20 @@ export function SiteNavigation() {
   }, []);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 32);
+    let frame = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => setScrolled((current) => {
+        const next = window.scrollY > 32;
+        return current === next ? current : next;
+      }));
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -57,11 +67,8 @@ export function SiteNavigation() {
     const previouslyFocused = document.activeElement as HTMLElement | null;
     const menu = menuRef.current;
     document.body.style.overflow = "hidden";
-    const focusables = () => [
-      triggerRef.current,
-      ...Array.from(menu?.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])') ?? []),
-    ].filter((element): element is HTMLElement => Boolean(element));
-    requestAnimationFrame(() => focusables()[1]?.focus());
+    const focusables = () => Array.from(menu?.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])') ?? []);
+    requestAnimationFrame(() => focusables()[0]?.focus());
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -143,6 +150,7 @@ export function SiteNavigation() {
           aria-expanded={menuOpen}
           aria-controls="editorial-menu"
           aria-label={menuOpen ? "Close menu" : "Open menu"}
+          tabIndex={menuOpen ? -1 : undefined}
           onClick={() => setMenuOpen((open) => !open)}
         >
           <span className="editorial-menu-trigger__lines" aria-hidden="true" />
@@ -160,6 +168,7 @@ export function SiteNavigation() {
         inert={menuOpen ? undefined : true}
         data-lenis-prevent
       >
+        <button className="editorial-menu__close type-label" type="button" onClick={() => setMenuOpen(false)}>Close</button>
         <Container className="editorial-menu__inner">
           <div>
             <p id="editorial-menu-title" className="sr-only">Site navigation</p>

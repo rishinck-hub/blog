@@ -5,8 +5,11 @@ import { HomeMotion } from "@/components/animation/home-motion";
 import { AnimatedLink } from "@/components/ui/animated-link";
 import { projects } from "@/data/projects";
 import { experience } from "@/data/experience";
+import { createPageMetadata } from "@/lib/metadata";
 
 import "./home.css";
+
+export const metadata = createPageMetadata({ title: "Software Developer", description: "Mohammed Rishin C K builds dependable full-stack applications, backend systems, and refined web experiences.", path: "/" });
 
 const selectedProjects = [
   { ...projects[0], number: "01", category: "Internal platform", role: "Development contributor", year: "Present" },
@@ -80,7 +83,7 @@ export default function HomePage() {
                 <h3 className="type-project-title">{project.name}</h3>
                 <span className="type-metadata">{project.category}</span>
               </div>
-              <Link href={`/work/${project.slug}`} className="home-project__visual home-reveal-image" data-cursor-label="View project" aria-label={`View ${project.name}`}>
+              <Link href={`/work/${project.slug}`} className="home-project__visual home-reveal-image" data-cursor-label="View project">
                 <span className="home-project__visual-index" aria-hidden="true">{project.number}</span>
                 <span className="home-project__visual-name" aria-hidden="true">{project.name}</span>
                 <span className="home-project__visual-note type-label">Project preview</span>

@@ -28,7 +28,8 @@ a:hover .project-visual::after,a:focus-visible .project-visual::after{transform:
 .project-visual--ink{background:var(--inverse-background);color:var(--inverse-foreground)}
 .project-visual--paper{background:var(--background-pure)}
 .project-visual--stone{background:#d9d6cf}
-.project-visual__number{position:absolute;top:4%;left:6%;z-index:-1;font-family:var(--font-display);font-size:clamp(8rem,22vw,22rem);line-height:1;opacity:.07}
+.project-visual__number{position:absolute;top:4%;left:6%;z-index:-1;color:transparent;-webkit-text-stroke:1px rgba(17,17,17,.22);font-family:var(--font-display);font-size:clamp(8rem,22vw,22rem);line-height:1}
+.project-visual--ink .project-visual__number{-webkit-text-stroke-color:rgba(244,242,237,.25)}
 .project-visual__title{position:absolute;right:8%;bottom:10%;max-width:10ch;font-family:var(--font-display);font-size:clamp(2.5rem,5.8vw,6rem);line-height:.88;text-align:right}
 .project-visual__label{position:absolute;top:8%;right:8%;max-width:15rem;text-align:right}
 .project-visual__tech{position:absolute;bottom:8%;left:8%;max-width:42%}

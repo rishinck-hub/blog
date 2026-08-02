@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -6,13 +5,11 @@ import { RevealImage } from "@/components/animation/reveal-image";
 import { TextReveal } from "@/components/animation/text-reveal";
 import { AnimatedLink } from "@/components/ui/animated-link";
 import { siteConfig, technologies } from "@/data/site";
+import { createPageMetadata } from "@/lib/metadata";
 
 import "./about.css";
 
-export const metadata: Metadata = {
-  title: "About",
-  description: "About Mohammed Rishin C K, his development approach, current focus, and creative interests.",
-};
+export const metadata = createPageMetadata({ title: "About", description: "About Mohammed Rishin C K, his development approach, current focus, and creative interests.", path: "/about" });
 
 const principles = [
   {
@@ -44,7 +41,7 @@ export default function AboutPage() {
 
       <section className="about-portrait editorial-container" aria-label="Portrait and biography">
         <RevealImage className="about-portrait__image">
-          <Image src="/profile.png" alt="Portrait of Mohammed Rishin C K" fill priority sizes="(max-width: 700px) 100vw, 70vw" />
+          <Image src="/profile.png" alt="Portrait of Mohammed Rishin C K" fill sizes="(max-width: 700px) 100vw, 70vw" />
         </RevealImage>
         <div className="about-portrait__caption type-metadata"><span>Mohammed Rishin C K</span><span>Software developer</span></div>
       </section>

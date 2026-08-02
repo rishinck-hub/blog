@@ -8,14 +8,14 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { shouldReduceAdvancedMotion } from "@/lib/motion";
 import type { CreativeEntry } from "@/types/content";
 
-function GalleryImage({ entry, sizes, priority = false }: Readonly<{ entry: CreativeEntry; sizes: string; priority?: boolean }>) {
+function GalleryImage({ entry, sizes }: Readonly<{ entry: CreativeEntry; sizes: string }>) {
   const [failed, setFailed] = useState(false);
   return failed ? (
     <div className="creative-image-placeholder" role="img" aria-label={`${entry.name} thumbnail unavailable`}>
       <span className="type-label">Image unavailable</span><strong>{entry.name}</strong><small>Replace with verified creative asset</small>
     </div>
   ) : (
-    <Image src={entry.thumbnailUrl} alt={`${entry.name} video frame`} fill sizes={sizes} priority={priority} loading={priority ? undefined : "lazy"} onError={() => setFailed(true)} />
+    <Image src={entry.thumbnailUrl} alt={`${entry.name} video frame`} fill sizes={sizes} loading="lazy" onError={() => setFailed(true)} />
   );
 }
 
@@ -71,14 +71,14 @@ export function CreativeGallery({ entries }: Readonly<{ entries: readonly Creati
   }, [close, isOpen, move]);
 
   return (
-    <section ref={galleryRef} className="creative-gallery editorial-container" aria-label="Creative work gallery">
-      <div className="creative-gallery__intro"><p className="type-label">01 — Selected frames</p><p className="type-metadata">Grayscale by default / color on hover</p></div>
+    <section ref={galleryRef} className="creative-gallery editorial-container" aria-labelledby="creative-gallery-title">
+      <div className="creative-gallery__intro"><h2 id="creative-gallery-title" className="type-label">01 — Selected frames</h2><p className="type-metadata">Grayscale by default / color on hover</p></div>
       <div className="creative-gallery__grid">
         {entries.map((entry, index) => (
           <article className={`creative-gallery__item creative-gallery__item--${index + 1}`} key={entry.id}>
-            <button type="button" className="creative-gallery__open" data-cursor-label="Open" onClick={(event) => { openerRef.current = event.currentTarget; setActiveIndex(index); }} aria-label={`Preview ${entry.name}`}>
+            <button type="button" className="creative-gallery__open" data-cursor-label="Open" onClick={(event) => { openerRef.current = event.currentTarget; setActiveIndex(index); }}>
               <span className="creative-gallery__media">
-                <GalleryImage entry={entry} sizes="(max-width: 650px) 100vw, (max-width: 1000px) 50vw, 45vw" priority={index === 0} />
+                <GalleryImage entry={entry} sizes="(max-width: 650px) 100vw, (max-width: 1000px) 50vw, 45vw" />
                 <span className="creative-gallery__view type-label">View frame</span>
               </span>
               <span className="creative-gallery__caption">
@@ -99,7 +99,7 @@ export function CreativeGallery({ entries }: Readonly<{ entries: readonly Creati
               <span className="type-label">{String(activeIndex + 1).padStart(2, "0")} / {String(entries.length).padStart(2, "0")}</span>
               <button ref={closeRef} type="button" data-cursor-label="Close" onClick={close} className="type-label">Close <span aria-hidden="true">×</span></button>
             </div>
-            <div className="creative-preview__image"><GalleryImage key={activeEntry.id} entry={activeEntry} sizes="90vw" priority /></div>
+            <div className="creative-preview__image"><GalleryImage key={activeEntry.id} entry={activeEntry} sizes="90vw" /></div>
             <div className="creative-preview__meta">
               <div><span className="type-metadata">{activeEntry.category} · {activeEntry.duration}</span><h2 id="creative-preview-title">{activeEntry.name}</h2></div>
               <div className="creative-preview__controls"><button type="button" data-cursor-label="Previous" onClick={() => move(-1)} aria-label="Previous creative work">←</button><button type="button" data-cursor-label="Next" onClick={() => move(1)} aria-label="Next creative work">→</button><a href={activeEntry.instagramUrl} data-cursor-label="Open" target="_blank" rel="noreferrer" className="type-label">Watch on Instagram ↗</a></div>

@@ -42,6 +42,7 @@ body {
   color: var(--foreground);
   font-family: var(--font-body), sans-serif;
   text-rendering: optimizeLegibility;
+  overflow-wrap: break-word;
 }
 
 ::selection {
@@ -230,6 +231,7 @@ body {
   gap: 0.55rem;
   width: fit-content;
   padding-block: 0.25rem;
+  min-height: 2.75rem;
 }
 
 .animated-link::after {
@@ -479,6 +481,19 @@ html[data-first-visit-loader="show"] .first-visit-loader {
   pointer-events: none;
 }
 
+.editorial-menu__close {
+  position: absolute;
+  top: .9rem;
+  right: var(--gutter);
+  z-index: 3;
+  display: inline-flex;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+}
+
 .editorial-menu.is-open {
   visibility: visible;
   clip-path: inset(0 0 0% 0);
@@ -573,6 +588,28 @@ html[data-first-visit-loader="show"] .first-visit-loader {
   .editorial-section-intro { grid-template-columns: 1fr; }
   .editorial-section-intro__label,
   .editorial-section-intro__content { grid-column: auto; }
+}
+
+@media (max-width: 430px) {
+  :where(.type-hero, .type-page-title, .type-section-heading, .type-project-title) {
+    overflow-wrap: anywhere;
+  }
+  .editorial-header__inner { min-height: 4rem; }
+  .editorial-menu__name { font-size: clamp(2.35rem, 14vw, 3.6rem); }
+}
+
+@media (hover: none), (pointer: coarse) {
+  :where(a, button, summary) { min-height: 2.75rem; }
+  :where(button, summary) { touch-action: manipulation; }
+  .cursor-label { display: none !important; }
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+  :where(.home-hero, .about-hero, .work-index__hero, .case-hero, .experience-hero, .creative-hero, .contact-hero) {
+    min-height: 36rem;
+  }
+  .editorial-menu__inner { align-items: start; padding-top: 5.5rem; }
+  .editorial-menu__name { font-size: clamp(2rem, 8vh, 3rem); }
 }
 
 @media (max-width: 540px) {

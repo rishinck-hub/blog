@@ -1,17 +1,17 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 
 import { ProjectVisual } from "@/components/projects/project-visual";
 import { AnimatedLink } from "@/components/ui/animated-link";
 import { projects } from "@/data/projects";
+import { createPageMetadata } from "@/lib/metadata";
 
 import "./work.css";
 
-export const metadata: Metadata = { title: "Work", description: "A collection of digital products, systems, and experiments by Mohammed Rishin C K." };
+export const metadata = createPageMetadata({ title: "Work", description: "A collection of digital products, systems, and experiments by Mohammed Rishin C K.", path: "/work" });
 
 export default function WorkPage() {
   return (
-    <main className="work-index">
+    <div className="work-index">
       <header className="work-index__hero editorial-container">
         <div className="work-index__eyebrow"><span className="type-label">Selected work</span><span className="type-metadata">{String(projects.length).padStart(2, "0")} projects</span></div>
         <h1 className="type-page-title">A collection of digital products,<br /><em>systems and experiments.</em></h1>
@@ -35,13 +35,13 @@ export default function WorkPage() {
                 </dl>
                 <AnimatedLink href={`/work/${project.slug}`} className="type-label">Read case study <span aria-hidden="true">→</span></AnimatedLink>
               </div>
-              <Link href={`/work/${project.slug}`} className="work-entry__visual" aria-label={`Read ${project.name} case study`} data-cursor-label="View project">
+              <Link href={`/work/${project.slug}`} className="work-entry__visual" data-cursor-label="View project">
                 <ProjectVisual project={project} number={number} />
               </Link>
             </article>
           );
         })}
       </section>
-    </main>
+    </div>
   );
 }

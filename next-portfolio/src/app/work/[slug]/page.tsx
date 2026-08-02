@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 
 import { ProjectVisual } from "@/components/projects/project-visual";
 import { getNextProject, getProject, projects } from "@/data/projects";
+import { siteConfig } from "@/data/site";
+import { createPageMetadata } from "@/lib/metadata";
 
 import "../work.css";
 import "./case-study.css";
@@ -16,7 +18,9 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
   const project = getProject((await params).slug);
-  return project ? { title: project.name, description: project.description } : { title: "Project not found" };
+  return project
+    ? createPageMetadata({ title: project.name, description: project.description, path: `/work/${project.slug}` })
+    : { title: "Project not found", robots: { index: false, follow: false } };
 }
 
 function StudySection({ index, title, children }: Readonly<{ index: string; title: string; children: React.ReactNode }>) {
@@ -36,9 +40,21 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const number = String(index + 1).padStart(2, "0");
   const nextProject = getNextProject(project.slug);
   const nextNumber = String(projects.findIndex((entry) => entry.slug === nextProject.slug) + 1).padStart(2, "0");
+  const projectSchema = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: project.name,
+    description: project.description,
+    url: `${siteConfig.url}/work/${project.slug}`,
+    creator: { "@id": `${siteConfig.url}/#person` },
+    genre: project.category,
+    keywords: project.technologies.join(", "),
+    ...(project.liveUrl ? { sameAs: project.liveUrl } : {}),
+  };
 
   return (
-    <main className="case-study">
+    <div className="case-study">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema).replace(/</g, "\\u003c") }} />
       <header className="case-hero editorial-container">
         <div className="case-hero__top type-label"><Link href="/work">← Work index</Link><span>Project {number} / {String(projects.length).padStart(2, "0")}</span></div>
         <p className="case-hero__category type-label">{project.category}</p>
@@ -100,6 +116,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <span className="case-next__arrow" aria-hidden="true">→</span>
         </Link>
       </nav>
-    </main>
+    </div>
   );
 }

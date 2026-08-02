@@ -1,6 +1,4 @@
 @import "tailwindcss";
-@import "./legacy.css";
-@import "./legacy-refresh.css";
 @import "../styles/design-system.css";
 
 @theme inline {
@@ -20,7 +18,7 @@
   position: fixed;
   top: 0.75rem;
   left: 0.75rem;
-  z-index: 100;
+  z-index: 1300;
   translate: 0 -200%;
   background: var(--white);
   color: var(--black);
