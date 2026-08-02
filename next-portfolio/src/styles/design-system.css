@@ -301,24 +301,44 @@ body {
   inset: 0;
   z-index: 1200;
   display: none;
-  grid-template-columns: 1fr auto;
-  align-items: end;
+  place-items: center;
   padding: var(--gutter);
-  background: var(--inverse-background);
-  color: var(--inverse-foreground);
+  background: var(--background);
+  color: var(--foreground);
   clip-path: inset(0);
   pointer-events: none;
 }
 
-html[data-first-visit-loader="show"] .first-visit-loader {
+html[data-first-visit-loader="show"] .first-visit-loader,
+html[data-first-visit-loader="exiting"] .first-visit-loader {
   display: grid;
-  animation: loader-safe-exit 0.25s 1s both;
 }
 
-.first-visit-loader__wordmark { font-size: .9rem; font-weight: 700; letter-spacing: .04em; }
-.first-visit-loader__counter { font-family: var(--font-display), serif; font-size: clamp(2rem, 5vw, 5rem); line-height: .8; }
+html[data-first-visit-loader="show"] .first-visit-loader {
+  animation: loader-safe-exit var(--duration-fast) 2.5s both;
+}
+
+html[data-first-visit-loader="show"] :is(.skip-link, .editorial-header, #main-content, .editorial-footer, .cursor-label) {
+  visibility: hidden;
+  animation: loader-content-safe-show 0s 2.5s forwards;
+}
+
+.first-visit-loader__wordmark {
+  display: inline-flex;
+  align-items: flex-start;
+  overflow: hidden;
+  font-size: clamp(1rem, 1.6vw, 1.35rem);
+  font-weight: 700;
+  letter-spacing: .045em;
+  line-height: 1;
+}
+.first-visit-loader__wordmark sup { margin-left: .08rem; font-size: .45em; line-height: 1; }
+.first-visit-loader__counter { position: absolute; left: var(--gutter); bottom: calc(var(--gutter) + .85rem); font-size: .65rem; font-weight: 600; letter-spacing: .1em; line-height: 1; }
+.first-visit-loader__track { position: absolute; right: var(--gutter); bottom: var(--gutter); left: var(--gutter); height: 1px; overflow: hidden; background: var(--line); }
+.first-visit-loader__track > span { display: block; width: 100%; height: 100%; background: var(--foreground); transform: scaleX(0); transform-origin: left; will-change: transform; }
 
 @keyframes loader-safe-exit { to { opacity: 0; visibility: hidden; } }
+@keyframes loader-content-safe-show { to { visibility: visible; } }
 
 .page-transition-shell { position: relative; }
 .route-frame { animation: route-frame-enter var(--duration-route) var(--ease-reveal) both; }

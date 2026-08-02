@@ -34,6 +34,8 @@ export const motion = {
   },
 } as const;
 
+export const loaderCompleteEvent = "rishin:loader-complete";
+
 export function shouldReduceAdvancedMotion() {
   if (typeof window === "undefined") return true;
   return (
