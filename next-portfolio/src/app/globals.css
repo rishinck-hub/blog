@@ -1,14 +1,19 @@
 @import "tailwindcss";
 @import "./legacy.css";
 @import "./legacy-refresh.css";
+@import "../styles/design-system.css";
 
 @theme inline {
   --font-sans: var(--font-body);
   --font-serif: var(--font-display);
-  --color-canvas: #f5f1e8;
-  --color-ink: #111111;
-  --color-muted-ink: #5c5a55;
-  --color-rule: #d6d0c5;
+  --color-background: var(--background);
+  --color-background-pure: var(--background-pure);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-inverse-background: var(--inverse-background);
+  --color-inverse-foreground: var(--inverse-foreground);
 }
 
 .skip-link {
@@ -24,30 +29,4 @@
 
 .skip-link:focus {
   translate: 0;
-}
-
-@media (max-width: 768px) {
-  .nav {
-    grid-template-columns: minmax(0, 1fr) auto;
-  }
-
-  .nav__left {
-    display: none;
-  }
-
-  .nav__center {
-    justify-content: flex-start;
-    min-width: 0;
-  }
-
-  .nav__right {
-    justify-self: end;
-  }
-
-  .nav__hamburger {
-    position: fixed;
-    top: 1.2rem;
-    right: 1.2rem;
-    z-index: 201;
-  }
 }

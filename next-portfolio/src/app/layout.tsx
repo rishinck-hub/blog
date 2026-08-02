@@ -1,30 +1,25 @@
 import type { Metadata } from "next";
-import { Barlow, Barlow_Condensed, DM_Serif_Display } from "next/font/google";
+import { Instrument_Serif, Manrope } from "next/font/google";
 
-import { Cursor } from "@/components/animation/cursor";
+import { MotionProvider } from "@/components/animation/motion-provider";
 import { SiteFooter } from "@/components/layout/site-footer";
-import { ScrollToTop } from "@/components/layout/scroll-to-top";
 import { SiteNavigation } from "@/components/navigation/site-navigation";
 import { siteConfig } from "@/data/site";
 
 import "./globals.css";
+import "lenis/dist/lenis.css";
 
-const bodyFont = Barlow({
+const bodyFont = Manrope({
   variable: "--font-body",
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["400", "500", "600", "700"],
 });
 
-const displayFont = Barlow_Condensed({
+const displayFont = Instrument_Serif({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["700", "900"],
-});
-
-const serifFont = DM_Serif_Display({
-  variable: "--font-serif",
-  subsets: ["latin"],
   weight: "400",
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -59,15 +54,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${bodyFont.variable} ${displayFont.variable} ${serifFont.variable}`}>
-        <a className="skip-link" href="#main-content">
-          Skip to main content
-        </a>
-        <ScrollToTop />
-        <Cursor />
-        <SiteNavigation />
-        <main id="main-content">{children}</main>
-        <SiteFooter />
+      <body className={`${bodyFont.variable} ${displayFont.variable}`}>
+        <MotionProvider>
+          <a className="skip-link" href="#main-content">Skip to main content</a>
+          <SiteNavigation />
+          <main id="main-content">{children}</main>
+          <SiteFooter />
+        </MotionProvider>
       </body>
     </html>
   );
