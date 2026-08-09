@@ -3,6 +3,8 @@
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 
+import { SiteScrollMotion } from "@/components/animation/site-scroll-motion";
+
 const routeMeta: Record<string, { number: string; label: string }> = {
   "/": { number: "01", label: "Home" },
   "/work": { number: "02", label: "Work" },
@@ -19,7 +21,7 @@ export function PageTransition({ children }: Readonly<{ children: ReactNode }>) 
   return (
     <div className="page-transition-shell">
       <div className="page-transition-wipe" aria-hidden="true"><span>{meta.number} — {meta.label}</span></div>
-      <div className="route-frame">{children}</div>
+      <SiteScrollMotion>{children}</SiteScrollMotion>
     </div>
   );
 }

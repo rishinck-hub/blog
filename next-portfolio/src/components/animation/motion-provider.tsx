@@ -22,13 +22,8 @@ export function MotionProvider({ children }: Readonly<{ children: ReactNode }>) 
       resizeFrame = requestAnimationFrame(() => ScrollTrigger.refresh(true));
     };
 
-    const onAssetLoad = (event: Event) => {
-      if (event.target instanceof HTMLImageElement) refresh();
-    };
-
     window.addEventListener("load", refresh);
     window.addEventListener("resize", refresh, { passive: true });
-    document.addEventListener("load", onAssetLoad, true);
     document.fonts.ready.then(() => {
       if (active) refresh();
     });
@@ -40,7 +35,6 @@ export function MotionProvider({ children }: Readonly<{ children: ReactNode }>) 
         cancelAnimationFrame(resizeFrame);
         window.removeEventListener("load", refresh);
         window.removeEventListener("resize", refresh);
-        document.removeEventListener("load", onAssetLoad, true);
       };
     }
 
@@ -65,7 +59,6 @@ export function MotionProvider({ children }: Readonly<{ children: ReactNode }>) 
       cancelAnimationFrame(resizeFrame);
       window.removeEventListener("load", refresh);
       window.removeEventListener("resize", refresh);
-      document.removeEventListener("load", onAssetLoad, true);
       lenis.off("scroll", updateScrollTrigger);
       gsap.ticker.remove(updateLenis);
       gsap.ticker.lagSmoothing(500, 33);

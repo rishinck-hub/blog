@@ -90,8 +90,12 @@ export function HomeMotion() {
         playOpening();
       }
 
-      gsap.utils.toArray<HTMLElement>(".home-animate").forEach((element) => {
+      gsap.utils.toArray<HTMLElement>(".home-animate:not(.home-divider)").forEach((element) => {
         gsap.from(element, { y: motion.distance.medium, autoAlpha: 0, duration: motion.timing.text.duration, ease: motion.ease.reveal, scrollTrigger: { trigger: element, start: "top 88%", once: true } });
+      });
+
+      gsap.utils.toArray<HTMLElement>(".home-divider").forEach((divider) => {
+        gsap.from(divider, { scaleX: 0, duration: motion.timing.divider, ease: motion.ease.editorial, scrollTrigger: { trigger: divider, start: "top 90%", once: true } });
       });
 
       gsap.utils.toArray<HTMLElement>(".home-reveal-image:not(.home-hero__portrait)").forEach((element) => {
