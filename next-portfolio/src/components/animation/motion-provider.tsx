@@ -57,6 +57,15 @@ export function MotionProvider({ children }: Readonly<{ children: ReactNode }>) 
       if ((event as CustomEvent<{ open: boolean }>).detail.open) lenis.stop();
       else lenis.start();
     };
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const onReducedMotionChange = (event: MediaQueryListEvent) => {
+      if (!event.matches) return;
+      document.documentElement.dataset.motionLevel = "off";
+      document.documentElement.classList.remove("custom-cursor-ready");
+      lenis.stop();
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+    reducedMotion.addEventListener("change", onReducedMotionChange);
     window.addEventListener(modalStateEvent, onModalState);
     refresh();
 
@@ -67,6 +76,7 @@ export function MotionProvider({ children }: Readonly<{ children: ReactNode }>) 
       window.removeEventListener("resize", refresh);
       lenis.off("scroll", updateScrollTrigger);
       window.removeEventListener(modalStateEvent, onModalState);
+      reducedMotion.removeEventListener("change", onReducedMotionChange);
       gsap.ticker.remove(updateLenis);
       gsap.ticker.lagSmoothing(500, 33);
       lenis.destroy();
