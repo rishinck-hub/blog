@@ -86,8 +86,7 @@ export function MotionProvider({ children }: Readonly<{ children: ReactNode }>) 
   }, []);
 
   useEffect(() => {
-    lenisRef.current?.scrollTo(0, { immediate: true });
-    if (!lenisRef.current) window.scrollTo({ top: 0, behavior: "instant" });
+    lenisRef.current?.resize();
     const frame = requestAnimationFrame(() => ScrollTrigger.refresh(true));
     return () => cancelAnimationFrame(frame);
   }, [pathname]);

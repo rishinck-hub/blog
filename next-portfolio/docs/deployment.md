@@ -7,9 +7,9 @@ Deploy from `next-portfolio/` to a Vercel Preview deployment first. Do not assig
 ## Current preview record
 
 - Vercel project: `ono4/next-portfolio` (separate from the existing React deployment)
-- Verified Preview: `https://next-portfolio-exk5blml0-ono4.vercel.app`
-- Preview deployment ID: `dpl_GCiYxEkj9EhnU4vCHpK5LvyaVeZs`
-- Inspector: `https://vercel.com/ono4/next-portfolio/GCiYxEkj9EhnU4vCHpK5LvyaVeZs`
+- Verified Preview: `https://next-portfolio-mhjkwzdfl-ono4.vercel.app`
+- Preview deployment ID: `dpl_4szaP1pUaS3WGwZFuRUzKSJFsdfZ`
+- Inspector: `https://vercel.com/ono4/next-portfolio/4szaP1pUaS3WGwZFuRUzKSJFsdfZ`
 - Status at verification: `READY`, target `Preview`
 - Access: Vercel Deployment Protection is enabled; authenticated Vercel requests are required.
 
