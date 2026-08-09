@@ -63,9 +63,16 @@ export function SiteScrollMotion({ children }: Readonly<{ children: ReactNode }>
           .from(section.querySelectorAll(":scope .type-label"), { y: motion.distance.small, autoAlpha: 0, stagger: motion.stagger.normal, duration: motion.duration.normal, ease: motion.ease.reveal }, 0.24);
       });
 
-      const footer = document.querySelector<HTMLElement>(".editorial-footer__inner");
+      const footer = document.querySelector<HTMLElement>(".editorial-footer");
       if (footer) {
-        gsap.from(footer.children, { y: motion.distance.medium, autoAlpha: 0, stagger: motion.stagger.normal, duration: motion.timing.text.duration, ease: motion.ease.reveal, scrollTrigger: { trigger: footer, start: "top 94%", once: true } });
+        const header = document.querySelector<HTMLElement>(".editorial-header");
+        if (header) ScrollTrigger.create({ trigger: footer, start: "top 4rem", end: "bottom top", toggleClass: { targets: header, className: "on-inverse" } });
+        gsap.timeline({ scrollTrigger: { trigger: footer, start: "top 88%", once: true } })
+          .from(footer.querySelectorAll(".editorial-footer__divider"), { scaleX: 0, duration: motion.timing.divider, ease: motion.ease.editorial, stagger: 0.16 })
+          .from(footer.querySelectorAll(".editorial-footer__statement-line > span"), { yPercent: 112, duration: motion.timing.text.duration, stagger: 0.08, ease: motion.ease.reveal }, 0.08)
+          .from(footer.querySelector(".editorial-footer__cta"), { y: motion.distance.small, autoAlpha: 0, duration: motion.duration.normal, ease: motion.ease.reveal }, 0.34)
+          .from(footer.querySelectorAll(".editorial-footer__details > *"), { y: motion.distance.small, autoAlpha: 0, duration: motion.duration.normal, stagger: motion.stagger.normal, ease: motion.ease.reveal }, 0.42)
+          .from(footer.querySelector(".editorial-footer__wordmark"), { yPercent: 24, autoAlpha: 0, duration: motion.duration.slow, ease: motion.ease.reveal }, 0.48);
       }
     }, frame);
 

@@ -6,6 +6,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 
 import { Container } from "@/components/layout/primitives";
+import { LocalTime } from "@/components/ui/local-time";
 import { siteConfig } from "@/data/site";
 import { motion, shouldReduceAdvancedMotion } from "@/lib/motion";
 
@@ -17,33 +18,13 @@ const menuNavigation = [
   ...siteConfig.navigation.slice(3),
 ];
 
-function getLocalTime() {
-  return new Intl.DateTimeFormat("en-IN", {
-    timeZone: "Asia/Kolkata",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  }).format(new Date());
-}
-
 export function SiteNavigation() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [localTime, setLocalTime] = useState("--:--");
   const headerRef = useRef<HTMLElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    const update = () => setLocalTime(getLocalTime());
-    const frame = requestAnimationFrame(update);
-    const timer = window.setInterval(update, 30_000);
-    return () => {
-      cancelAnimationFrame(frame);
-      window.clearInterval(timer);
-    };
-  }, []);
 
   useEffect(() => {
     let frame = 0;
@@ -197,7 +178,7 @@ export function SiteNavigation() {
             </div>
             <div className="editorial-menu__aside-group">
               <span className="type-label">Local time</span>
-              <time dateTime={localTime}>{localTime} IST</time>
+              <LocalTime />
             </div>
           </aside>
         </Container>

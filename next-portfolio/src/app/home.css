@@ -88,11 +88,6 @@ body:has(.editorial-home) .editorial-header.menu-is-open { color: var(--inverse-
 .home-experience__row { display:grid; grid-template-columns:4rem minmax(16rem,1.4fr) 1fr auto; gap:var(--grid-gap); align-items:start; border-top:1px solid var(--line); padding-block:2rem; }
 .home-experience__row:last-child { border-bottom:1px solid var(--line); }
 .home-experience__row h3 { font-family:var(--font-display); font-size:clamp(1.6rem,3vw,3rem); font-weight:400; line-height:1; }
-.home-cta { min-height:100svh; background:var(--inverse-background); color:var(--inverse-foreground); }
-.home-cta__inner { position:relative; display:flex; min-height:100svh; flex-direction:column; justify-content:center; align-items:flex-start; padding-block:7rem; }
-.home-cta__title { display:grid; margin:clamp(2rem,5vw,5rem) 0; font-family:var(--font-display); font-size:clamp(4rem,11vw,11rem); font-weight:400; letter-spacing:-.055em; line-height:.77; text-transform:uppercase; }
-.home-cta__title span:nth-child(2) { padding-left:clamp(1rem,10vw,10rem); }
-.home-cta__counter { position:absolute; right:var(--gutter); bottom:2rem; color:var(--inverse-muted); }
 
 @media (max-width: 800px) {
   .home-hero__portrait { width:100%; opacity:.66; }
@@ -142,8 +137,6 @@ body:has(.editorial-home) .editorial-header.menu-is-open { color: var(--inverse-
   .home-experience__row { grid-template-columns:2rem 1fr; }
   .home-experience__row time { grid-column:2; grid-row:1; justify-self:end; }
   .home-experience__row p { grid-column:2; }
-  .home-cta__title { font-size:clamp(3.3rem,17vw,6rem); }
-  .home-cta__title span:nth-child(2) { padding-left:0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .home-project-scene__primary::before,.home-project-scene__visual-index,.home-project-scene__visual-name,.home-project-scene__visual-link span { transition:none; }

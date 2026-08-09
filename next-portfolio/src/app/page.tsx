@@ -98,14 +98,6 @@ export default function HomePage() {
         <AnimatedLink href="/experience" className="type-label">View full experience <span aria-hidden="true">→</span></AnimatedLink>
       </section>
 
-      <section className="home-cta" aria-labelledby="contact-cta-title">
-        <div className="editorial-container home-cta__inner">
-          <p className="type-label home-animate">Have an idea?</p>
-          <TextReveal as="h2" id="contact-cta-title" className="home-cta__title" text="Let's build something meaningful." mode="line" lines={["Let's build", "something", "meaningful."]} />
-          <AnimatedLink href="/contact" className="type-label home-animate">Start a conversation <span aria-hidden="true">→</span></AnimatedLink>
-          <span className="home-cta__counter type-metadata">05 — Contact</span>
-        </div>
-      </section>
     </div>
   );
 }
