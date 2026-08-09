@@ -6,7 +6,7 @@ import { useEffect, useRef, type ReactNode } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { motion, shouldReduceAdvancedMotion } from "@/lib/motion";
+import { modalStateEvent, motion, shouldReduceAdvancedMotion } from "@/lib/motion";
 
 export function MotionProvider({ children }: Readonly<{ children: ReactNode }>) {
   const pathname = usePathname();
@@ -52,6 +52,11 @@ export function MotionProvider({ children }: Readonly<{ children: ReactNode }>) 
     lenis.on("scroll", updateScrollTrigger);
     gsap.ticker.add(updateLenis);
     gsap.ticker.lagSmoothing(0);
+    const onModalState = (event: Event) => {
+      if ((event as CustomEvent<{ open: boolean }>).detail.open) lenis.stop();
+      else lenis.start();
+    };
+    window.addEventListener(modalStateEvent, onModalState);
     refresh();
 
     return () => {
@@ -60,6 +65,7 @@ export function MotionProvider({ children }: Readonly<{ children: ReactNode }>) 
       window.removeEventListener("load", refresh);
       window.removeEventListener("resize", refresh);
       lenis.off("scroll", updateScrollTrigger);
+      window.removeEventListener(modalStateEvent, onModalState);
       gsap.ticker.remove(updateLenis);
       gsap.ticker.lagSmoothing(500, 33);
       lenis.destroy();

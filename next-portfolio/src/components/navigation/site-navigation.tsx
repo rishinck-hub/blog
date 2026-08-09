@@ -6,6 +6,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 
 import { Container } from "@/components/layout/primitives";
+import { ContactModalTrigger } from "@/components/contact/contact-modal";
 import { LocalTime } from "@/components/ui/local-time";
 import { siteConfig } from "@/data/site";
 import { motion, shouldReduceAdvancedMotion } from "@/lib/motion";
@@ -121,6 +122,7 @@ export function SiteNavigation() {
                 </Link>
               </li>
             ))}
+            <li><ContactModalTrigger className="editorial-nav-link editorial-nav-contact type-navigation">Let&apos;s Talk</ContactModalTrigger></li>
           </ul>
         </nav>
 
@@ -169,6 +171,7 @@ export function SiteNavigation() {
             <div className="editorial-menu__aside-group">
               <span className="type-label">Contact</span>
               <a href={siteConfig.socials[0].href}>{siteConfig.socials[0].value}</a>
+              <ContactModalTrigger className="editorial-menu__contact type-label" onClick={() => setMenuOpen(false)}>Let&apos;s Talk →</ContactModalTrigger>
             </div>
             <div className="editorial-menu__aside-group">
               <span className="type-label">Social</span>

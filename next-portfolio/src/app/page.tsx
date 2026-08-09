@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { HomeMotion } from "@/components/animation/home-motion";
+import { ContactModalTrigger } from "@/components/contact/contact-modal";
 import { TextReveal } from "@/components/animation/text-reveal";
 import { SelectedProjectsStage } from "@/components/projects/selected-projects-stage";
 import { CapabilitiesAccordion } from "@/components/sections/capabilities-accordion";
@@ -43,7 +44,7 @@ export default function HomePage() {
           <p className="home-hero__statement home-hero__animate type-body-large">I build reliable digital systems<br />and refined web experiences.</p>
           <div className="home-hero__actions home-hero__animate type-label">
             <AnimatedLink href="/work">View selected work <span aria-hidden="true">→</span></AnimatedLink>
-            <AnimatedLink href="/contact">Contact me <span aria-hidden="true">→</span></AnimatedLink>
+            <ContactModalTrigger className="animated-link type-navigation">Contact me <span aria-hidden="true">→</span></ContactModalTrigger>
           </div>
           <span className="home-hero__counter type-metadata" aria-hidden="true">00 / 05</span>
           <a className="home-hero__scroll type-label" href="#introduction">Scroll <span aria-hidden="true">↓</span></a>

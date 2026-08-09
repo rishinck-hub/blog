@@ -5,6 +5,7 @@ import Script from "next/script";
 import { CursorLabel } from "@/components/animation/cursor-label";
 import { FirstVisitLoader } from "@/components/animation/first-visit-loader";
 import { MotionProvider } from "@/components/animation/motion-provider";
+import { ContactModalProvider } from "@/components/contact/contact-modal";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteNavigation } from "@/components/navigation/site-navigation";
 import { siteConfig, technologies } from "@/data/site";
@@ -98,11 +99,13 @@ export default function RootLayout({
         </Script>
         <FirstVisitLoader />
         <MotionProvider>
-          <a className="skip-link" href="#main-content">Skip to main content</a>
-          <SiteNavigation />
-          <main id="main-content">{children}</main>
-          <SiteFooter />
-          <CursorLabel />
+          <ContactModalProvider>
+            <a className="skip-link" href="#main-content">Skip to main content</a>
+            <SiteNavigation />
+            <main id="main-content">{children}</main>
+            <SiteFooter />
+            <CursorLabel />
+          </ContactModalProvider>
         </MotionProvider>
       </body>
     </html>

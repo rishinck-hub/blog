@@ -482,6 +482,7 @@ html[data-first-visit-loader="show"] :is(.skip-link, .editorial-header, #main-co
   position: relative;
   padding-block: 0.45rem;
 }
+.editorial-nav-contact { color: inherit; }
 
 .editorial-nav-link::after {
   position: absolute;
@@ -631,6 +632,70 @@ html[data-first-visit-loader="show"] :is(.skip-link, .editorial-header, #main-co
 .editorial-menu__aside a {
   width: fit-content;
   color: var(--inverse-foreground);
+}
+.editorial-menu__contact { width: fit-content; color: var(--inverse-foreground); text-align: left; }
+
+html.contact-modal-open #main-content,
+html.contact-modal-open .editorial-footer {
+  opacity: .72;
+  transform: scale(.995);
+  transform-origin: center top;
+}
+#main-content,.editorial-footer { transition: opacity var(--duration-modal) var(--ease-editorial), transform var(--duration-modal) var(--ease-editorial); }
+.contact-modal { position:fixed; inset:0; z-index:1100; display:grid; place-items:center; padding:clamp(1rem,3vw,3rem); }
+.contact-modal__backdrop { position:absolute; inset:0; background:rgba(8,8,8,.76); }
+.contact-modal__panel { position:relative; display:grid; width:min(100%,72rem); max-height:min(90svh,58rem); grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr); overflow:auto; overscroll-behavior:contain; background:var(--background-pure); color:var(--foreground); }
+.contact-modal__close { position:absolute; z-index:2; top:1.25rem; right:1.25rem; display:flex; align-items:center; gap:.65rem; min-height:2.75rem; }
+.contact-modal__close span { font-size:1.3rem; font-weight:300; transition:transform var(--duration-hover) var(--ease-editorial); }
+.contact-modal__close:hover span,.contact-modal__close:focus-visible span { transform:rotate(90deg); }
+.contact-modal__identity,.contact-modal__form { padding:clamp(2rem,4vw,4rem); }
+.contact-modal__identity { display:grid; align-content:start; gap:1.5rem; border-right:1px solid var(--line); }
+.contact-modal__title { overflow:hidden; margin-top:clamp(2rem,6vh,5rem); font-family:var(--font-display); font-size:clamp(4rem,7vw,7rem); font-weight:400; letter-spacing:-.05em; line-height:.8; text-transform:uppercase; }
+.contact-modal__title span { display:block; }
+.contact-modal__intro { max-width:28rem; }
+.contact-modal__portrait { position:relative; width:min(55%,12rem); aspect-ratio:4/5; overflow:hidden; background:var(--surface); }
+.contact-modal__portrait img { object-fit:cover; object-position:50% 42%; filter:grayscale(1) contrast(1.04); }
+.contact-modal__direct { display:flex; flex-wrap:wrap; gap:1rem 1.5rem; }
+.contact-modal__direct a { min-height:2.75rem; }
+.contact-modal__form { padding-top:clamp(5rem,8vh,7rem); }
+.contact-modal .contact-form { position:relative; display:grid; grid-template-columns:1fr 1fr; gap:1.35rem var(--grid-gap); }
+.contact-modal .contact-field { position:relative; display:grid; gap:.5rem; }
+.contact-modal .contact-field label { font-size:.65rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; }
+.contact-modal .contact-field input,.contact-modal .contact-field textarea { width:100%; border:0; border-bottom:1px solid var(--foreground); border-radius:0; background:transparent; color:var(--foreground); font:inherit; outline:0; padding:.6rem 0 .85rem; }
+.contact-modal .contact-field textarea { min-height:7rem; resize:vertical; line-height:1.5; }
+.contact-modal .contact-field input:focus,.contact-modal .contact-field textarea:focus { border-color:var(--focus); box-shadow:0 2px 0 -1px var(--focus); }
+.contact-modal .contact-field input[aria-invalid=true],.contact-modal .contact-field textarea[aria-invalid=true] { border-color:#a32626; }
+.contact-modal .contact-field--message,.contact-modal .contact-form__footer,.contact-modal .contact-form__status { grid-column:1/-1; }
+.contact-modal .contact-field__error { color:#8d1d1d; font-size:.72rem; }
+.contact-modal .contact-field__help { color:var(--muted); font-size:.66rem; }
+.contact-modal .contact-honeypot { position:absolute!important; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+.contact-modal .contact-form__footer { display:grid; grid-template-columns:auto 1fr; gap:1rem; align-items:center; margin-top:.5rem; }
+.contact-modal .contact-form__footer button { min-height:3rem; padding:0 1.25rem; border:1px solid var(--foreground); font-size:.68rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; transition:background var(--duration-hover),color var(--duration-hover); }
+.contact-modal .contact-form__footer button:hover:not(:disabled),.contact-modal .contact-form__footer button:focus-visible { background:var(--foreground); color:var(--background-pure); }
+.contact-modal .contact-form__footer button:disabled { opacity:.55; }
+.contact-modal .contact-form__status { min-height:1.25rem; font-size:.75rem; line-height:1.4; }
+.contact-modal .contact-form__status--success { color:#24643c; }
+.contact-modal .contact-form__status--error { color:#8d1d1d; }
+
+@media (max-width: 720px) {
+  .contact-modal { place-items:stretch; padding:0; }
+  .contact-modal__panel { width:100%; max-height:100svh; min-height:100svh; grid-template-columns:1fr; }
+  .contact-modal__identity { border-right:0; border-bottom:1px solid var(--line); }
+  .contact-modal__title { font-size:clamp(3.8rem,18vw,6rem); }
+  .contact-modal__portrait { width:min(42%,9rem); }
+  .contact-modal__form { padding-top:2.5rem; padding-bottom:max(2.5rem,env(safe-area-inset-bottom)); }
+}
+
+@media (max-width: 480px) {
+  .contact-modal .contact-form { grid-template-columns:1fr; }
+  .contact-modal .contact-field,.contact-modal .contact-field--message,.contact-modal .contact-form__footer,.contact-modal .contact-form__status { grid-column:1; }
+  .contact-modal .contact-field input,.contact-modal .contact-field textarea { font-size:1rem; }
+  .contact-modal .contact-form__footer { grid-template-columns:1fr; }
+  .contact-modal .contact-form__footer button { width:100%; }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  #main-content,.editorial-footer,.contact-modal__close span,.contact-modal .contact-form__footer button { transition:none; }
 }
 
 .editorial-footer {

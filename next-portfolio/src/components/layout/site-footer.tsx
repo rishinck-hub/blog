@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { ContactModalTrigger } from "@/components/contact/contact-modal";
 import { LocalTime } from "@/components/ui/local-time";
 import { siteConfig } from "@/data/site";
 
@@ -13,7 +14,7 @@ export function SiteFooter() {
         <h2 className="editorial-footer__statement">
           {["Let's build", "something", "meaningful."].map((line) => <span className="editorial-footer__statement-line" key={line}><span>{line}{" "}</span></span>)}
         </h2>
-        <Link className="editorial-footer__cta type-label" href="/contact" data-cursor-label="Open">Let&apos;s talk <span aria-hidden="true">→</span></Link>
+        <ContactModalTrigger className="editorial-footer__cta type-label">Let&apos;s talk <span aria-hidden="true">→</span></ContactModalTrigger>
 
         <div className="editorial-footer__divider" />
         <div className="editorial-footer__details">

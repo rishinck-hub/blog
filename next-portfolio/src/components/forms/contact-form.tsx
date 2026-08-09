@@ -23,7 +23,7 @@ function validate(form: HTMLFormElement): FormErrors {
   return errors;
 }
 
-export function ContactForm({ recipient, endpoint }: Readonly<{ recipient: string; endpoint?: string }>) {
+export function ContactForm({ recipient, endpoint, idPrefix = "contact", onSuccess }: Readonly<{ recipient: string; endpoint?: string; idPrefix?: string; onSuccess?: () => void }>) {
   const [errors, setErrors] = useState<FormErrors>({});
   const [state, setState] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
@@ -41,7 +41,8 @@ export function ContactForm({ recipient, endpoint }: Readonly<{ recipient: strin
     if (Object.keys(nextErrors).length) {
       setState("error");
       setMessage("Please correct the highlighted fields and try again.");
-      form.querySelector<HTMLElement>("[aria-invalid='true']")?.focus();
+      const firstInvalidField = Object.keys(nextErrors)[0] as FormFields;
+      requestAnimationFrame(() => form.querySelector<HTMLElement>(`[name="${firstInvalidField}"]`)?.focus());
       return;
     }
 
@@ -78,6 +79,7 @@ export function ContactForm({ recipient, endpoint }: Readonly<{ recipient: strin
       setErrors({});
       setState("success");
       setMessage("Your message was accepted by the configured contact provider. Thank you.");
+      onSuccess?.();
     } catch {
       setState("error");
       setMessage(`The form provider could not accept your message. Please email ${recipient} directly.`);
@@ -86,23 +88,23 @@ export function ContactForm({ recipient, endpoint }: Readonly<{ recipient: strin
 
   const field = (name: FormFields, label: string, type: "text" | "email" = "text", maxLength = 120) => (
     <div className="contact-field">
-      <label htmlFor={`contact-${name}`}>{label}</label>
-      <input id={`contact-${name}`} name={name} type={type} required maxLength={maxLength} autoComplete={name === "name" ? "name" : name === "email" ? "email" : "off"} aria-invalid={Boolean(errors[name])} aria-describedby={errors[name] ? `contact-${name}-error` : undefined} onChange={() => errors[name] && setErrors((current) => ({ ...current, [name]: undefined }))} />
-      {errors[name] ? <span id={`contact-${name}-error`} className="contact-field__error">{errors[name]}</span> : null}
+      <label htmlFor={`${idPrefix}-${name}`}>{label}</label>
+      <input id={`${idPrefix}-${name}`} name={name} type={type} required maxLength={maxLength} autoComplete={name === "name" ? "name" : name === "email" ? "email" : "off"} aria-invalid={Boolean(errors[name])} aria-describedby={errors[name] ? `${idPrefix}-${name}-error` : undefined} onChange={() => errors[name] && setErrors((current) => ({ ...current, [name]: undefined }))} />
+      {errors[name] ? <span id={`${idPrefix}-${name}-error`} className="contact-field__error">{errors[name]}</span> : null}
     </div>
   );
 
   return (
     <form className="contact-form" noValidate onSubmit={submit}>
-      <div className="contact-honeypot" aria-hidden="true"><label htmlFor="company-website">Company website</label><input id="company-website" name="companyWebsite" type="text" tabIndex={-1} autoComplete="off" /></div>
+      <div className="contact-honeypot" aria-hidden="true"><label htmlFor={`${idPrefix}-company-website`}>Company website</label><input id={`${idPrefix}-company-website`} name="companyWebsite" type="text" tabIndex={-1} autoComplete="off" /></div>
       {field("name", "Name", "text", 80)}
       {field("email", "Email", "email", 254)}
       {field("subject", "Subject", "text", 120)}
       <div className="contact-field contact-field--message">
-        <label htmlFor="contact-message">Message</label>
-        <textarea id="contact-message" name="message" required minLength={20} maxLength={3000} rows={7} aria-invalid={Boolean(errors.message)} aria-describedby={errors.message ? "contact-message-error" : "contact-message-help"} onChange={() => errors.message && setErrors((current) => ({ ...current, message: undefined }))} />
-        <span id="contact-message-help" className="contact-field__help">Please do not include passwords, credentials, or private customer information.</span>
-        {errors.message ? <span id="contact-message-error" className="contact-field__error">{errors.message}</span> : null}
+        <label htmlFor={`${idPrefix}-message`}>Message</label>
+        <textarea id={`${idPrefix}-message`} name="message" required minLength={20} maxLength={3000} rows={7} aria-invalid={Boolean(errors.message)} aria-describedby={errors.message ? `${idPrefix}-message-error` : `${idPrefix}-message-help`} onChange={() => errors.message && setErrors((current) => ({ ...current, message: undefined }))} />
+        <span id={`${idPrefix}-message-help`} className="contact-field__help">Please do not include passwords, credentials, or private customer information.</span>
+        {errors.message ? <span id={`${idPrefix}-message-error`} className="contact-field__error">{errors.message}</span> : null}
       </div>
       <div className="contact-form__footer">
         <button type="submit" disabled={state === "loading"}>{state === "loading" ? "Working…" : endpoint ? "Send message →" : "Prepare email →"}</button>

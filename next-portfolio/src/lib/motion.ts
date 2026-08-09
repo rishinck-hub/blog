@@ -25,7 +25,7 @@ export const motion = {
   timing: {
     text: { duration: 0.72, stagger: 0.035 },
     image: { duration: 0.9, scaleDuration: 1.14 },
-    modal: { enter: 0.72, exit: 0.42 },
+    modal: { enter: 0.64, exit: 0.42 },
     hover: 0.18,
     route: 0.46,
     divider: 0.7,
@@ -40,6 +40,7 @@ export const motion = {
 } as const;
 
 export const loaderCompleteEvent = "rishin:loader-complete";
+export const modalStateEvent = "rishin:modal-state";
 
 export function shouldReduceAdvancedMotion() {
   if (typeof window === "undefined") return true;
