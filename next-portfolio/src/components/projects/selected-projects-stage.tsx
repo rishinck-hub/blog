@@ -49,13 +49,13 @@ export function SelectedProjectsStage({ projects }: Readonly<{ projects: readonl
           const at = index;
           const tone = stageTones[(index + 1) % stageTones.length];
           timeline
-            .to(current.querySelector(".home-project-scene__primary"), { xPercent: -4, scale: 0.985, autoAlpha: 0.3, duration: 1, ease: "none" }, at)
+            .to(current.querySelector(".home-project-scene__primary"), { xPercent: -3, scale: 0.99, autoAlpha: 0.38, duration: 1, ease: "none" }, at)
             .to(current.querySelector(".home-project-scene__title"), { x: -motion.distance.medium, autoAlpha: 0, duration: 0.65, ease: motion.ease.exit }, at)
             .to(current.querySelector(".home-project-scene__meta"), { y: -motion.distance.small, autoAlpha: 0, duration: 0.5, ease: motion.ease.exit }, at)
             .to(current, { autoAlpha: 0, duration: 0.75, ease: motion.ease.exit }, at + 0.2)
             .fromTo(next, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.55, ease: motion.ease.reveal }, at + 0.2)
-            .fromTo(next.querySelector(".home-project-scene__primary"), { clipPath: "inset(0 0 0 100%)", scale: 1.04, xPercent: 5 }, { clipPath: "inset(0)", scale: 1, xPercent: 0, duration: motion.timing.image.duration, ease: motion.ease.reveal }, at + 0.15)
-            .fromTo(next.querySelector(".home-project-scene__secondary"), { xPercent: 8, yPercent: 5 }, { xPercent: 0, yPercent: -3, duration: 1, ease: "none" }, at + 0.2)
+            .fromTo(next.querySelector(".home-project-scene__primary"), { clipPath: "inset(0 0 0 100%)", scale: 1.035, xPercent: 4 }, { clipPath: "inset(0)", scale: 1, xPercent: 0, duration: motion.timing.image.duration, ease: motion.ease.reveal }, at + 0.15)
+            .fromTo(next.querySelector(".home-project-scene__secondary"), { xPercent: 6, yPercent: 4 }, { xPercent: 0, yPercent: -2, duration: 1, ease: "none" }, at + 0.2)
             .fromTo(next.querySelector(".home-project-scene__title"), { x: motion.distance.medium, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: motion.timing.text.duration, ease: motion.ease.reveal }, at + 0.28)
             .fromTo(next.querySelector(".home-project-scene__meta"), { y: motion.distance.small, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: motion.duration.normal, ease: motion.ease.reveal }, at + 0.4)
             .to(pin, { backgroundColor: tone.background, color: tone.foreground, duration: 0.75, ease: "none" }, at);
@@ -64,7 +64,7 @@ export function SelectedProjectsStage({ projects }: Readonly<{ projects: readonl
         const scrollTrigger = ScrollTrigger.create({
           trigger: stage,
           start: "top top",
-          end: () => `+=${window.innerHeight * (projects.length - 1) * 0.85}`,
+          end: () => `+=${window.innerHeight * (projects.length - 1) * 0.78}`,
           animation: timeline,
           pin,
           scrub: motion.timing.scroll.scrub,

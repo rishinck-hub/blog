@@ -19,12 +19,12 @@
   --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-exit: cubic-bezier(0.7, 0, 0.84, 0);
   --duration-fast: 180ms;
-  --duration-normal: 480ms;
+  --duration-normal: 440ms;
   --duration-slow: 900ms;
   --duration-text: 720ms;
   --duration-image: 900ms;
-  --duration-modal-enter: 720ms;
-  --duration-modal-exit: 420ms;
+  --duration-modal-enter: 580ms;
+  --duration-modal-exit: 340ms;
   --duration-route: 460ms;
   --duration-divider: 700ms;
   --duration-hover: 180ms;
@@ -670,11 +670,11 @@ html[data-first-visit-loader="show"] :is(.skip-link, .editorial-header, #main-co
 
 html.contact-modal-open #main-content,
 html.contact-modal-open .editorial-footer {
-  opacity: .72;
-  transform: scale(.995);
+  opacity: .8;
+  transform: scale(.997);
   transform-origin: center top;
 }
-#main-content,.editorial-footer { transition: opacity var(--duration-modal) var(--ease-editorial), transform var(--duration-modal) var(--ease-editorial); }
+#main-content,.editorial-footer { transition: opacity var(--duration-modal-exit) var(--ease-editorial), transform var(--duration-modal-exit) var(--ease-editorial); }
 .contact-modal { position:fixed; inset:0; z-index:1100; display:grid; place-items:center; padding:clamp(1rem,3vw,3rem); }
 .contact-modal__backdrop { position:absolute; inset:0; background:rgba(8,8,8,.76); }
 .contact-modal__panel { position:relative; display:grid; width:min(100%,72rem); max-height:min(90svh,58rem); grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr); overflow:auto; overscroll-behavior:contain; background:var(--background-pure); color:var(--foreground); }

@@ -30,7 +30,7 @@ export function FirstVisitLoader() {
     if (!loader || !counter || !line || !mark || document.documentElement.dataset.firstVisitLoader !== "show") return;
     const level = getMotionLevel();
     const durationScale = level === "essential" ? 0.55 : level === "reduced" ? 0.75 : 1;
-    const loaderFallbackMs = level === "essential" ? 900 : level === "reduced" ? 1_200 : 1_600;
+    const loaderFallbackMs = level === "essential" ? 800 : level === "reduced" ? 1_100 : 1_400;
 
     let active = true;
     let fontsReady = false;
