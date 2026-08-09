@@ -3,6 +3,7 @@ import Image from "next/image";
 import { HomeMotion } from "@/components/animation/home-motion";
 import { TextReveal } from "@/components/animation/text-reveal";
 import { SelectedProjectsStage } from "@/components/projects/selected-projects-stage";
+import { CapabilitiesAccordion } from "@/components/sections/capabilities-accordion";
 import { AnimatedLink } from "@/components/ui/animated-link";
 import { projects } from "@/data/projects";
 import { experience } from "@/data/experience";
@@ -80,17 +81,7 @@ export default function HomePage() {
         <div className="home-section-head home-animate"><p className="type-label">03 — Capabilities</p><span className="type-metadata">What I work with</span></div>
         <div className="home-divider home-animate" />
         <TextReveal as="h2" id="capabilities-title" className="type-section-heading home-capabilities__heading" text="From application logic to the final interface." mode="line" lines={["From application logic", "to the final interface."]} />
-        <div className="home-capability-list">
-          {capabilities.map((item) => (
-            <details className="home-capability home-animate" key={item.number}>
-              <summary><span className="type-metadata">{item.number}</span><strong>{item.name}</strong><span className="home-capability__toggle" aria-hidden="true">+</span></summary>
-              <div className="home-capability__body">
-                <p className="type-body">{item.description}</p>
-                <dl className="type-metadata"><div><dt>Tools</dt><dd>{item.technologies}</dd></div><div><dt>Related work</dt><dd>{item.project}</dd></div></dl>
-              </div>
-            </details>
-          ))}
-        </div>
+        <CapabilitiesAccordion items={capabilities} />
       </section>
 
       <section className="home-experience editorial-section editorial-container" aria-labelledby="experience-title">

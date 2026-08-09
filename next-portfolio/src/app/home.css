@@ -67,9 +67,15 @@ body:has(.editorial-home) .editorial-header.menu-is-open { color: var(--inverse-
 .home-capability:last-child { border-bottom:1px solid var(--line); }
 .home-capability summary { display:grid; grid-template-columns:4rem 1fr auto; align-items:center; min-height:clamp(5rem,9vw,8rem); cursor:pointer; list-style:none; }
 .home-capability summary::-webkit-details-marker { display:none; }
-.home-capability summary strong { font-family:var(--font-display); font-size:clamp(1.8rem,4vw,4rem); font-weight:400; text-transform:uppercase; }
-.home-capability__toggle { font-size:2rem; font-weight:300; transition:transform var(--duration-normal) var(--ease-editorial); }
-.home-capability[open] .home-capability__toggle { transform:rotate(45deg); }
+.home-capability summary strong { font-family:var(--font-display); font-size:clamp(1.8rem,4vw,4rem); font-weight:400; text-transform:uppercase; transition:transform var(--duration-hover) var(--ease-editorial); }
+.home-capability__number { opacity:.48; transition:opacity var(--duration-hover) var(--ease-editorial); }
+.home-capability summary:hover strong,.home-capability summary:focus-visible strong,.home-capability[open] summary strong { transform:translateX(.45rem); }
+.home-capability summary:hover .home-capability__number,.home-capability summary:focus-visible .home-capability__number,.home-capability[open] .home-capability__number { opacity:1; }
+.home-capability__toggle { position:relative; width:1.25rem; height:1.25rem; }
+.home-capability__toggle span { position:absolute; top:50%; left:0; width:100%; height:1px; background:currentColor; transition:transform var(--duration-normal) var(--ease-editorial); }
+.home-capability__toggle span:last-child { transform:rotate(90deg); }
+.home-capability[open] .home-capability__toggle span:last-child { transform:rotate(90deg) scaleX(0); }
+.home-capability__content { overflow:hidden; }
 .home-capability__body { display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:var(--grid-gap); padding:0 0 3rem 4rem; }
 .home-capability__body > p { grid-column:1/7; max-width:38rem; }
 .home-capability__body dl { grid-column:8/-1; display:grid; gap:1rem; }
@@ -141,4 +147,5 @@ body:has(.editorial-home) .editorial-header.menu-is-open { color: var(--inverse-
 }
 @media (prefers-reduced-motion: reduce) {
   .home-project-scene__primary::before,.home-project-scene__visual-index,.home-project-scene__visual-name,.home-project-scene__visual-link span { transition:none; }
+  .home-capability summary strong,.home-capability__number,.home-capability__toggle span { transition:none; }
 }
