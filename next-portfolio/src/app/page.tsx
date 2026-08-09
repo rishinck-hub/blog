@@ -1,8 +1,8 @@
 import Image from "next/image";
-import Link from "next/link";
 
 import { HomeMotion } from "@/components/animation/home-motion";
 import { TextReveal } from "@/components/animation/text-reveal";
+import { SelectedProjectsStage } from "@/components/projects/selected-projects-stage";
 import { AnimatedLink } from "@/components/ui/animated-link";
 import { projects } from "@/data/projects";
 import { experience } from "@/data/experience";
@@ -12,11 +12,7 @@ import "./home.css";
 
 export const metadata = createPageMetadata({ title: "Software Developer", description: "Mohammed Rishin C K builds dependable full-stack applications, backend systems, and refined web experiences.", path: "/" });
 
-const selectedProjects = [
-  { ...projects[0], number: "01", category: "Internal platform", role: "Development contributor", year: "Present" },
-  { ...projects[2], number: "02", category: "Web application", role: "Designer & developer", year: "Portfolio project" },
-  { ...projects[3], number: "03", category: "Healthcare software", role: "Full-stack developer", year: "2026" },
-] as const;
+const selectedProjects = [projects[0], projects[2], projects[3]] as const;
 
 const capabilities = [
   { number: "01", name: "Backend engineering", description: "Maintainable server-side systems and application logic grounded in hands-on Laravel, Django, Flask, and Python work.", technologies: "Laravel · Django REST · Flask · Python", project: "OnlineCheckWriter.com backend" },
@@ -76,28 +72,7 @@ export default function HomePage() {
           <div className="home-divider home-animate" />
           <TextReveal as="h2" id="selected-work-title" className="type-section-heading home-work__heading" text="Selected systems, built with purpose." mode="line" lines={["Selected systems,", "built with purpose."]} />
         </div>
-        <div className="home-projects">
-          {selectedProjects.map((project) => (
-            <article className="home-project editorial-container" key={project.slug}>
-              <div className="home-project__top home-animate">
-                <span className="type-metadata">{project.number}</span>
-                <h3 className="type-project-title">{project.name}</h3>
-                <span className="type-metadata">{project.category}</span>
-              </div>
-              <Link href={`/work/${project.slug}`} className="home-project__visual home-reveal-image" data-cursor-label="View project">
-                <span className="home-project__visual-index" aria-hidden="true">{project.number}</span>
-                <span className="home-project__visual-name" aria-hidden="true">{project.name}</span>
-                <span className="home-project__visual-note type-label">Project preview</span>
-              </Link>
-              <div className="home-project__meta home-animate">
-                <p><span>Role</span>{project.role}</p>
-                <p><span>Technology</span>{project.technologies.join(" · ")}</p>
-                <p><span>Year</span>{project.year}</p>
-                <AnimatedLink href={`/work/${project.slug}`} className="type-label">View project <span aria-hidden="true">→</span></AnimatedLink>
-              </div>
-            </article>
-          ))}
-        </div>
+        <SelectedProjectsStage projects={selectedProjects} />
         <div className="editorial-container home-work__all"><AnimatedLink href="/work" className="type-label">Explore all projects <span aria-hidden="true">→</span></AnimatedLink></div>
       </section>
 
