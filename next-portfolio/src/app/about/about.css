@@ -19,10 +19,20 @@ body:has(.about-page) .editorial-header.menu-is-open{color:var(--inverse-foregro
 .about-bio__actions{display:flex;flex-wrap:wrap;gap:1.5rem;margin-top:1rem}
 .about-philosophy{background:var(--background-pure)}
 .about-philosophy__title{max-width:12ch;margin:clamp(3rem,7vw,7rem) 0}
-.about-principles{border-top:1px solid var(--line)}
-.about-principle{display:grid;grid-template-columns:4rem minmax(15rem,1fr) minmax(18rem,1fr);gap:var(--grid-gap);align-items:start;padding-block:2.25rem;border-bottom:1px solid var(--line)}
+.draggable-strip{min-width:0}
+.draggable-strip__toolbar{display:flex;justify-content:space-between;align-items:center;padding-bottom:1rem}
+.draggable-strip__controls{display:flex;gap:.5rem}
+.draggable-strip__controls button{display:grid;width:2.75rem;height:2.75rem;place-items:center;border:1px solid var(--line);border-radius:50%;transition:background var(--duration-hover),color var(--duration-hover),opacity var(--duration-hover)}
+.draggable-strip__controls button:hover:not(:disabled),.draggable-strip__controls button:focus-visible{background:var(--foreground);color:var(--background-pure)}
+.draggable-strip__controls button:disabled{opacity:.3}
+.draggable-strip__viewport{overflow-x:auto;overscroll-behavior-inline:contain;scroll-behavior:smooth;scroll-snap-type:x mandatory;scrollbar-width:thin;scrollbar-color:var(--foreground) transparent;cursor:grab}
+.draggable-strip__viewport:is(.is-dragging,.is-gliding){scroll-behavior:auto;scroll-snap-type:none}
+.draggable-strip__viewport.is-dragging{cursor:grabbing;user-select:none}
+.draggable-strip__track{display:flex;width:max-content;min-width:100%;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.about-principle{display:grid;width:clamp(23rem,46vw,43rem);flex:none;grid-template-columns:4rem 1fr;gap:var(--grid-gap);align-content:start;min-height:23rem;padding:2.25rem var(--grid-gap) 3rem 0;border-right:1px solid var(--line);scroll-snap-align:start}
+.about-principle:last-child{border-right:0}
 .about-principle h3{font-family:var(--font-display);font-size:clamp(1.8rem,3.2vw,3.4rem);font-weight:400;line-height:1}
-.about-principle p{max-width:36rem}
+.about-principle p{grid-column:2;max-width:31rem;align-self:end}
 .about-focus__grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--grid-gap);padding-top:clamp(3rem,7vw,7rem)}
 .about-focus__grid h2{grid-column:1/7;max-width:11ch}
 .about-focus__copy{grid-column:8/-1;display:grid;gap:1.5rem;padding-top:1rem}
@@ -39,5 +49,7 @@ body:has(.about-page) .editorial-header.menu-is-open{color:var(--inverse-foregro
 .about-close__inner{display:flex;min-height:80svh;flex-direction:column;justify-content:center;align-items:flex-start;padding-block:6rem}
 .about-close h2{margin:clamp(2rem,5vw,5rem) 0;font-family:var(--font-display);font-size:clamp(3.8rem,9vw,9rem);font-weight:400;letter-spacing:-.05em;line-height:.82;text-transform:uppercase}
 .about-close__inner>div{display:flex;flex-wrap:wrap;gap:1.5rem 2.5rem}
-@media(max-width:800px){.about-hero__title{grid-column:1/-1}.about-hero__intro{grid-column:5/-1}.about-portrait__image,.about-portrait__caption{width:92%}.about-bio__content h2{grid-column:1/8}.about-bio__copy{grid-column:7/-1}.about-principle{grid-template-columns:3rem 1fr}.about-principle p{grid-column:2}.about-focus__grid h2{grid-column:1/8}.about-focus__copy{grid-column:7/-1}.about-stack{grid-template-columns:repeat(3,minmax(0,1fr))}.about-creative__title{grid-column:1/-1}.about-creative__copy{grid-column:5/-1}}
-@media(max-width:560px){.about-hero{min-height:82svh}.about-hero__top{gap:1rem}.about-hero__intro{grid-column:1/-1}.about-hero__counter{display:none}.about-portrait__image,.about-portrait__caption{width:100%}.about-portrait__image{height:68svh}.about-bio__content,.about-focus__grid{grid-template-columns:1fr}.about-bio__content h2,.about-bio__copy,.about-focus__grid h2,.about-focus__copy{grid-column:1}.about-bio__copy{padding-top:1rem}.about-principle{grid-template-columns:2rem 1fr}.about-stack{grid-column:1;grid-template-columns:repeat(2,minmax(0,1fr))}.about-stack>span{min-height:6.5rem}.about-creative__grid{grid-template-columns:1fr}.about-creative__title,.about-creative__copy,.about-creative__words,.about-creative .about-section-label{grid-column:1}.about-creative__words{gap:1rem}.about-close{min-height:72svh}.about-close__inner{min-height:72svh}}
+@media(max-width:800px){.about-hero__title{grid-column:1/-1}.about-hero__intro{grid-column:5/-1}.about-portrait__image,.about-portrait__caption{width:92%}.about-bio__content h2{grid-column:1/8}.about-bio__copy{grid-column:7/-1}.about-principle{width:min(78vw,36rem);grid-template-columns:3rem 1fr}.about-principle p{grid-column:2}.about-focus__grid h2{grid-column:1/8}.about-focus__copy{grid-column:7/-1}.about-stack{grid-template-columns:repeat(3,minmax(0,1fr))}.about-creative__title{grid-column:1/-1}.about-creative__copy{grid-column:5/-1}}
+@media(max-width:560px){.about-hero{min-height:82svh}.about-hero__top{gap:1rem}.about-hero__intro{grid-column:1/-1}.about-hero__counter{display:none}.about-portrait__image,.about-portrait__caption{width:100%}.about-portrait__image{height:68svh}.about-bio__content,.about-focus__grid{grid-template-columns:1fr}.about-bio__content h2,.about-bio__copy,.about-focus__grid h2,.about-focus__copy{grid-column:1}.about-bio__copy{padding-top:1rem}.draggable-strip__toolbar{align-items:flex-start}.draggable-strip__toolbar>span{max-width:12rem}.about-principle{width:86vw;min-height:21rem;grid-template-columns:2rem 1fr;padding-right:1rem}.about-stack{grid-column:1;grid-template-columns:repeat(2,minmax(0,1fr))}.about-stack>span{min-height:6.5rem}.about-creative__grid{grid-template-columns:1fr}.about-creative__title,.about-creative__copy,.about-creative__words,.about-creative .about-section-label{grid-column:1}.about-creative__words{gap:1rem}.about-close{min-height:72svh}.about-close__inner{min-height:72svh}}
+@media(prefers-reduced-motion:reduce){.draggable-strip__viewport{scroll-behavior:auto}.draggable-strip__controls button{transition:none}}
+@media(pointer:coarse){.draggable-strip__viewport{cursor:auto}}

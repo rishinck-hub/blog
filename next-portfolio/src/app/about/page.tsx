@@ -4,6 +4,7 @@ import Link from "next/link";
 import { RevealImage } from "@/components/animation/reveal-image";
 import { TextReveal } from "@/components/animation/text-reveal";
 import { AnimatedLink } from "@/components/ui/animated-link";
+import { DraggableStrip } from "@/components/ui/draggable-strip";
 import { siteConfig, technologies } from "@/data/site";
 import { createPageMetadata } from "@/lib/metadata";
 
@@ -65,7 +66,7 @@ export default function AboutPage() {
         <div className="editorial-container">
           <div className="about-section-label type-label">02 — Development philosophy</div>
           <TextReveal as="h2" className="about-philosophy__title type-section-heading" text="Clear thinking before clean code." />
-          <div className="about-principles">
+          <DraggableStrip label="Development philosophy steps" viewportClassName="about-principles">
             {principles.map((principle) => (
               <article className="about-principle" key={principle.number}>
                 <span className="type-metadata">{principle.number}</span>
@@ -73,7 +74,7 @@ export default function AboutPage() {
                 <p className="type-body">{principle.text}</p>
               </article>
             ))}
-          </div>
+          </DraggableStrip>
         </div>
       </section>
 
