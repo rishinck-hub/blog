@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import { useLayoutEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 import { AnimatedLink } from "@/components/ui/animated-link";
 import { createLocalPointerMotion } from "@/lib/local-pointer-motion";
@@ -24,7 +23,6 @@ export function SelectedProjectsStage({ projects }: Readonly<{ projects: readonl
     const stage = stageRef.current;
     const counter = counterRef.current;
     if (!stage || !counter || projects.length < 2 || shouldReduceAdvancedMotion()) return;
-    gsap.registerPlugin(ScrollTrigger);
 
     const media = gsap.matchMedia();
     const context = gsap.context(() => {

@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap } from "@/lib/gsap";
 
 import { motion, shouldReduceAdvancedMotion } from "@/lib/motion";
 import { createLocalPointerMotion } from "@/lib/local-pointer-motion";
@@ -33,7 +32,6 @@ export function CreativeGallery({ entries }: Readonly<{ entries: readonly Creati
 
   useLayoutEffect(() => {
     if (!galleryRef.current || shouldReduceAdvancedMotion()) return;
-    gsap.registerPlugin(ScrollTrigger);
     const context = gsap.context(() => {
       gsap.utils.toArray<HTMLElement>(".creative-gallery__media").forEach((media, index) => {
         const layer = media.querySelector<HTMLElement>(".creative-gallery__motion-layer");

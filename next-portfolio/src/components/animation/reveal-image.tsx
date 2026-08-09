@@ -1,8 +1,7 @@
 "use client";
 
 import { useLayoutEffect, useRef, type ReactNode } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap } from "@/lib/gsap";
 
 import { getMotionLevel, motion } from "@/lib/motion";
 
@@ -13,7 +12,6 @@ export function RevealImage({ children, className = "" }: Readonly<{ children: R
     const level = getMotionLevel();
     if (!scope.current || level === "off") return;
     const durationScale = level === "full" ? 1 : level === "reduced" ? 0.72 : 0.5;
-    gsap.registerPlugin(ScrollTrigger);
     const context = gsap.context(() => {
       const image = scope.current?.querySelector("img");
       gsap.fromTo(scope.current, { clipPath: motion.reveal.imageClipFrom }, {

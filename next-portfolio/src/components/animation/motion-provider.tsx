@@ -3,8 +3,7 @@
 import Lenis from "lenis";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, type ReactNode } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 import { getMotionLevel, modalStateEvent, motion } from "@/lib/motion";
 
@@ -13,7 +12,6 @@ export function MotionProvider({ children }: Readonly<{ children: ReactNode }>) 
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
     document.documentElement.dataset.motionLevel = getMotionLevel();
     let active = true;
     let resizeFrame = 0;
@@ -25,7 +23,8 @@ export function MotionProvider({ children }: Readonly<{ children: ReactNode }>) 
 
     window.addEventListener("load", refresh);
     window.addEventListener("resize", refresh, { passive: true });
-    document.fonts.ready.then(() => {
+    document.addEventListener("load", refresh, true);
+    document.fonts.ready.catch(() => undefined).then(() => {
       if (active) refresh();
     });
 
@@ -36,6 +35,7 @@ export function MotionProvider({ children }: Readonly<{ children: ReactNode }>) 
         cancelAnimationFrame(resizeFrame);
         window.removeEventListener("load", refresh);
         window.removeEventListener("resize", refresh);
+        document.removeEventListener("load", refresh, true);
       };
     }
 
@@ -74,6 +74,7 @@ export function MotionProvider({ children }: Readonly<{ children: ReactNode }>) 
       cancelAnimationFrame(resizeFrame);
       window.removeEventListener("load", refresh);
       window.removeEventListener("resize", refresh);
+      document.removeEventListener("load", refresh, true);
       lenis.off("scroll", updateScrollTrigger);
       window.removeEventListener(modalStateEvent, onModalState);
       reducedMotion.removeEventListener("change", onReducedMotionChange);

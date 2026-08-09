@@ -36,6 +36,7 @@ export function FirstVisitLoader() {
     let fontsReady = false;
     let imageReady = false;
     let fallbackTimer = 0;
+    let exitTimeline: gsap.core.Timeline | null = null;
     const controller = new AbortController();
     const progress = { value: 0 };
 
@@ -90,7 +91,7 @@ export function FirstVisitLoader() {
         onUpdate: renderProgress,
         onComplete: () => {
           document.documentElement.dataset.firstVisitLoader = "exiting";
-          gsap.timeline({
+          exitTimeline = gsap.timeline({
             defaults: { ease: motion.ease.exit },
             onComplete: () => {
               document.documentElement.dataset.firstVisitLoader = "done";
@@ -109,6 +110,7 @@ export function FirstVisitLoader() {
       controller.abort();
       window.clearTimeout(fallbackTimer);
       gsap.killTweensOf(progress);
+      exitTimeline?.kill();
       context.revert();
     };
   }, []);

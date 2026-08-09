@@ -30,6 +30,8 @@ export function ContactModalProvider({ children }: Readonly<{ children: ReactNod
   const panelRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
+  const focusFrameRef = useRef(0);
+  const mountedRef = useRef(true);
   const pathnameRef = useRef(pathname);
 
   const openModal = useCallback((trigger: HTMLElement) => {
@@ -47,7 +49,7 @@ export function ContactModalProvider({ children }: Readonly<{ children: ReactNod
     }
     timelineRef.current?.kill();
     const scale = level === "full" ? 1 : level === "reduced" ? 0.72 : 0.5;
-    timelineRef.current = gsap.timeline({ onComplete: () => setOpen(false) })
+    timelineRef.current = gsap.timeline({ onComplete: () => { if (mountedRef.current) setOpen(false); } })
       .to(panel, { clipPath: "inset(0 0 100% 0)", y: level === "essential" ? 0 : -motion.distance.small, duration: motion.timing.modal.exit * scale, ease: motion.ease.exit })
       .to(overlay, { autoAlpha: 0, duration: motion.duration.fast, ease: motion.ease.exit }, 0.12);
   }, []);
@@ -78,7 +80,7 @@ export function ContactModalProvider({ children }: Readonly<{ children: ReactNod
     body.style.width = "100%";
     body.style.overflow = "hidden";
     if (scrollbarWidth > 0) body.style.paddingRight = `${scrollbarWidth}px`;
-    const focusFrame = requestAnimationFrame(() => panelRef.current?.focus({ preventScroll: true }));
+    focusFrameRef.current = requestAnimationFrame(() => panelRef.current?.focus({ preventScroll: true }));
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") { event.preventDefault(); requestClose(); return; }
@@ -98,7 +100,7 @@ export function ContactModalProvider({ children }: Readonly<{ children: ReactNod
     window.addEventListener("keydown", onKeyDown);
 
     return () => {
-      cancelAnimationFrame(focusFrame);
+      cancelAnimationFrame(focusFrameRef.current);
       window.removeEventListener("keydown", onKeyDown);
       timelineRef.current?.kill();
       timelineRef.current = null;
@@ -110,9 +112,18 @@ export function ContactModalProvider({ children }: Readonly<{ children: ReactNod
       document.documentElement.classList.remove("contact-modal-open");
       window.scrollTo({ top: scrollY, behavior: "instant" });
       window.dispatchEvent(new CustomEvent(modalStateEvent, { detail: { open: false } }));
-      requestAnimationFrame(() => { if (openerRef.current?.isConnected) openerRef.current.focus(); });
+      focusFrameRef.current = requestAnimationFrame(() => { if (openerRef.current?.isConnected) openerRef.current.focus(); });
     };
   }, [open, requestClose]);
+
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+      cancelAnimationFrame(focusFrameRef.current);
+      timelineRef.current?.kill();
+    };
+  }, []);
 
   useEffect(() => {
     if (pathnameRef.current === pathname) return;

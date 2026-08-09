@@ -1,8 +1,7 @@
 "use client";
 
 import { useLayoutEffect, useRef, type ReactNode } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 import { getMotionLevel, motion } from "@/lib/motion";
 
@@ -13,7 +12,6 @@ export function SiteScrollMotion({ children }: Readonly<{ children: ReactNode }>
     const frame = frameRef.current;
     const level = getMotionLevel();
     if (!frame || level === "off" || level === "essential") return;
-    gsap.registerPlugin(ScrollTrigger);
 
     const context = gsap.context(() => {
       gsap.utils.toArray<HTMLElement>(".work-entry").forEach((entry) => {

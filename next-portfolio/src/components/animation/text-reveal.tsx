@@ -1,8 +1,7 @@
 "use client";
 
 import { useLayoutEffect, useRef, type ReactNode } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 import { getMotionLevel, motion } from "@/lib/motion";
 
@@ -35,7 +34,6 @@ export function TextReveal({
     const element = scope.current;
     const level = getMotionLevel();
     if (!element || level === "off") return;
-    gsap.registerPlugin(ScrollTrigger);
 
     let active = true;
     let resizeFrame = 0;

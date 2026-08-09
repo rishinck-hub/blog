@@ -29,6 +29,7 @@ export function SiteNavigation() {
   const headerRef = useRef<HTMLElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const focusFrameRef = useRef(0);
 
   useEffect(() => {
     let frame = 0;
@@ -54,13 +55,13 @@ export function SiteNavigation() {
     const menu = menuRef.current;
     document.body.style.overflow = "hidden";
     const focusables = () => Array.from(menu?.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])') ?? []);
-    requestAnimationFrame(() => focusables()[0]?.focus());
+    focusFrameRef.current = requestAnimationFrame(() => focusables()[0]?.focus());
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         event.preventDefault();
         setMenuOpen(false);
-        requestAnimationFrame(() => triggerRef.current?.focus());
+        focusFrameRef.current = requestAnimationFrame(() => triggerRef.current?.focus());
         return;
       }
       if (event.key !== "Tab") return;
@@ -80,6 +81,7 @@ export function SiteNavigation() {
     return () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKeyDown);
+      cancelAnimationFrame(focusFrameRef.current);
       if (previouslyFocused && document.contains(previouslyFocused)) previouslyFocused.focus();
     };
   }, [menuOpen]);

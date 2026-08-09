@@ -1,14 +1,12 @@
 "use client";
 
 import { useLayoutEffect } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap } from "@/lib/gsap";
 
 import { getMotionLevel, loaderCompleteEvent, motion } from "@/lib/motion";
 
 export function HomeMotion() {
   useLayoutEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
     const root = document.querySelector<HTMLElement>(".editorial-home");
     if (!root) return;
 
