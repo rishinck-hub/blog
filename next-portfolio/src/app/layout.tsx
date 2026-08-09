@@ -5,6 +5,7 @@ import Script from "next/script";
 import { CursorLabel } from "@/components/animation/cursor-label";
 import { FirstVisitLoader } from "@/components/animation/first-visit-loader";
 import { MotionProvider } from "@/components/animation/motion-provider";
+import { RouteTransitionProvider } from "@/components/animation/route-transition-provider";
 import { ContactModalProvider } from "@/components/contact/contact-modal";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteNavigation } from "@/components/navigation/site-navigation";
@@ -98,6 +99,7 @@ export default function RootLayout({
           {`try{var r=document.documentElement;var seen=sessionStorage.getItem("rishin-loader-seen");var reduced=matchMedia("(prefers-reduced-motion: reduce),(pointer: coarse)").matches;var slow=navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=4;r.dataset.firstVisitLoader=!seen&&!reduced&&!slow?"show":"skip";if(r.dataset.firstVisitLoader==="show")sessionStorage.setItem("rishin-loader-seen","1")}catch(e){document.documentElement.dataset.firstVisitLoader="skip"}`}
         </Script>
         <FirstVisitLoader />
+        <RouteTransitionProvider />
         <MotionProvider>
           <ContactModalProvider>
             <a className="skip-link" href="#main-content">Skip to main content</a>
