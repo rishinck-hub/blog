@@ -6,6 +6,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { AnimatedLink } from "@/components/ui/animated-link";
+import { createLocalPointerMotion } from "@/lib/local-pointer-motion";
 import { motion, shouldReduceAdvancedMotion } from "@/lib/motion";
 import type { Project } from "@/types/content";
 
@@ -35,6 +36,14 @@ export function SelectedProjectsStage({ projects }: Readonly<{ projects: readonl
         stage.classList.add("is-enhanced");
         gsap.set(articles, { zIndex: (index) => index + 1 });
         gsap.set(articles.slice(1), { autoAlpha: 0 });
+
+        const removePointerMotion = articles.map((article) => {
+          const area = article.querySelector<HTMLElement>(".home-project-scene__primary");
+          const layer = article.querySelector<HTMLElement>(".home-project-scene__pointer-layer");
+          return area && layer
+            ? createLocalPointerMotion(area, layer, { x: motion.pointer.secondary.x, y: motion.pointer.secondary.y, rotation: 0.3 })
+            : () => {};
+        });
 
         const timeline = gsap.timeline();
         articles.slice(1).forEach((next, index) => {
@@ -71,6 +80,7 @@ export function SelectedProjectsStage({ projects }: Readonly<{ projects: readonl
         });
 
         return () => {
+          removePointerMotion.forEach((remove) => remove());
           scrollTrigger.kill();
           stage.classList.remove("is-enhanced");
           delete stage.dataset.activeIndex;
@@ -104,8 +114,10 @@ export function SelectedProjectsStage({ projects }: Readonly<{ projects: readonl
                 </div>
 
                 <Link href={`/work/${project.slug}`} className="home-project-scene__primary" data-cursor-label="View project">
-                  <span className="home-project-scene__visual-index" aria-hidden="true">{number}</span>
-                  <span className="home-project-scene__visual-name" aria-hidden="true">{project.name}</span>
+                  <span className="home-project-scene__pointer-layer" aria-hidden="true">
+                    <span className="home-project-scene__visual-index">{number}</span>
+                    <span className="home-project-scene__visual-name">{project.name}</span>
+                  </span>
                   <span className="home-project-scene__visual-link type-label">View project <span aria-hidden="true">→</span></span>
                 </Link>
 

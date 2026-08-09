@@ -6,6 +6,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { motion, shouldReduceAdvancedMotion } from "@/lib/motion";
+import { createLocalPointerMotion } from "@/lib/local-pointer-motion";
 import type { CreativeEntry } from "@/types/content";
 
 function GalleryImage({ entry, sizes }: Readonly<{ entry: CreativeEntry; sizes: string }>) {
@@ -35,10 +36,19 @@ export function CreativeGallery({ entries }: Readonly<{ entries: readonly Creati
     gsap.registerPlugin(ScrollTrigger);
     const context = gsap.context(() => {
       gsap.utils.toArray<HTMLElement>(".creative-gallery__media").forEach((media, index) => {
-        gsap.to(media.querySelector("img"), { yPercent: index % 2 ? -4 : 4, ease: "none", scrollTrigger: { trigger: media, start: "top bottom", end: "bottom top", scrub: motion.timing.scroll.scrub } });
+        const layer = media.querySelector<HTMLElement>(".creative-gallery__motion-layer");
+        if (!layer) return;
+        gsap.to(layer, { yPercent: index % 2 ? -3 : 3, ease: "none", scrollTrigger: { trigger: media, start: "top bottom", end: "bottom top", scrub: motion.timing.scroll.scrub } });
       });
     }, galleryRef);
-    return () => context.revert();
+    const removePointerMotion = gsap.utils.toArray<HTMLElement>(".creative-gallery__media", galleryRef.current).map((media) => {
+      const layer = media.querySelector<HTMLElement>(".creative-gallery__motion-layer");
+      return layer ? createLocalPointerMotion(media, layer, { x: 6, y: 4, rotation: 0.25 }) : () => {};
+    });
+    return () => {
+      removePointerMotion.forEach((remove) => remove());
+      context.revert();
+    };
   }, []);
 
   useEffect(() => {
@@ -78,7 +88,9 @@ export function CreativeGallery({ entries }: Readonly<{ entries: readonly Creati
           <article className={`creative-gallery__item creative-gallery__item--${index + 1}`} key={entry.id}>
             <button type="button" className="creative-gallery__open" data-cursor-label="Open" onClick={(event) => { openerRef.current = event.currentTarget; setActiveIndex(index); }}>
               <span className="creative-gallery__media">
-                <GalleryImage entry={entry} sizes="(max-width: 650px) 100vw, (max-width: 1000px) 50vw, 45vw" />
+                <span className="creative-gallery__motion-layer">
+                  <GalleryImage entry={entry} sizes="(max-width: 650px) 100vw, (max-width: 1000px) 50vw, 45vw" />
+                </span>
                 <span className="creative-gallery__view type-label">View frame</span>
               </span>
               <span className="creative-gallery__caption">

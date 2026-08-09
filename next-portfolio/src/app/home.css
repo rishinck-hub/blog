@@ -40,6 +40,7 @@ body:has(.editorial-home) .editorial-header.menu-is-open { color: var(--inverse-
 .home-project-scene--ink .home-project-scene__primary { background:#101010; color:var(--inverse-foreground); }
 .home-project-scene--stone .home-project-scene__primary { background:#d9d6cf; color:var(--foreground); }
 .home-project-scene__primary::before { position:absolute; inset:8%; border:1px solid currentColor; opacity:.2; content:""; transition:inset var(--duration-divider) var(--ease-editorial); }
+.home-project-scene__pointer-layer { position:absolute; inset:0; pointer-events:none; }
 .home-project-scene__visual-index { position:absolute; top:6%; left:7%; color:transparent; -webkit-text-stroke:1px currentColor; opacity:.2; font-family:var(--font-display); font-size:clamp(8rem,20vw,21rem); line-height:1; transition:transform var(--duration-image) var(--ease-editorial); }
 .home-project-scene__visual-name { position:absolute; right:7%; bottom:9%; max-width:11ch; text-align:right; font-family:var(--font-display); font-size:clamp(2.6rem,5.5vw,6rem); line-height:.86; transition:transform var(--duration-normal) var(--ease-editorial); }
 .home-project-scene__visual-link { position:absolute; top:8%; right:8%; }
