@@ -96,7 +96,7 @@ export default function RootLayout({
       <body className={`${bodyFont.variable} ${displayFont.variable}`}>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema).replace(/</g, "\\u003c") }} />
         <Script id="first-visit-loader-gate" strategy="beforeInteractive">
-          {`try{var r=document.documentElement;var seen=sessionStorage.getItem("rishin-loader-seen");var reduced=matchMedia("(prefers-reduced-motion: reduce),(pointer: coarse)").matches;var slow=navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=4;r.dataset.firstVisitLoader=!seen&&!reduced&&!slow?"show":"skip";if(r.dataset.firstVisitLoader==="show")sessionStorage.setItem("rishin-loader-seen","1")}catch(e){document.documentElement.dataset.firstVisitLoader="skip"}`}
+          {`try{var r=document.documentElement;var seen=sessionStorage.getItem("rishin-loader-seen");var off=matchMedia("(prefers-reduced-motion: reduce)").matches;var mobile=matchMedia("(max-width:640px)").matches;var precise=matchMedia("(hover:hover) and (pointer:fine)").matches;var slow=navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=4;r.dataset.motionLevel=off?"off":mobile?"essential":precise&&!slow?"full":"reduced";r.dataset.firstVisitLoader=!seen&&!off&&!slow?"show":"skip";if(r.dataset.firstVisitLoader==="show")sessionStorage.setItem("rishin-loader-seen","1")}catch(e){document.documentElement.dataset.motionLevel="off";document.documentElement.dataset.firstVisitLoader="skip"}`}
         </Script>
         <FirstVisitLoader />
         <RouteTransitionProvider />

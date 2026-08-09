@@ -329,9 +329,32 @@ body {
 }
 .cursor-label.is-contextual .cursor-label__text { opacity: 1; transform: translateY(0); }
 
-@media (hover: hover) and (pointer: fine) and (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   html.custom-cursor-ready,
   html.custom-cursor-ready :is(a, button, summary, [data-cursor-label]) { cursor: none; }
+}
+
+html[data-motion-level="reduced"] {
+  --duration-normal: 360ms;
+  --duration-slow: 620ms;
+  --duration-image: 640ms;
+  --duration-divider: 520ms;
+  --duration-route: 345ms;
+}
+
+html[data-motion-level="essential"] {
+  --duration-normal: 260ms;
+  --duration-slow: 420ms;
+  --duration-image: 440ms;
+  --duration-divider: 360ms;
+  --duration-route: 230ms;
+}
+
+html[data-motion-level="essential"] .route-frame { animation-name: route-frame-enter-essential; }
+
+@keyframes route-frame-enter-essential {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .first-visit-loader {

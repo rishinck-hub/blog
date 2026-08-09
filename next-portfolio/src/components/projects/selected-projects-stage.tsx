@@ -28,7 +28,7 @@ export function SelectedProjectsStage({ projects }: Readonly<{ projects: readonl
 
     const media = gsap.matchMedia();
     const context = gsap.context(() => {
-      media.add("(min-width: 901px) and (min-height: 650px)", () => {
+      media.add("(hover: hover) and (pointer: fine) and (min-width: 901px) and (min-height: 650px)", () => {
         const pin = stage.querySelector<HTMLElement>(".selected-projects-stage__pin");
         const articles = gsap.utils.toArray<HTMLElement>(".home-project-scene");
         if (!pin || articles.length !== projects.length) return;

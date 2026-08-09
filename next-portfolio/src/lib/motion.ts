@@ -42,12 +42,20 @@ export const motion = {
 export const loaderCompleteEvent = "rishin:loader-complete";
 export const modalStateEvent = "rishin:modal-state";
 
+export type MotionLevel = "full" | "reduced" | "essential" | "off";
+
+export function getMotionLevel(): MotionLevel {
+  if (typeof window === "undefined") return "off";
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return "off";
+  if (window.matchMedia("(max-width: 640px)").matches) return "essential";
+  if (window.matchMedia("(hover: hover) and (pointer: fine)").matches && !(navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4)) return "full";
+  return "reduced";
+}
+
+export function hasFullMotion() {
+  return getMotionLevel() === "full";
+}
+
 export function shouldReduceAdvancedMotion() {
-  if (typeof window === "undefined") return true;
-  return (
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-    window.matchMedia("(pointer: coarse)").matches ||
-    window.matchMedia("(max-width: 900px)").matches ||
-    (navigator.hardwareConcurrency !== undefined && navigator.hardwareConcurrency <= 4)
-  );
+  return getMotionLevel() !== "full";
 }

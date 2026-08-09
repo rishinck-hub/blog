@@ -6,7 +6,7 @@ import { useEffect, useRef, type ReactNode } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { modalStateEvent, motion, shouldReduceAdvancedMotion } from "@/lib/motion";
+import { getMotionLevel, modalStateEvent, motion } from "@/lib/motion";
 
 export function MotionProvider({ children }: Readonly<{ children: ReactNode }>) {
   const pathname = usePathname();
@@ -14,6 +14,7 @@ export function MotionProvider({ children }: Readonly<{ children: ReactNode }>) 
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
+    document.documentElement.dataset.motionLevel = getMotionLevel();
     let active = true;
     let resizeFrame = 0;
 
@@ -28,7 +29,7 @@ export function MotionProvider({ children }: Readonly<{ children: ReactNode }>) 
       if (active) refresh();
     });
 
-    if (shouldReduceAdvancedMotion()) {
+    if (getMotionLevel() !== "full") {
       refresh();
       return () => {
         active = false;

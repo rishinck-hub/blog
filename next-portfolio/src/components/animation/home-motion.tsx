@@ -4,7 +4,7 @@ import { useLayoutEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { loaderCompleteEvent, motion, shouldReduceAdvancedMotion } from "@/lib/motion";
+import { getMotionLevel, loaderCompleteEvent, motion } from "@/lib/motion";
 
 export function HomeMotion() {
   useLayoutEffect(() => {
@@ -12,11 +12,11 @@ export function HomeMotion() {
     const root = document.querySelector<HTMLElement>(".editorial-home");
     if (!root) return;
 
-    const reduced = shouldReduceAdvancedMotion();
+    const level = getMotionLevel();
     let playOpening: (() => void) | undefined;
     let removePointerResponse: () => void = () => {};
     const context = gsap.context(() => {
-      if (reduced) {
+      if (level === "off") {
         return;
       }
 
@@ -29,21 +29,19 @@ export function HomeMotion() {
       const shade = root.querySelector<HTMLElement>(".home-hero__shade");
       if (!header || !hero || !portrait || !portraitImage || !heading || !detail || !shade) return;
       gsap.set(header, { autoAlpha: 0 });
+      const durationScale = level === "full" ? 1 : level === "reduced" ? 0.72 : 0.5;
       const opening = gsap.timeline({ paused: true, defaults: { ease: motion.ease.reveal } });
       opening
-        .to(header, { autoAlpha: 1, duration: motion.duration.fast })
-        .from(".home-status", { y: motion.distance.small, autoAlpha: 0, duration: motion.duration.normal }, 0.1)
-        .from(".home-hero__line > span", { yPercent: 112, duration: motion.timing.text.duration, stagger: 0.1 }, 0.28)
-        .from(portrait, { clipPath: motion.reveal.imageClipFrom, duration: motion.timing.image.duration }, 0.52)
-        .fromTo(portraitImage, { scale: 1.065 }, { scale: 1, duration: motion.timing.image.scaleDuration }, 0.52)
-        .from(".home-hero__role", { y: motion.distance.small, autoAlpha: 0, duration: motion.duration.normal }, 0.88)
-        .from(".home-hero__statement", { y: motion.distance.small, autoAlpha: 0, duration: motion.duration.normal }, 0.98)
-        .from(".home-hero__actions", { y: motion.distance.small, autoAlpha: 0, duration: motion.duration.normal }, 1.08)
-        .from(".home-hero__scroll, .home-hero__counter", { y: motion.distance.small / 2, autoAlpha: 0, duration: motion.duration.fast }, 1.28);
+        .to(header, { autoAlpha: 1, duration: motion.duration.fast * durationScale })
+        .from(".home-status", { y: motion.distance.small * durationScale, autoAlpha: 0, duration: motion.duration.normal * durationScale }, 0.06)
+        .from(".home-hero__line > span", { yPercent: level === "essential" ? 55 : 112, duration: motion.timing.text.duration * durationScale, stagger: 0.1 * durationScale }, 0.14)
+        .from(portrait, { clipPath: motion.reveal.imageClipFrom, duration: motion.timing.image.duration * durationScale }, 0.28)
+        .fromTo(portraitImage, { scale: level === "essential" ? 1.025 : 1.065 }, { scale: 1, duration: motion.timing.image.scaleDuration * durationScale }, 0.28)
+        .from(".home-hero__role, .home-hero__statement, .home-hero__actions", { y: motion.distance.small * durationScale, autoAlpha: 0, stagger: motion.stagger.normal * durationScale, duration: motion.duration.normal * durationScale }, 0.48)
+        .from(".home-hero__scroll, .home-hero__counter", { y: motion.distance.small / 2, autoAlpha: 0, duration: motion.duration.fast * durationScale }, 0.66);
 
       opening.eventCallback("onComplete", () => {
-        const precisePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-        if (!precisePointer) return;
+        if (level !== "full") return;
 
         const portraitX = gsap.quickTo(portrait, "x", { duration: motion.duration.normal, ease: motion.ease.editorial });
         const portraitY = gsap.quickTo(portrait, "y", { duration: motion.duration.normal, ease: motion.ease.editorial });
@@ -102,7 +100,9 @@ export function HomeMotion() {
         gsap.from(element, { clipPath: motion.reveal.imageClipFrom, duration: motion.timing.image.duration, ease: motion.ease.reveal, scrollTrigger: { trigger: element, start: "top 86%", once: true } });
       });
 
-      gsap.to(".home-intro__image img", { yPercent: motion.timing.scroll.distance, ease: "none", scrollTrigger: { trigger: ".home-intro__image", start: "top bottom", end: "bottom top", scrub: motion.timing.scroll.scrub } });
+      if (level === "full") {
+        gsap.to(".home-intro__image img", { yPercent: motion.timing.scroll.distance, ease: "none", scrollTrigger: { trigger: ".home-intro__image", start: "top bottom", end: "bottom top", scrub: motion.timing.scroll.scrub } });
+      }
     }, root);
 
     return () => {

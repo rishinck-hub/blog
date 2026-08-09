@@ -3,9 +3,7 @@
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 
-import { loaderCompleteEvent, motion } from "@/lib/motion";
-
-const loaderFallbackMs = 1_600;
+import { getMotionLevel, loaderCompleteEvent, motion } from "@/lib/motion";
 
 function waitForHeroImage(signal: AbortSignal) {
   const image = document.querySelector<HTMLImageElement>(".home-hero__portrait img");
@@ -30,6 +28,9 @@ export function FirstVisitLoader() {
     const line = lineRef.current;
     const mark = markRef.current;
     if (!loader || !counter || !line || !mark || document.documentElement.dataset.firstVisitLoader !== "show") return;
+    const level = getMotionLevel();
+    const durationScale = level === "essential" ? 0.55 : level === "reduced" ? 0.75 : 1;
+    const loaderFallbackMs = level === "essential" ? 900 : level === "reduced" ? 1_200 : 1_600;
 
     let active = true;
     let fontsReady = false;
@@ -43,7 +44,7 @@ export function FirstVisitLoader() {
       gsap.fromTo(mark.children, { yPercent: 115, autoAlpha: 0 }, {
         yPercent: 0,
         autoAlpha: 1,
-        duration: motion.duration.normal,
+        duration: motion.duration.normal * durationScale,
         stagger: motion.stagger.tight,
         ease: motion.ease.reveal,
       });
@@ -58,7 +59,7 @@ export function FirstVisitLoader() {
       const target = 10 + (fontsReady ? 45 : 0) + (imageReady ? 40 : 0);
       gsap.to(progress, {
         value: target,
-        duration: motion.duration.normal,
+        duration: motion.duration.normal * durationScale,
         ease: motion.ease.reveal,
         overwrite: true,
         onUpdate: renderProgress,
@@ -83,7 +84,7 @@ export function FirstVisitLoader() {
       window.clearTimeout(fallbackTimer);
       gsap.to(progress, {
         value: 100,
-        duration: motion.duration.fast,
+        duration: motion.duration.fast * durationScale,
         ease: motion.ease.reveal,
         overwrite: true,
         onUpdate: renderProgress,
@@ -97,8 +98,8 @@ export function FirstVisitLoader() {
               window.dispatchEvent(new Event(loaderCompleteEvent));
             },
           })
-            .to(mark, { yPercent: -30, autoAlpha: 0, duration: motion.duration.fast })
-            .to(loader, { clipPath: "inset(0 0 100% 0)", duration: motion.timing.modal.exit }, 0);
+            .to(mark, { yPercent: -30, autoAlpha: 0, duration: motion.duration.fast * durationScale })
+            .to(loader, { clipPath: "inset(0 0 100% 0)", duration: motion.timing.modal.exit * durationScale }, 0);
         },
       });
     });

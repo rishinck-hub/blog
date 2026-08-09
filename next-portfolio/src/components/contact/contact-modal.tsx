@@ -7,7 +7,7 @@ import { gsap } from "gsap";
 
 import { ContactForm } from "@/components/forms/contact-form";
 import { siteConfig } from "@/data/site";
-import { modalStateEvent, motion } from "@/lib/motion";
+import { getMotionLevel, modalStateEvent, motion } from "@/lib/motion";
 
 type ContactModalContextValue = { openModal: (trigger: HTMLElement) => void };
 const ContactModalContext = createContext<ContactModalContextValue | null>(null);
@@ -40,24 +40,27 @@ export function ContactModalProvider({ children }: Readonly<{ children: ReactNod
   const requestClose = useCallback(() => {
     const overlay = overlayRef.current;
     const panel = panelRef.current;
-    if (!overlay || !panel || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const level = getMotionLevel();
+    if (!overlay || !panel || level === "off") {
       setOpen(false);
       return;
     }
     timelineRef.current?.kill();
+    const scale = level === "full" ? 1 : level === "reduced" ? 0.72 : 0.5;
     timelineRef.current = gsap.timeline({ onComplete: () => setOpen(false) })
-      .to(panel, { clipPath: "inset(0 0 100% 0)", y: -motion.distance.small, duration: motion.timing.modal.exit, ease: motion.ease.exit })
+      .to(panel, { clipPath: "inset(0 0 100% 0)", y: level === "essential" ? 0 : -motion.distance.small, duration: motion.timing.modal.exit * scale, ease: motion.ease.exit })
       .to(overlay, { autoAlpha: 0, duration: motion.duration.fast, ease: motion.ease.exit }, 0.12);
   }, []);
   useLayoutEffect(() => {
-    if (!open || !overlayRef.current || !panelRef.current || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const level = getMotionLevel();
+    if (!open || !overlayRef.current || !panelRef.current || level === "off") return;
+    const scale = level === "full" ? 1 : level === "reduced" ? 0.72 : 0.5;
     const context = gsap.context(() => {
       timelineRef.current = gsap.timeline()
         .fromTo(overlayRef.current, { autoAlpha: 0 }, { autoAlpha: 1, duration: motion.duration.fast, ease: motion.ease.reveal })
-        .fromTo(panelRef.current, { clipPath: "inset(100% 0 0 0)", y: motion.distance.small }, { clipPath: "inset(0)", y: 0, duration: motion.timing.modal.enter, ease: motion.ease.editorial }, 0.04)
-        .from(".contact-modal__title span", { yPercent: 110, duration: motion.timing.text.duration, ease: motion.ease.reveal }, 0.16)
-        .from(".contact-modal__portrait", { clipPath: motion.reveal.imageClipFrom, scale: 1.035, duration: motion.timing.image.duration, ease: motion.ease.reveal }, 0.2)
-        .from(".contact-modal__intro, .contact-modal__direct, .contact-modal .contact-form", { y: motion.distance.small, autoAlpha: 0, stagger: motion.stagger.normal, duration: motion.duration.normal, ease: motion.ease.reveal }, 0.24);
+        .fromTo(panelRef.current, { clipPath: "inset(100% 0 0 0)", y: level === "essential" ? 0 : motion.distance.small }, { clipPath: "inset(0)", y: 0, duration: motion.timing.modal.enter * scale, ease: motion.ease.editorial }, 0.04)
+        .from(".contact-modal__title span", { yPercent: level === "essential" ? 45 : 110, duration: motion.timing.text.duration * scale, ease: motion.ease.reveal }, 0.1)
+        .from(".contact-modal__portrait, .contact-modal__intro, .contact-modal__direct, .contact-modal .contact-form", { y: motion.distance.small * scale, autoAlpha: 0, stagger: motion.stagger.normal * scale, duration: motion.duration.normal * scale, ease: motion.ease.reveal }, 0.14);
     }, overlayRef);
     return () => context.revert();
   }, [open]);

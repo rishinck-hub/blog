@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
-import { motion, shouldReduceAdvancedMotion } from "@/lib/motion";
+import { hasFullMotion, motion } from "@/lib/motion";
 
 export function CursorLabel() {
   const cursorRef = useRef<HTMLDivElement>(null);
@@ -12,9 +12,9 @@ export function CursorLabel() {
   useEffect(() => {
     const cursor = cursorRef.current;
     const text = textRef.current;
-    const precisePointer = window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 1024px) and (prefers-reduced-motion: no-preference)").matches;
+    const precisePointer = window.matchMedia("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)").matches;
     const capableDevice = navigator.hardwareConcurrency === undefined || navigator.hardwareConcurrency > 4;
-    if (!cursor || !text || !precisePointer || !capableDevice || shouldReduceAdvancedMotion()) return;
+    if (!cursor || !text || !precisePointer || !capableDevice || !hasFullMotion()) return;
 
     cursor.style.display = "grid";
     gsap.set(cursor, { xPercent: -50, yPercent: -50 });

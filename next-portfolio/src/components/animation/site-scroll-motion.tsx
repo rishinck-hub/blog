@@ -4,14 +4,15 @@ import { useLayoutEffect, useRef, type ReactNode } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { motion, shouldReduceAdvancedMotion } from "@/lib/motion";
+import { getMotionLevel, motion } from "@/lib/motion";
 
 export function SiteScrollMotion({ children }: Readonly<{ children: ReactNode }>) {
   const frameRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const frame = frameRef.current;
-    if (!frame || shouldReduceAdvancedMotion()) return;
+    const level = getMotionLevel();
+    if (!frame || level === "off" || level === "essential") return;
     gsap.registerPlugin(ScrollTrigger);
 
     const context = gsap.context(() => {
@@ -53,9 +54,11 @@ export function SiteScrollMotion({ children }: Readonly<{ children: ReactNode }>
         onEnter: (items) => gsap.from(items, { y: motion.distance.medium, autoAlpha: 0, stagger: motion.stagger.normal, duration: motion.timing.image.duration, ease: motion.ease.reveal, overwrite: true }),
       });
 
-      gsap.utils.toArray<HTMLElement>(".about-creative__words, .creative-close h2, .case-next__title").forEach((words, index) => {
-        gsap.fromTo(words, { xPercent: index % 2 ? 2.5 : -2.5 }, { xPercent: index % 2 ? -2.5 : 2.5, ease: "none", scrollTrigger: { trigger: words, start: "top bottom", end: "bottom top", scrub: motion.timing.scroll.scrub } });
-      });
+      if (level === "full") {
+        gsap.utils.toArray<HTMLElement>(".about-creative__words, .creative-close h2, .case-next__title").forEach((words, index) => {
+          gsap.fromTo(words, { xPercent: index % 2 ? 2.5 : -2.5 }, { xPercent: index % 2 ? -2.5 : 2.5, ease: "none", scrollTrigger: { trigger: words, start: "top bottom", end: "bottom top", scrub: motion.timing.scroll.scrub } });
+        });
+      }
 
       gsap.utils.toArray<HTMLElement>(".about-close, .experience-close, .creative-close, .contact-close").forEach((section) => {
         gsap.timeline({ scrollTrigger: { trigger: section, start: "top 90%", once: true } })

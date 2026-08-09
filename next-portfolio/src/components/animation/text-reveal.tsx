@@ -4,7 +4,7 @@ import { useLayoutEffect, useRef, type ReactNode } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { motion, shouldReduceAdvancedMotion } from "@/lib/motion";
+import { getMotionLevel, motion } from "@/lib/motion";
 
 type TextRevealProps = Readonly<{
   text: string;
@@ -33,18 +33,20 @@ export function TextReveal({
 
   useLayoutEffect(() => {
     const element = scope.current;
-    if (!element || shouldReduceAdvancedMotion()) return;
+    const level = getMotionLevel();
+    if (!element || level === "off") return;
     gsap.registerPlugin(ScrollTrigger);
 
     let active = true;
     let resizeFrame = 0;
     const targets = element.querySelectorAll<HTMLElement>(".text-reveal__unit");
-    const stagger = mode === "line" ? motion.stagger.normal : mode === "character" ? motion.stagger.tight / 2 : motion.stagger.tight;
+    const density = level === "full" ? 1 : level === "reduced" ? 0.72 : 0.48;
+    const stagger = (mode === "line" ? motion.stagger.normal : mode === "character" ? motion.stagger.tight / 2 : motion.stagger.tight) * density;
     const context = gsap.context(() => {
       const animation = gsap.fromTo(targets, { yPercent: 112, autoAlpha: 0 }, {
         yPercent: 0,
         autoAlpha: 1,
-        duration: mode === "character" ? motion.duration.normal : motion.timing.text.duration,
+        duration: (mode === "character" ? motion.duration.normal : motion.timing.text.duration) * density,
         delay,
         ease: motion.ease.reveal,
         stagger,

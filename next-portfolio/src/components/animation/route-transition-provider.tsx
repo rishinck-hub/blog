@@ -4,7 +4,7 @@ import gsap from "gsap";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 
-import { motion } from "@/lib/motion";
+import { getMotionLevel, motion } from "@/lib/motion";
 
 const routeMeta: Record<string, { number: string; label: string }> = {
   "/": { number: "01", label: "Home" },
@@ -37,7 +37,9 @@ export function RouteTransitionProvider() {
   useEffect(() => {
     const panel = panelRef.current;
     if (!panel) return;
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const level = getMotionLevel();
+    const reducedMotion = level === "off";
+    const scale = level === "essential" ? 0.5 : level === "reduced" ? 0.75 : 1;
 
     const onNavigationIntent = (event: MouseEvent) => {
       if (reducedMotion || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
@@ -54,9 +56,9 @@ export function RouteTransitionProvider() {
         .set(panel, { visibility: "visible", clipPath: "inset(0 100% 0 0)" })
         .set(currentLabelRef.current, { yPercent: 0, autoAlpha: 1 })
         .set(nextLabelRef.current, { yPercent: 120, autoAlpha: 0 })
-        .to(panel, { clipPath: "inset(0)", duration: motion.duration.fast, ease: motion.ease.exit })
-        .to(currentLabelRef.current, { yPercent: -120, autoAlpha: 0, duration: motion.duration.fast, ease: motion.ease.exit }, 0.04)
-        .to(nextLabelRef.current, { yPercent: 0, autoAlpha: 1, duration: motion.duration.normal, ease: motion.ease.reveal }, 0.08);
+        .to(panel, { clipPath: "inset(0)", duration: motion.duration.fast * scale, ease: motion.ease.exit })
+        .to(currentLabelRef.current, { yPercent: -120, autoAlpha: 0, duration: motion.duration.fast * scale, ease: motion.ease.exit }, 0.04 * scale)
+        .to(nextLabelRef.current, { yPercent: 0, autoAlpha: 1, duration: motion.duration.normal * scale, ease: motion.ease.reveal }, 0.08 * scale);
     };
 
     document.addEventListener("click", onNavigationIntent, true);
@@ -69,7 +71,9 @@ export function RouteTransitionProvider() {
   useEffect(() => {
     if (previousPathRef.current === pathname) return;
     const panel = panelRef.current;
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const level = getMotionLevel();
+    const reducedMotion = level === "off";
+    const scale = level === "essential" ? 0.5 : level === "reduced" ? 0.75 : 1;
     previousPathRef.current = pathname;
     if (!panel || reducedMotion) {
       pendingPathRef.current = null;
@@ -86,15 +90,15 @@ export function RouteTransitionProvider() {
       timeline
         .set(panel, { visibility: "visible", clipPath: "inset(0 0 0 100%)" })
         .set(nextLabelRef.current, { yPercent: 35, autoAlpha: 0 })
-        .to(panel, { clipPath: "inset(0)", duration: 0.12, ease: motion.ease.exit })
-        .to(nextLabelRef.current, { yPercent: 0, autoAlpha: 1, duration: motion.duration.fast, ease: motion.ease.reveal }, 0);
+        .to(panel, { clipPath: "inset(0)", duration: 0.12 * scale, ease: motion.ease.exit })
+        .to(nextLabelRef.current, { yPercent: 0, autoAlpha: 1, duration: motion.duration.fast * scale, ease: motion.ease.reveal }, 0);
     } else {
       timeline.set(panel, { visibility: "visible", clipPath: "inset(0)" });
     }
 
     timeline
-      .to(nextLabelRef.current, { yPercent: -35, autoAlpha: 0, duration: motion.duration.fast, ease: motion.ease.exit }, ">+0.02")
-      .to(panel, { clipPath: "inset(0 0 0 100%)", duration: motion.timing.route, ease: motion.ease.editorial }, "<");
+      .to(nextLabelRef.current, { yPercent: -35, autoAlpha: 0, duration: motion.duration.fast * scale, ease: motion.ease.exit }, ">+0.02")
+      .to(panel, { clipPath: "inset(0 0 0 100%)", duration: motion.timing.route * scale, ease: motion.ease.editorial }, "<");
     return () => {
       timeline.kill();
     };
