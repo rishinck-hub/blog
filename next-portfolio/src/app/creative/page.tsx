@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { CreativeBackgroundVideo } from "@/components/creative/creative-background-video";
 import { CreativeGallery } from "@/components/creative/creative-gallery";
 import { creativeEntries } from "@/data/creative";
 import { createPageMetadata } from "@/lib/metadata";
@@ -12,6 +13,7 @@ export default function CreativePage() {
   return (
     <div className="creative-page">
       <header className="creative-hero editorial-container">
+        <CreativeBackgroundVideo />
         <div className="creative-hero__top type-label"><span>Creative work</span><span>{String(creativeEntries.length).padStart(2, "0")} published edits</span></div>
         <h1 className="type-page-title">Stories shaped through <em>motion, rhythm and visual detail.</em></h1>
         <p className="type-body-large">A selection of existing cinematic, commercial, travel, event, music, and social edits made for digital audiences.</p>
