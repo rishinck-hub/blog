@@ -1,5 +1,5 @@
 import { Reveal } from "@/components/animation/reveal";
-import { services } from "@/data/site";
+import { services } from "@/data";
 
 export function SkillsSection({ limit }: Readonly<{ limit?: number }>) {
   const visibleServices = limit ? services.slice(0, limit) : services;

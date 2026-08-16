@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { siteConfig } from "@/data/site";
+import { siteConfig } from "@/data";
 import { modalStateEvent } from "@/lib/motion";
 
 const email = siteConfig.socials.find((item) => item.label === "Email");

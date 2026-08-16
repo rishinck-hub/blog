@@ -3,12 +3,12 @@ import Link from "next/link";
 import { TextReveal } from "@/components/animation/text-reveal";
 import { ProjectVisual } from "@/components/projects/project-visual";
 import { AnimatedLink } from "@/components/ui/animated-link";
-import { projects } from "@/data/projects";
+import { pageMetadata, projects } from "@/data";
 import { createPageMetadata } from "@/lib/metadata";
 
 import "./work.css";
 
-export const metadata = createPageMetadata({ title: "Work", description: "A collection of digital products, systems, and experiments by Mohammed Rishin C K.", path: "/work" });
+export const metadata = createPageMetadata(pageMetadata.work);
 
 export default function WorkPage() {
   return (

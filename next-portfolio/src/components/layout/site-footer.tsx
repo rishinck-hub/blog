@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { ContactModalTrigger } from "@/components/contact/contact-modal";
 import { LocalTime } from "@/components/ui/local-time";
-import { siteConfig } from "@/data/site";
+import { siteConfig } from "@/data";
 
 import { Container } from "./primitives";
 

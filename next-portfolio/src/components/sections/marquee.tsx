@@ -1,4 +1,4 @@
-import { marqueeItems } from "@/data/site";
+import { marqueeItems } from "@/data";
 
 export function Marquee() {
   const items = [...marqueeItems, ...marqueeItems];

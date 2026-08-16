@@ -10,7 +10,7 @@ import { ContactModalProvider } from "@/components/contact/contact-modal";
 import { ContactDock } from "@/components/contact/contact-dock";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteNavigation } from "@/components/navigation/site-navigation";
-import { siteConfig, technologies } from "@/data/site";
+import { siteConfig, technologies } from "@/data";
 
 import "./globals.css";
 import "lenis/dist/lenis.css";

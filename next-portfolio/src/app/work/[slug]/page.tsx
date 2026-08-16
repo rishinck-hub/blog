@@ -4,8 +4,7 @@ import { notFound } from "next/navigation";
 
 import { TextReveal } from "@/components/animation/text-reveal";
 import { ProjectVisual } from "@/components/projects/project-visual";
-import { getNextProject, getProject, projects } from "@/data/projects";
-import { siteConfig } from "@/data/site";
+import { getNextProject, getProject, projects, siteConfig } from "@/data";
 import { createPageMetadata } from "@/lib/metadata";
 
 import "../work.css";

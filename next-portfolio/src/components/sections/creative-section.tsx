@@ -5,7 +5,7 @@ import Script from "next/script";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { Reveal } from "@/components/animation/reveal";
-import { creativeEntries } from "@/data/creative";
+import { creativeEntries } from "@/data";
 import type { CreativeEntry } from "@/types/content";
 
 declare global {

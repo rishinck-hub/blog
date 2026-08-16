@@ -1,5 +1,5 @@
 import { Reveal } from "@/components/animation/reveal";
-import { experience } from "@/data/experience";
+import { experience } from "@/data";
 
 export function ExperienceSection({ limit }: Readonly<{ limit?: number }>) {
   const visibleExperience = limit ? experience.slice(0, limit) : experience;

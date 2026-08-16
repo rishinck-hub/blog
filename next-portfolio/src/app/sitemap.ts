@@ -1,7 +1,6 @@
 import type { MetadataRoute } from "next";
 
-import { projects } from "@/data/projects";
-import { siteConfig } from "@/data/site";
+import { projects, siteConfig } from "@/data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = ["", "/work", "/about", "/experience", "/creative", "/contact"];

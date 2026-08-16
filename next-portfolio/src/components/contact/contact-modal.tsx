@@ -6,7 +6,7 @@ import { createContext, useCallback, useContext, useEffect, useLayoutEffect, use
 import { gsap } from "gsap";
 
 import { ContactForm } from "@/components/forms/contact-form";
-import { siteConfig } from "@/data/site";
+import { siteConfig } from "@/data";
 import { getMotionLevel, modalStateEvent, motion } from "@/lib/motion";
 
 type ContactModalContextValue = { openModal: (trigger: HTMLElement) => void };

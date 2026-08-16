@@ -1,11 +1,11 @@
 import { TextReveal } from "@/components/animation/text-reveal";
 import { ContactForm } from "@/components/forms/contact-form";
-import { siteConfig } from "@/data/site";
+import { pageMetadata, siteConfig } from "@/data";
 import { createPageMetadata } from "@/lib/metadata";
 
 import "./contact.css";
 
-export const metadata = createPageMetadata({ title: "Contact", description: "Contact Mohammed Rishin C K about software development roles, projects, and collaborations.", path: "/contact" });
+export const metadata = createPageMetadata(pageMetadata.contact);
 
 const contactLinks = [siteConfig.socials[0], siteConfig.socials[1], siteConfig.socials[2]];
 

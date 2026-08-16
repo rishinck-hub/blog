@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import { Reveal } from "@/components/animation/reveal";
-import { siteConfig } from "@/data/site";
+import { siteConfig } from "@/data";
 
 export function ContactSection() {
   const contactLinks = [siteConfig.socials[0], siteConfig.socials[1], siteConfig.socials[2], siteConfig.socials[4]];

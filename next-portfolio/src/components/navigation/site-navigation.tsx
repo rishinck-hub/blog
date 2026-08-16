@@ -9,7 +9,7 @@ import { gsap } from "gsap";
 import { Container } from "@/components/layout/primitives";
 import { ContactModalTrigger } from "@/components/contact/contact-modal";
 import { LocalTime } from "@/components/ui/local-time";
-import { siteConfig } from "@/data/site";
+import { siteConfig } from "@/data";
 import { createLocalPointerMotion } from "@/lib/local-pointer-motion";
 import { motion } from "@/lib/motion";
 

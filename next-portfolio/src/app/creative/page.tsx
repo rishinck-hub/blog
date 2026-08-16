@@ -2,12 +2,12 @@ import Link from "next/link";
 
 import { CreativeBackgroundVideo } from "@/components/creative/creative-background-video";
 import { CreativeGallery } from "@/components/creative/creative-gallery";
-import { creativeEntries } from "@/data/creative";
+import { creativeEntries, pageMetadata } from "@/data";
 import { createPageMetadata } from "@/lib/metadata";
 
 import "./creative.css";
 
-export const metadata = createPageMetadata({ title: "Creative", description: "An editorial gallery of video editing, motion, event, travel, and social work by Mohammed Rishin C K.", path: "/creative" });
+export const metadata = createPageMetadata(pageMetadata.creative);
 
 export default function CreativePage() {
   return (

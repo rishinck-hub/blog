@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { siteConfig } from "@/data/site";
+import { siteConfig } from "@/data";
 
 export function createPageMetadata({ title, description, path }: Readonly<{ title: string; description: string; path: string }>): Metadata {
   const canonical = new URL(path, siteConfig.url).toString();

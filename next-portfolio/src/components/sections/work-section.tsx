@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { Reveal } from "@/components/animation/reveal";
-import { projects } from "@/data/projects";
+import { projects } from "@/data";
 
 export function WorkSection({ limit, showHeader = true }: Readonly<{ limit?: number; showHeader?: boolean }>) {
   const visibleProjects = limit ? projects.slice(0, limit) : projects;

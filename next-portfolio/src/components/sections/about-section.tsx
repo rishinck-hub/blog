@@ -1,5 +1,5 @@
 import { Reveal } from "@/components/animation/reveal";
-import { technologies } from "@/data/site";
+import { technologies } from "@/data";
 
 export function AboutSection({ compact = false }: Readonly<{ compact?: boolean }>) {
   const visibleTechnologies = compact ? technologies.slice(0, 8) : technologies;
