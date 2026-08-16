@@ -6,16 +6,19 @@ import { hasFullMotion, motion } from "@/lib/motion";
 
 export function CursorLabel() {
   const cursorRef = useRef<HTMLDivElement>(null);
+  const positionRef = useRef<HTMLSpanElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const cursor = cursorRef.current;
+    const position = positionRef.current;
     const text = textRef.current;
     const precisePointer = window.matchMedia("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)").matches;
     const capableDevice = navigator.hardwareConcurrency === undefined || navigator.hardwareConcurrency > 4;
-    if (!cursor || !text || !precisePointer || !capableDevice || !hasFullMotion()) return;
+    if (!cursor || !position || !text || !precisePointer || !capableDevice || !hasFullMotion()) return;
 
     cursor.style.display = "grid";
+    position.style.display = "block";
     const current = { x: 0, y: 0, scale: 1 };
     const target = { x: 0, y: 0, scale: 1 };
     let frame = 0;
@@ -50,12 +53,14 @@ export function CursorLabel() {
     };
 
     const onMove = (event: PointerEvent) => {
+      position.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0) translate(-50%, -50%)`;
       if (!initialized) {
         initialized = true;
         current.x = event.clientX;
         current.y = event.clientY;
         document.documentElement.classList.add("custom-cursor-ready");
         cursor.classList.add("is-visible");
+        position.classList.add("is-visible");
       }
       target.x = event.clientX;
       target.y = event.clientY;
@@ -63,8 +68,15 @@ export function CursorLabel() {
       const hoveredTarget = (event.target as Element | null)?.closest<HTMLElement>("[data-cursor-label]");
       setContext(hoveredTarget?.dataset.cursorLabel?.trim() ?? "");
     };
-    const hide = () => cursor.classList.remove("is-visible");
-    const show = () => { if (initialized) cursor.classList.add("is-visible"); };
+    const hide = () => {
+      cursor.classList.remove("is-visible");
+      position.classList.remove("is-visible");
+    };
+    const show = () => {
+      if (!initialized) return;
+      cursor.classList.add("is-visible");
+      position.classList.add("is-visible");
+    };
     const press = () => { target.scale = 0.88; scheduleRender(); };
     const release = () => { target.scale = 1; scheduleRender(); };
 
@@ -85,13 +97,17 @@ export function CursorLabel() {
       cancelAnimationFrame(frame);
       cursor.style.display = "none";
       cursor.style.transform = "";
+      position.style.display = "none";
+      position.style.transform = "";
     };
   }, []);
 
   return (
-    <div ref={cursorRef} className="cursor-label" aria-hidden="true">
-      <span className="cursor-label__point" />
-      <span ref={textRef} className="cursor-label__text type-label" />
-    </div>
+    <>
+      <span ref={positionRef} className="cursor-position" aria-hidden="true" />
+      <div ref={cursorRef} className="cursor-label" aria-hidden="true">
+        <span ref={textRef} className="cursor-label__text type-label" />
+      </div>
+    </>
   );
 }
