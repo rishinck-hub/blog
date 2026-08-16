@@ -49,7 +49,7 @@ body:has(.editorial-home) .editorial-header.menu-is-open { color: var(--inverse-
 .home-project-scene__primary:hover .home-project-scene__visual-index,.home-project-scene__primary:focus-visible .home-project-scene__visual-index { transform:translateX(1rem) scale(1.015); }
 .home-project-scene__primary:hover .home-project-scene__visual-name,.home-project-scene__primary:focus-visible .home-project-scene__visual-name { transform:translateX(-.5rem); }
 .home-project-scene__primary:hover .home-project-scene__visual-link span,.home-project-scene__primary:focus-visible .home-project-scene__visual-link span { transform:translateX(.25rem); }
-.home-project-scene__secondary { z-index:3; grid-column:10/12; grid-row:1; align-self:end; display:grid; gap:.4rem; min-height:7.5rem; padding:1rem; background:var(--inverse-background); color:var(--inverse-foreground); transform:translateY(10%); }
+.home-project-scene__secondary { z-index:3; grid-column:10/12; grid-row:1; align-self:end; display:grid; gap:.4rem; min-height:7.5rem; margin:0 1.25rem 1.25rem 0; padding:1rem; background:var(--inverse-background); color:var(--inverse-foreground); transform:none; }
 .home-project-scene__secondary strong { font-family:var(--font-display); font-size:clamp(1.6rem,3vw,3rem); font-weight:400; }
 .home-project-scene__secondary>span:last-child { color:var(--inverse-muted); font-size:.7rem; line-height:1.5; }
 .home-project-scene__meta { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:var(--grid-gap); align-items:end; padding-right:10rem; }
@@ -105,7 +105,7 @@ body:has(.editorial-home) .editorial-header.menu-is-open { color: var(--inverse-
   .home-project-scene__copy,.home-project-scene__primary,.home-project-scene__secondary { grid-column:auto; grid-row:auto; }
   .home-project-scene__copy { padding-top:1rem; }
   .home-project-scene__primary { min-height:0; aspect-ratio:4/5; }
-  .home-project-scene__secondary { width:min(75%,22rem); margin-left:auto; transform:none; }
+  .home-project-scene__secondary { width:min(75%,22rem); margin:0 0 0 auto; transform:none; }
   .home-project-scene__meta { grid-template-columns:1fr; padding-right:0; }
   .home-project-scene__meta dl { grid-template-columns:1fr 1fr; }
   .home-capability__body > p,.home-capability__body dl { grid-column:1/-1; }
