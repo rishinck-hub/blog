@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
 
 import { hasFullMotion, motion } from "@/lib/motion";
 
@@ -17,11 +16,31 @@ export function CursorLabel() {
     if (!cursor || !text || !precisePointer || !capableDevice || !hasFullMotion()) return;
 
     cursor.style.display = "grid";
-    gsap.set(cursor, { xPercent: -50, yPercent: -50 });
-    const moveX = gsap.quickTo(cursor, "x", { duration: motion.timing.cursor.follow, ease: motion.ease.reveal });
-    const moveY = gsap.quickTo(cursor, "y", { duration: motion.timing.cursor.follow, ease: motion.ease.reveal });
+    const current = { x: 0, y: 0, scale: 1 };
+    const target = { x: 0, y: 0, scale: 1 };
+    let frame = 0;
+    let previousTime = 0;
     let currentLabel = "";
     let initialized = false;
+
+    const render = (time: number) => {
+      const elapsed = previousTime ? Math.min(64, time - previousTime) : 16;
+      previousTime = time;
+      const smoothing = 1 - Math.exp(-elapsed / (motion.timing.cursor.follow * 1000));
+      current.x += (target.x - current.x) * smoothing;
+      current.y += (target.y - current.y) * smoothing;
+      current.scale += (target.scale - current.scale) * Math.min(1, smoothing * 1.8);
+      cursor.style.transform = `translate3d(${current.x}px, ${current.y}px, 0) translate(-50%, -50%) scale(${current.scale})`;
+
+      const unsettled = Math.abs(target.x - current.x) > 0.05 || Math.abs(target.y - current.y) > 0.05 || Math.abs(target.scale - current.scale) > 0.002;
+      frame = unsettled ? requestAnimationFrame(render) : 0;
+    };
+    const scheduleRender = () => {
+      if (!frame) {
+        previousTime = 0;
+        frame = requestAnimationFrame(render);
+      }
+    };
 
     const setContext = (nextLabel: string) => {
       if (nextLabel === currentLabel) return;
@@ -31,20 +50,23 @@ export function CursorLabel() {
     };
 
     const onMove = (event: PointerEvent) => {
-      moveX(event.clientX);
-      moveY(event.clientY);
       if (!initialized) {
         initialized = true;
+        current.x = event.clientX;
+        current.y = event.clientY;
         document.documentElement.classList.add("custom-cursor-ready");
         cursor.classList.add("is-visible");
       }
-      const target = (event.target as Element | null)?.closest<HTMLElement>("[data-cursor-label]");
-      setContext(target?.dataset.cursorLabel?.trim() ?? "");
+      target.x = event.clientX;
+      target.y = event.clientY;
+      scheduleRender();
+      const hoveredTarget = (event.target as Element | null)?.closest<HTMLElement>("[data-cursor-label]");
+      setContext(hoveredTarget?.dataset.cursorLabel?.trim() ?? "");
     };
     const hide = () => cursor.classList.remove("is-visible");
     const show = () => { if (initialized) cursor.classList.add("is-visible"); };
-    const press = () => gsap.to(cursor, { scale: 0.88, duration: motion.timing.cursor.press, ease: motion.ease.exit, overwrite: true });
-    const release = () => gsap.to(cursor, { scale: 1, duration: motion.timing.cursor.state, ease: motion.ease.editorial, overwrite: true });
+    const press = () => { target.scale = 0.88; scheduleRender(); };
+    const release = () => { target.scale = 1; scheduleRender(); };
 
     window.addEventListener("pointermove", onMove, { passive: true });
     document.documentElement.addEventListener("pointerleave", hide);
@@ -60,8 +82,9 @@ export function CursorLabel() {
       window.removeEventListener("pointerdown", press);
       window.removeEventListener("pointerup", release);
       document.documentElement.classList.remove("custom-cursor-ready");
-      gsap.killTweensOf(cursor);
+      cancelAnimationFrame(frame);
       cursor.style.display = "none";
+      cursor.style.transform = "";
     };
   }, []);
 
