@@ -40,6 +40,15 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const number = String(index + 1).padStart(2, "0");
   const nextProject = getNextProject(project.slug);
   const nextNumber = String(projects.findIndex((entry) => entry.slug === nextProject.slug) + 1).padStart(2, "0");
+  const studySections = [
+    { title: "Overview", content: <p>{project.description}</p> },
+    ...(project.challenge ? [{ title: "Problem", content: <p>{project.challenge}</p> }] : []),
+    ...(project.approach ? [{ title: "Approach", content: <p>{project.approach}</p> }] : []),
+    ...(project.process ? [{ title: "Development process", content: <p>{project.process}</p> }] : []),
+    ...(project.features?.length ? [{ title: "Features", content: <ul className="case-features">{project.features.map((feature) => <li key={feature}>{feature}</li>)}</ul> }] : []),
+    { title: "Technology", content: <p>The documented stack for this project is {project.technologies.join(", ")}.</p> },
+    ...(project.outcome ? [{ title: "Outcome", content: <p>{project.outcome}</p> }] : []),
+  ];
   const projectSchema = {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
@@ -81,26 +90,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </aside>
         ) : null}
 
-        <StudySection index="01" title="Overview"><p>{project.description}</p></StudySection>
-        <StudySection index="02" title="Problem"><p>{project.challenge ?? "A detailed problem statement was not included in the existing public portfolio."}</p></StudySection>
-        <StudySection index="03" title="Approach"><p>{project.approach ?? "The existing portfolio records the project and its technology stack, but does not provide a public implementation narrative."}</p></StudySection>
-        <StudySection index="04" title="Development process"><p>{project.process ?? "A detailed development process is not publicly documented for this project."}</p></StudySection>
-        <StudySection index="05" title="Features">
-          {project.features?.length ? <ul className="case-features">{project.features.map((feature) => <li key={feature}>{feature}</li>)}</ul> : <p>Feature-level details are not available in the existing public portfolio.</p>}
-        </StudySection>
-        <StudySection index="06" title="Technology decisions">
-          <p>The documented stack for this project is {project.technologies.join(", ")}. Further architectural rationale is not included in the public source material.</p>
-        </StudySection>
-        <StudySection index="07" title="Outcome"><p>{project.outcome ?? "No public outcome statement is currently available."}</p></StudySection>
-        <StudySection index="08" title="Gallery">
-          <div className="case-gallery-note">
-            <ProjectVisual project={project} number={number} />
-            <p className="type-metadata">{project.isConfidential ? "Neutral visuals replace private product screenshots." : "No genuine public gallery images are available in the current portfolio assets."}</p>
-          </div>
-        </StudySection>
+        {studySections.map((section, sectionIndex) => (
+          <StudySection index={String(sectionIndex + 1).padStart(2, "0")} title={section.title} key={section.title}>{section.content}</StudySection>
+        ))}
 
         <section className="case-links" aria-labelledby="case-links-title">
-          <div><span className="type-label">09</span><h2 id="case-links-title" className="type-label">External links</h2></div>
+          <div><span className="type-label">{String(studySections.length + 1).padStart(2, "0")}</span><h2 id="case-links-title" className="type-label">External links</h2></div>
           <div className="case-links__items">
             {project.liveUrl ? <a className="animated-link type-label" href={project.liveUrl} target="_blank" rel="noreferrer">Visit live project <span aria-hidden="true">↗</span></a> : null}
             {project.repositoryUrl ? <a className="animated-link type-label" href={project.repositoryUrl} target="_blank" rel="noreferrer">View repository <span aria-hidden="true">↗</span></a> : null}

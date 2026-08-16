@@ -904,9 +904,6 @@ html.contact-modal-open .editorial-footer {
   .editorial-menu__item { opacity: 1; transform: none; clip-path: none; }
   .cursor-label, .cursor-position { display: none !important; }
   .contact-dock, .contact-dock__panel, .contact-dock__trigger i { transition:none; }
-  .selected-projects-stage.is-enhanced .selected-projects-stage__pin { height:auto; min-height:0; overflow:visible; }
-  .selected-projects-stage.is-enhanced .home-project-scene { position:relative; inset:auto; min-height:0; opacity:1 !important; visibility:visible !important; transform:none !important; }
-  .selected-projects-stage.is-enhanced .selected-projects-stage__progress { display:none; }
   .animated-link::after,
   .editorial-nav-link::after { transition-duration: 0.01ms; }
 }
