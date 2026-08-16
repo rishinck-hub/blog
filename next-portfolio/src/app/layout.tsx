@@ -7,6 +7,7 @@ import { FirstVisitLoader } from "@/components/animation/first-visit-loader";
 import { MotionProvider } from "@/components/animation/motion-provider";
 import { RouteTransitionProvider } from "@/components/animation/route-transition-provider";
 import { ContactModalProvider } from "@/components/contact/contact-modal";
+import { ContactDock } from "@/components/contact/contact-dock";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteNavigation } from "@/components/navigation/site-navigation";
 import { siteConfig, technologies } from "@/data/site";
@@ -106,6 +107,7 @@ export default function RootLayout({
             <SiteNavigation />
             <main id="main-content">{children}</main>
             <SiteFooter />
+            <ContactDock />
             <CursorLabel />
           </ContactModalProvider>
         </MotionProvider>
