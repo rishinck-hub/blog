@@ -299,16 +299,18 @@ body {
   pointer-events: none;
   display: none;
   place-items: center;
-  width: 0.58rem;
-  height: 0.58rem;
+  width: 0.65rem;
+  height: 0.65rem;
   opacity: 0;
   overflow: hidden;
   transform-origin: center;
   border-radius: 999px;
-  background: #fff;
-  box-shadow: 0 0 0 1px rgba(17, 17, 17, 0.2);
+  background: var(--foreground);
+  box-shadow:
+    0 0 0 1px rgba(244, 242, 237, 0.9),
+    0 0 0 2px rgba(17, 17, 17, 0.28);
   color: var(--background-pure);
-  mix-blend-mode: difference;
+  mix-blend-mode: normal;
   transition:
     width var(--duration-cursor) var(--ease-editorial),
     height var(--duration-cursor) var(--ease-editorial),
