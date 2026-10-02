@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
-import Cursor from './components/Cursor';
 import Nav from './components/Nav';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
@@ -8,13 +7,30 @@ import WorkPage from './pages/WorkPage';
 import ExperiencePage from './pages/ExperiencePage';
 import CreativePage from './pages/CreativePage';
 import ContactPage from './pages/ContactPage';
+import { siteLinks } from './data';
+import FloatingResume from './components/FloatingResume';
 
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  }, [pathname]);
+    if (hash) {
+      requestAnimationFrame(() => {
+        document.getElementById(hash.slice(1))?.scrollIntoView({ behavior: 'instant' });
+      });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+    const routeTitles = {
+      '/': 'Mohammed Rishin C K — Software Developer',
+      '/about': 'About — Mohammed Rishin C K',
+      '/work': 'Selected Work — Mohammed Rishin C K',
+      '/experience': 'Experience — Mohammed Rishin C K',
+      '/creative': 'Creative Work — Mohammed Rishin C K',
+      '/contact': 'Contact — Mohammed Rishin C K',
+    };
+    document.title = routeTitles[pathname] || routeTitles['/'];
+  }, [pathname, hash]);
 
   return null;
 }
@@ -25,9 +41,10 @@ export default function App() {
   return (
     <>
       <ScrollToTop />
-      <Cursor />
+      <a className="skip-link" href="#main-content">Skip to content</a>
       <Nav />
-      <main>
+      <FloatingResume />
+      <main id="main-content">
         <div className="page-transition" key={pathname}>
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -41,12 +58,16 @@ export default function App() {
         </div>
       </main>
       <footer className="footer">
-        <span>© 2026 Mohammed Rishin C K</span>
-        <div className="footer__right">
-          <a href="https://www.linkedin.com/in/mohammed-rishin-c-k-a00525240/" target="_blank" rel="noreferrer">LinkedIn</a>
-          <a href="https://github.com/rishinck-hub" target="_blank" rel="noreferrer">GitHub</a>
-          <a href="mailto:rishinkpm@gmail.com">Email</a>
+        <div>
+          <a className="footer__name" href="#main-content">Mohammed Rishin C K</a>
+          <p>Software developer building dependable digital products.</p>
         </div>
+        <div className="footer__right" aria-label="Social links">
+          <a href={siteLinks.linkedin} target="_blank" rel="noreferrer">LinkedIn <span>↗</span></a>
+          <a href={siteLinks.github} target="_blank" rel="noreferrer">GitHub <span>↗</span></a>
+          <a href={siteLinks.email}>Email <span>↗</span></a>
+        </div>
+        <p className="footer__meta">© 2026 · Kerala, India · Riyadh, Saudi Arabia</p>
       </footer>
     </>
   );

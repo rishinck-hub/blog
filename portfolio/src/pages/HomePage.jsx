@@ -1,48 +1,34 @@
-import Hero from '../sections/Hero';
+import HeroEditorial from '../sections/HeroEditorial';
 import Marquee from '../components/Marquee';
-import About from '../sections/About';
-import Work from '../sections/Work';
-import Skills from '../sections/Skills';
-import Experience from '../sections/Experience';
-import Reels from '../sections/Reels';
+import AboutEditorial from '../sections/AboutEditorial';
+import WorkEditorial from '../sections/WorkEditorial';
+import SkillsEditorial from '../sections/SkillsEditorial';
+import ExperienceEditorial from '../sections/ExperienceEditorial';
+import ReelsEditorial from '../sections/ReelsEditorial';
 import SectionLink from '../components/SectionLink';
+import { siteLinks } from '../data';
 
 export default function HomePage() {
   return (
     <>
-      <Hero />
+      <HeroEditorial />
       <Marquee />
-      <About compact />
-      <Work limit={3} />
-      <SectionLink to="/work">Explore all projects</SectionLink>
-      <Skills limit={4} />
-      <SectionLink to="/about">More about my skills</SectionLink>
-      <Experience limit={2} />
-      <SectionLink to="/experience">View full experience</SectionLink>
-      <Reels limit={3} />
+      <AboutEditorial compact />
+      <WorkEditorial limit={4} />
+      <SectionLink to="/work">View the full project archive</SectionLink>
+      <SkillsEditorial limit={4} />
+      <SectionLink to="/about">More about my approach</SectionLink>
+      <ExperienceEditorial limit={3} />
+      <SectionLink to="/experience">View the complete journey</SectionLink>
+      <ReelsEditorial limit={3} />
       <SectionLink to="/creative">Explore creative work</SectionLink>
       <section className="home-contact">
-        <p>Have a project or opportunity in mind?</p>
-        <h2>Let’s build<br /><span>something great.</span></h2>
-        <div className="home-contact__details">
-          <a href="mailto:rishinkpm@gmail.com">
-            <span>Email</span>
-            <strong>rishinkpm@gmail.com</strong>
-          </a>
-          <a href="https://www.linkedin.com/in/mohammed-rishin-c-k-a00525240/" target="_blank" rel="noreferrer">
-            <span>LinkedIn</span>
-            <strong>Mohammed Rishin C K</strong>
-          </a>
-          <a href="https://github.com/rishinck-hub" target="_blank" rel="noreferrer">
-            <span>GitHub</span>
-            <strong>rishinck-hub</strong>
-          </a>
-          <a href="https://wa.me/916238634185" target="_blank" rel="noreferrer">
-            <span>WhatsApp</span>
-            <strong>+91 623 863 4185</strong>
-          </a>
+        <p className="eyebrow">Start a conversation</p>
+        <h2>Let’s make something<br /><em>useful together.</em></h2>
+        <div className="home-contact__bottom">
+          <p>Have a role, project, or thoughtful idea in mind? I’d be glad to hear about it.</p>
+          <a className="button button--inverse" href={siteLinks.email}>Send me an email <span aria-hidden="true">↗</span></a>
         </div>
-        <SectionLink to="/contact">Start a conversation</SectionLink>
       </section>
     </>
   );
