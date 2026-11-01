@@ -3,7 +3,7 @@ export const siteLinks = {
   linkedin: 'https://www.linkedin.com/in/mohammed-rishin-c-k-a00525240/',
   github: 'https://github.com/rishinck-hub',
   instagram: 'https://www.instagram.com/_rishin___ck',
-  whatsapp: 'https://wa.me/916238634185',
+  whatsapp: 'https://wa.me/966546407613',
   portfolio: 'https://blog-tau-two-15.vercel.app/',
 };
 

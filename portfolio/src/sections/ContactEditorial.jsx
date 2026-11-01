@@ -5,7 +5,7 @@ const LINKS = [
   { label: 'Email', value: 'rishinkpm@gmail.com', href: siteLinks.email, external: false },
   { label: 'LinkedIn', value: 'Connect professionally', href: siteLinks.linkedin, external: true },
   { label: 'GitHub', value: 'Explore my code', href: siteLinks.github, external: true },
-  { label: 'WhatsApp', value: '+91 623 863 4185', href: siteLinks.whatsapp, external: true },
+  { label: 'WhatsApp', value: '+966 54 640 7613', href: siteLinks.whatsapp, external: true },
 ];
 
 export default function ContactEditorial() {
